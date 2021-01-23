@@ -10,11 +10,17 @@
     <v-main>
       <router-view />
     </v-main>
+    <TheFooter />
   </v-app>
 </template>
 
 <script>
+import TheFooter from '@/components/TheFooter';
+
 export default {
   name: 'App',
+  components: {
+    TheFooter,
+  },
 };
 </script>
