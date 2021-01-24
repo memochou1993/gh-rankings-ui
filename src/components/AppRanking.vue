@@ -9,9 +9,9 @@
       >
         <v-list>
           <v-list-item-group>
-            <template v-for="(item, i) in items">
+            <template v-for="(rank, i) in ranks">
               <v-list-item
-                :key="item.id">
+                :key="rank.id">
                 <v-list-item-icon
                   class="my-2"
                 >
@@ -19,14 +19,14 @@
                     tile
                   >
                     <img
-                      :src="item.image"
-                      :alt="item.id"
+                      :src="rank.imageUrl"
+                      :alt="rank.name"
                     />
                   </v-avatar>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title
-                    v-text="`${item.rank.rank}. ${item.id}`"
+                    v-text="`${rank.rank}. ${rank.name}`"
                   />
                 </v-list-item-content>
                 <v-list-item-action>
@@ -35,18 +35,17 @@
                     text
                   >
                     <span
-                      v-text="item.rank.totalCount.toLocaleString()"
+                      v-text="rank.totalCount.toLocaleString()"
                     />
                     <v-icon
                       right
-                    >
-                      mdi-star
-                    </v-icon>
+                      v-text="getIcon(rank.tags)"
+                    />
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
               <v-divider
-                v-if="i < items.length - 1"
+                v-if="i < ranks.length - 1"
                 :key="i"
               />
             </template>
@@ -64,9 +63,23 @@ export default {
       type: String,
       required: true,
     },
-    items: {
+    ranks: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    getIcon(tags) {
+      switch (true) {
+        case tags.join(',').includes('watchers'):
+          return 'mdi-eye-outline';
+        case tags.join(',').includes('stargazers'):
+          return 'mdi-star';
+        case tags.join(',').includes('forks'):
+          return 'mdi-source-fork';
+        default:
+          return '';
+      }
     },
   },
 };

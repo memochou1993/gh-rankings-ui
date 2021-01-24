@@ -8,13 +8,13 @@ export default new Vuex.Store({
   state: {
     /**
      * @param ranks
-     * @param ranks[].id
-     * @param ranks[].image
-     * @param ranks[].rank.rank
-     * @param ranks[].rank.last
-     * @param ranks[].rank.totalCount
-     * @param ranks[].rank.tags
-     * @param ranks[].rank.createdAt
+     * @param ranks[].name
+     * @param ranks[].imageUrl
+     * @param ranks[].rank
+     * @param ranks[].last
+     * @param ranks[].totalCount
+     * @param ranks[].tags
+     * @param ranks[].createdAt
      */
     ranks: [],
   },
@@ -24,9 +24,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async fetchRepositories({ commit }) {
-      const { data } = await axios.get('/repositories?tags=stargazers&limit=100&page=1');
-      commit('setRanks', data.data);
+    async fetch({
+      commit,
+    }, params) {
+      const { data } = await axios.get('/', { params });
+      commit('setRanks', data.data || []);
     },
   },
 });

@@ -6,9 +6,10 @@
       <v-col
         cols="6"
       >
-        <AppList
+        <AppRanking
           title="Repository Ranking"
-          :items="ranks"
+          :ranks="ranks"
+          class="my-5"
         />
       </v-col>
     </v-row>
@@ -20,14 +21,20 @@ import {
   mapState,
   mapActions,
 } from 'vuex';
-import AppList from '@/components/AppList';
+import AppRanking from '@/components/AppRanking';
 
 export default {
   components: {
-    AppList,
+    AppRanking,
   },
   created() {
-    this.fetchRepositories();
+    this.fetch({
+      tags: [
+        'user',
+        'repositories.stargazers',
+      ],
+      limit: 100,
+    });
   },
   computed: {
     ...mapState([
@@ -36,7 +43,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchRepositories',
+      'fetch',
     ]),
   },
 };
