@@ -9,9 +9,12 @@
       >
         <v-list>
           <v-list-item-group>
-            <template v-for="(rank, i) in ranks">
+            <template
+              v-for="(rank, i) in ranks"
+            >
               <v-list-item
-                :key="rank.id">
+                :key="rank.id"
+              >
                 <v-list-item-icon
                   class="my-2"
                 >

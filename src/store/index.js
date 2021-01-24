@@ -28,7 +28,8 @@ export default new Vuex.Store({
       commit,
     }, params) {
       const { data } = await axios.get('/', { params });
-      commit('setRanks', data.data || []);
+      const ranks = data.data.filter((rank) => rank.totalCount > 0);
+      commit('setRanks', ranks);
     },
   },
 });
