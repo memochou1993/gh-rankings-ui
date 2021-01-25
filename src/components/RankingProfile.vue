@@ -61,18 +61,9 @@
                       {{ rank.tags }}
                     </v-list-item-content>
                     <v-list-item-action>
-                      <v-btn
-                        :ripple="false"
-                        text
-                      >
-                        <span
-                          v-text="rank.totalCount.toLocaleString()"
-                        />
-                        <v-icon
-                          right
-                          v-text="getIcon(rank.tags)"
-                        />
-                      </v-btn>
+                      <RankingTotalCount
+                        :rank="rank"
+                      />
                     </v-list-item-action>
                   </v-list-item>
                   <v-divider
@@ -90,7 +81,12 @@
 </template>
 
 <script>
+import RankingTotalCount from '@/components/RankingTotalCount';
+
 export default {
+  components: {
+    RankingTotalCount,
+  },
   props: {
     ranks: {
       type: Array,
@@ -105,36 +101,5 @@ export default {
       return this.ranks[0]?.name;
     },
   },
-  methods: {
-    getIcon(tags) {
-      switch (true) {
-        case tags.join(',')
-          .includes('followers'):
-          return 'mdi-account-supervisor';
-        case tags.join(',')
-          .includes('watchers'):
-          return 'mdi-eye-outline';
-        case tags.join(',')
-          .includes('stargazers'):
-          return 'mdi-star';
-        case tags.join(',')
-          .includes('forks'):
-          return 'mdi-source-fork';
-        default:
-          return '';
-      }
-    },
-  },
 };
 </script>
-
-<style lang="scss" scoped>
-.v-list {
-  .v-btn {
-    cursor: inherit;
-  }
-  .v-btn::before {
-    background-color: transparent !important;
-  }
-}
-</style>
