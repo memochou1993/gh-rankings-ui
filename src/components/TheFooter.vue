@@ -6,10 +6,10 @@
       class="primary"
     >
       <v-col
-        class="text-center"
         cols="12"
+        class="text-center"
       >
-        Memo Chou
+        Powered by Memo Chou
       </v-col>
     </v-footer>
   </div>

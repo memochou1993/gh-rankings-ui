@@ -1,27 +1,30 @@
 <template>
   <div>
     <v-card>
-      <v-card-title>
-        {{ title }}
-      </v-card-title>
+      <v-card-title
+        v-text="title"
+      />
       <v-card-text
         class="pa-0"
       >
-        <v-list>
+        <v-list
+          class="py-0"
+        >
           <v-list-item-group>
             <template
               v-for="(rank, i) in ranks"
             >
               <v-list-item
-                :key="rank.id"
+                :key="i"
+                :to="`/${rank.name}`"
               >
                 <v-list-item-icon
                   class="my-2"
                 >
                   <v-avatar
-                    tile
+                    rounded
                   >
-                    <img
+                    <v-img
                       :src="rank.imageUrl"
                       :alt="rank.name"
                     />
@@ -41,15 +44,15 @@
                       v-text="rank.totalCount.toLocaleString()"
                     />
                     <v-icon
-                      right
                       v-text="getIcon(rank.tags)"
+                      right
                     />
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
               <v-divider
                 v-if="i < ranks.length - 1"
-                :key="i"
+                :key="`divider-${i}`"
               />
             </template>
           </v-list-item-group>
@@ -89,7 +92,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-btn::before {
-  background-color: transparent !important;
+.v-list {
+  .v-btn {
+    cursor: inherit;
+  }
+  .v-btn::before {
+    background-color: transparent !important;
+  }
 }
 </style>

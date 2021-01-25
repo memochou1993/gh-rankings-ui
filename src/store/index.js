@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    loading: false,
     /**
      * @param ranks
      * @param ranks[].name
@@ -19,17 +20,30 @@ export default new Vuex.Store({
     ranks: [],
   },
   mutations: {
+    setLoading(state, loading) {
+      state.loading = loading;
+    },
     setRanks(state, ranks) {
       state.ranks = ranks;
     },
   },
   actions: {
-    async fetch({
+    fetch({
       commit,
     }, params) {
-      const { data } = await axios.get('/', { params });
-      const ranks = data.data.filter((rank) => rank.totalCount > 0);
-      commit('setRanks', ranks);
+      commit('setLoading', true);
+      return new Promise((resolve, reject) => {
+        axios.get('/', { params })
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+          .finally(() => {
+            commit('setLoading', false);
+          });
+      });
     },
   },
 });
