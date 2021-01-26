@@ -55,9 +55,6 @@ export default {
       this.fetch();
     },
   },
-  created() {
-    this.setPage(Number(this.$route.query.page) || 1);
-  },
   computed: {
     ...mapState([
       'ranks',
@@ -78,6 +75,9 @@ export default {
         limit: this.limit,
       };
     },
+  },
+  created() {
+    this.setPage(Number(this.$route.query.page) || 1);
   },
   methods: {
     setLoaded(loaded) {

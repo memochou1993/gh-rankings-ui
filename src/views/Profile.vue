@@ -34,9 +34,6 @@ export default {
     loaded: false,
     ranks: [],
   }),
-  created() {
-    this.fetch();
-  },
   computed: {
     ...mapState([
       'loading',
@@ -50,6 +47,9 @@ export default {
         limit: 1000,
       };
     },
+  },
+  created() {
+    this.fetch();
   },
   methods: {
     setLoaded(loaded) {
