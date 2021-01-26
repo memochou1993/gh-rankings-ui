@@ -5,6 +5,7 @@
     >
       <v-card-title
         v-text="title"
+        class="font-weight-light"
       />
       <v-card-text
         class="pa-0"
@@ -19,6 +20,7 @@
               <v-list-item
                 :key="i"
                 :to="`/${rank.name}`"
+                class="body-1 font-weight-light"
               >
                 <v-list-item-icon
                   class="my-2"

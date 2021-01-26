@@ -1,12 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      GitHub Rankings
-    </v-app-bar>
+    <TheHeader />
     <v-main>
       <router-view />
     </v-main>
@@ -16,11 +10,13 @@
 
 <script>
 import TheFooter from '@/components/TheFooter';
+import TheHeader from '@/components/TheHeader';
 
 export default {
   name: 'App',
   components: {
     TheFooter,
+    TheHeader,
   },
 };
 </script>

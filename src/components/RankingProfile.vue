@@ -25,7 +25,7 @@
           </v-card-title>
           <v-card-text>
             <div
-              class="title text-center"
+              class="title font-weight-light text-center"
             >
               {{ name }}
             </div>
@@ -60,7 +60,7 @@
                     <v-list-item-content>
                       <v-list-item-title
                         v-text="`${rank.rank}/${rank.last}`"
-                        class="title"
+                        class="title font-weight-light"
                       />
                       {{ rank.tags }}
                     </v-list-item-content>

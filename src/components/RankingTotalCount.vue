@@ -6,7 +6,7 @@
     >
       <span
         v-text="rank.totalCount.toLocaleString()"
-        class="body-1"
+        class="body-1 font-weight-light"
       />
       <v-icon
         v-text="icon"
