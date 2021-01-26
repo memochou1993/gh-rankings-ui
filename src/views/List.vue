@@ -21,7 +21,7 @@
               :total-visible="9"
               next-icon="mdi-menu-right"
               prev-icon="mdi-menu-left"
-              class="my-5"
+              class="font-weight-light my-5"
             />
           </div>
         </v-fade-transition>

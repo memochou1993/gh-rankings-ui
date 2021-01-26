@@ -7,7 +7,7 @@
     >
       <v-col
         cols="12"
-        class="text-center"
+        class="font-weight-light text-center"
       >
         Powered by Memo Chou
       </v-col>
