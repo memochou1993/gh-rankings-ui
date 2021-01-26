@@ -25,7 +25,8 @@
           </v-card-title>
           <v-card-text>
             <div
-              class="title font-weight-light text-center"
+              @click="open()"
+              class="title font-weight-light text-center pointer"
             >
               {{ name }}
             </div>
@@ -104,6 +105,11 @@ export default {
     },
     name() {
       return this.ranks[0]?.name || '';
+    },
+  },
+  methods: {
+    open() {
+      window.open(`https://github.com/${this.name}`, '_blank', 'noreferrer noopener');
     },
   },
 };
