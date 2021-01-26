@@ -10,6 +10,7 @@
       />
       <v-icon
         v-text="icon"
+        :size="20"
         right
       />
     </v-btn>
@@ -30,11 +31,11 @@ export default {
       const tags = this.rank.tags.join(',');
       switch (true) {
         case tags.includes('followers'):
-          return 'mdi-account-supervisor';
+          return 'mdi-account-group-outline ';
         case tags.includes('watchers'):
           return 'mdi-eye-outline';
         case tags.includes('stargazers'):
-          return 'mdi-star';
+          return 'mdi-star-outline';
         case tags.includes('forks'):
           return 'mdi-source-fork';
         default:
