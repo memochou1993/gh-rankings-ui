@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-card>
+    <v-card
+      :elevation="5"
+    >
       <v-card-title
         v-text="title"
       />
@@ -57,6 +59,7 @@
 import RankingTotalCount from '@/components/RankingTotalCount';
 
 export default {
+  name: 'RankingList',
   components: {
     RankingTotalCount,
   },

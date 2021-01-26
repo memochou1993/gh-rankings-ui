@@ -8,7 +8,7 @@
       >
         <v-fade-transition>
           <RankingProfile
-            v-show="!loading"
+            v-show="loaded"
             :name="name"
             :ranks="ranks"
             class="my-5"
@@ -31,6 +31,7 @@ export default {
     RankingProfile,
   },
   data: () => ({
+    loaded: false,
     ranks: [],
   }),
   created() {
@@ -51,12 +52,16 @@ export default {
     },
   },
   methods: {
+    setLoaded(loaded) {
+      this.loaded = loaded;
+    },
     setRanks(ranks) {
       this.ranks = ranks;
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
       this.setRanks(data);
+      this.setLoaded(true);
     },
   },
 };

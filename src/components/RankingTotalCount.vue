@@ -6,6 +6,7 @@
     >
       <span
         v-text="rank.totalCount.toLocaleString()"
+        class="body-1"
       />
       <v-icon
         v-text="icon"
@@ -17,6 +18,7 @@
 
 <script>
 export default {
+  name: 'RankingTotalCount',
   props: {
     rank: {
       type: Object,

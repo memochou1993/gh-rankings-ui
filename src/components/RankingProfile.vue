@@ -7,7 +7,9 @@
         xs="12"
         sm="3"
       >
-        <v-card>
+        <v-card
+          :elevation="5"
+        >
           <v-card-title
             class="headline"
           >
@@ -34,7 +36,9 @@
         xs="12"
         sm="9"
       >
-        <v-card>
+        <v-card
+          :elevation="5"
+        >
           <v-card-text
             class="pa-0"
           >
@@ -84,6 +88,7 @@
 import RankingTotalCount from '@/components/RankingTotalCount';
 
 export default {
+  name: 'RankingProfile',
   components: {
     RankingTotalCount,
   },
@@ -95,10 +100,10 @@ export default {
   },
   computed: {
     imageUrl() {
-      return this.ranks[0]?.imageUrl;
+      return this.ranks[0]?.imageUrl || '';
     },
     name() {
-      return this.ranks[0]?.name;
+      return this.ranks[0]?.name || '';
     },
   },
 };
