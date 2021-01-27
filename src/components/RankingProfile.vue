@@ -43,41 +43,20 @@
           <v-card-text
             class="pa-0"
           >
-            <v-list
-              class="py-0"
-            >
-              <v-list-item-group>
-                <template
-                  v-for="(rank, i) in ranks"
-                >
-                  <v-list-item
-                    :key="i"
-                    :ripple="false"
-                    inactive
-                  >
-                    <v-list-item-icon
-                      class="my-2"
-                    />
-                    <v-list-item-content>
-                      <v-list-item-title
-                        v-text="`${rank.rank}/${rank.last}`"
-                        class="title font-weight-light"
-                      />
-                      {{ rank.tags }}
-                    </v-list-item-content>
-                    <v-list-item-action>
-                      <RankingTotalCount
-                        :rank="rank"
-                      />
-                    </v-list-item-action>
-                  </v-list-item>
-                  <v-divider
-                    v-if="i < ranks.length - 1"
-                    :key="`divider-${i}`"
-                  />
-                </template>
-              </v-list-item-group>
-            </v-list>
+            <RankingGroup
+              :ranks="stargazers"
+              title="Stargazers Ranking"
+            />
+            <v-divider />
+            <RankingGroup
+              :ranks="forks"
+              title="Forks Ranking"
+            />
+            <v-divider />
+            <RankingGroup
+              :ranks="watchers"
+              title="Watchers Ranking"
+            />
           </v-card-text>
         </v-card>
       </v-col>
@@ -86,12 +65,12 @@
 </template>
 
 <script>
-import RankingTotalCount from '@/components/RankingTotalCount';
+import RankingGroup from '@/components/RankingGroup';
 
 export default {
   name: 'RankingProfile',
   components: {
-    RankingTotalCount,
+    RankingGroup,
   },
   props: {
     ranks: {
@@ -105,6 +84,15 @@ export default {
     },
     name() {
       return this.ranks[0]?.name || '';
+    },
+    stargazers() {
+      return this.ranks.filter((rank) => rank.tags.join(',').includes('stargazers'));
+    },
+    forks() {
+      return this.ranks.filter((rank) => rank.tags.join(',').includes('forks'));
+    },
+    watchers() {
+      return this.ranks.filter((rank) => rank.tags.join(',').includes('watchers'));
     },
   },
   methods: {

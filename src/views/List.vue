@@ -8,7 +8,7 @@
       >
         <v-fade-transition>
           <div
-            v-show="loaded"
+            v-if="loaded"
           >
             <RankingList
               :title="'Repository Ranking'"
@@ -17,7 +17,7 @@
             />
             <v-pagination
               v-model="page"
-              :length="length"
+              :length="pages"
               :total-visible="9"
               next-icon="mdi-menu-right"
               prev-icon="mdi-menu-left"
@@ -47,8 +47,19 @@ export default {
     limit: 10,
   }),
   watch: {
+    $route(after) {
+      this.setPage(Number(after.query.page) || 1);
+    },
     page(after, before) {
       if (after === before) {
+        return;
+      }
+      if (after === 1 && before === 0) {
+        this.fetch();
+        return;
+      }
+      if (Number(this.$route.query.page) > 100) {
+        this.$router.replace({ query: { ...this.$route.query, page: '1' } }).catch(() => {});
         return;
       }
       this.$router.push({ query: { ...this.$route.query, page: String(after) } }).catch(() => {});
@@ -62,14 +73,15 @@ export default {
     last() {
       return this.ranks[0]?.last || 0;
     },
-    length() {
-      return Math.ceil(this.last / this.limit);
+    pages() {
+      const pages = Math.ceil(this.last / this.limit);
+      return pages > 100 ? 100 : pages;
     },
     params() {
       return {
         tags: [
-          'repository',
-          'stargazers',
+          'type:repository',
+          'field:stargazers',
         ],
         page: this.page,
         limit: this.limit,

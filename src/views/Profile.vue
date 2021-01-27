@@ -8,7 +8,7 @@
       >
         <v-fade-transition>
           <RankingProfile
-            v-show="loaded"
+            v-if="loaded"
             :name="name"
             :ranks="ranks"
             class="my-5"
