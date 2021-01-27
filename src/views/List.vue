@@ -80,8 +80,8 @@ export default {
     params() {
       return {
         tags: [
-          'type:repository',
-          'field:stargazers',
+          'type:user',
+          'field:repositories.stargazers',
         ],
         page: this.page,
         limit: this.limit,

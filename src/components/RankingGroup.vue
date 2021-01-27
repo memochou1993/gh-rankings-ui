@@ -84,22 +84,27 @@
                       <v-col
                         cols="8"
                       >
-                        <RankingTag
-                          v-if="isGists(rank.tags)"
-                          :content="'Gists'"
-                        />
-                        <RankingTag
-                          v-if="isRepositories(rank.tags)"
-                          :content="'Repositories'"
-                        />
-                        <RankingTag
-                          v-if="getLocation(rank.tags)"
-                          :content="getLocation(rank.tags)"
-                        />
-                        <RankingTag
-                          v-if="getLanguage(rank.tags)"
-                          :content="getLanguage(rank.tags)"
-                        />
+                        <span
+                          v-for="(tag, i) in rank.tags"
+                          :key="i"
+                        >
+                          <RankingTag
+                            v-if="tag.includes('gists')"
+                            :content="'Gists'"
+                          />
+                          <RankingTag
+                            v-if="tag.includes('repositories')"
+                            :content="'Repositories'"
+                          />
+                          <RankingTag
+                            v-if="tag.includes('language')"
+                            :content="tag.replace('language:', '')"
+                          />
+                          <RankingTag
+                            v-if="tag.includes('location')"
+                            :content="tag.replace('location:', '')"
+                          />
+                        </span>
                       </v-col>
                     </v-row>
                   </v-list-item-title>
@@ -145,20 +150,6 @@ export default {
     ranks: {
       type: Array,
       required: true,
-    },
-  },
-  methods: {
-    isGists(tags) {
-      return tags.find((tag) => tag.includes('gists'));
-    },
-    isRepositories(tags) {
-      return tags.find((tag) => tag.includes('repositories'));
-    },
-    getLocation(tags) {
-      return tags.find((tag) => tag.includes('location'))?.replace('location:', '');
-    },
-    getLanguage(tags) {
-      return tags.find((tag) => tag.includes('language'))?.replace('language:', '');
     },
   },
 };
