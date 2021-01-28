@@ -4,7 +4,7 @@
       justify="center"
     >
       <v-col
-        cols="10"
+        md="8"
       >
         <v-fade-transition>
           <RankingProfile

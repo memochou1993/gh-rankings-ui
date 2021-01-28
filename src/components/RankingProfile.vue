@@ -37,28 +37,10 @@
         xs="12"
         sm="9"
       >
-        <v-card
-          :elevation="5"
-        >
-          <v-card-text
-            class="pa-0"
-          >
-            <RankingGroup
-              :ranks="stargazers"
-              title="Stargazers Ranking"
-            />
-            <v-divider />
-            <RankingGroup
-              :ranks="forks"
-              title="Forks Ranking"
-            />
-            <v-divider />
-            <RankingGroup
-              :ranks="watchers"
-              title="Watchers Ranking"
-            />
-          </v-card-text>
-        </v-card>
+        <RankingGroup
+          :ranks="sort(filter(ranks, ['repositories'], 2))"
+          title="Repositories Ranking"
+        />
       </v-col>
     </v-row>
   </div>
@@ -85,17 +67,21 @@ export default {
     name() {
       return this.ranks[0]?.name || '';
     },
-    stargazers() {
-      return this.ranks.filter((rank) => rank.tags.join(',').includes('stargazers'));
-    },
-    forks() {
-      return this.ranks.filter((rank) => rank.tags.join(',').includes('forks'));
-    },
-    watchers() {
-      return this.ranks.filter((rank) => rank.tags.join(',').includes('watchers'));
-    },
   },
   methods: {
+    filter(ranks, tags, length = -1) {
+      return ranks
+        .filter((rank) => tags.every((tag) => rank.tags.join(',').includes(tag)))
+        .filter((rank) => length === -1 || rank.tags.length === length);
+    },
+    sort(ranks) {
+      return [
+        ...this.filter(ranks, ['followers']),
+        ...this.filter(ranks, ['stargazers']),
+        ...this.filter(ranks, ['forks']),
+        ...this.filter(ranks, ['watchers']),
+      ];
+    },
     open() {
       window.open(`https://github.com/${this.name}`, '_blank', 'noreferrer noopener');
     },
