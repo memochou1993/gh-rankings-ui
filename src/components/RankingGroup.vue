@@ -14,6 +14,39 @@
           class="py-0"
         >
           <v-list-item-group>
+            <template>
+              <v-list-item
+                :ripple="false"
+                inactive
+              >
+                <v-list-item-content>
+                  <v-list-item-title
+                    class="title font-weight-light"
+                  >
+                    <v-row>
+                      <v-col
+                        cols="4"
+                        class="text-right"
+                      >
+                        Category
+                      </v-col>
+                      <v-col
+                        cols="4"
+                        class="text-left"
+                      >
+                        Rank
+                      </v-col>
+                      <v-col
+                        cols="4"
+                        class="text-right"
+                      >
+                        Total Count
+                      </v-col>
+                    </v-row>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
             <template
               v-for="(rank, i) in ranks"
             >
@@ -24,11 +57,12 @@
               >
                 <v-list-item-content>
                   <v-list-item-title
-                    class="title font-weight-light text-right"
+                    class="title font-weight-light"
                   >
                     <v-row>
                       <v-col
                         cols="4"
+                        class="text-right"
                       >
                         <span
                           v-for="(tag, i) in rank.tags"
@@ -45,8 +79,8 @@
                         </span>
                       </v-col>
                       <v-col
-                        cols="8"
-                        class="title font-weight-light text-left"
+                        cols="4"
+                        class="text-left"
                       >
                         <span
                           v-if="rank.rank > rank.last"
@@ -59,20 +93,17 @@
                           {{ `${rank.rank}/${rank.last}` }}
                         </span>
                       </v-col>
+                      <v-col
+                        cols="4"
+                        class="text-right"
+                      >
+                        <RankingTotalCount
+                          :rank="rank"
+                        />
+                      </v-col>
                     </v-row>
                   </v-list-item-title>
                 </v-list-item-content>
-                <v-list-item-action>
-                  <v-row>
-                    <v-col
-                      class="text-right"
-                    >
-                      <RankingTotalCount
-                        :rank="rank"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-list-item-action>
               </v-list-item>
               <v-divider
                 v-if="i < ranks.length - 1"
@@ -108,9 +139,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.v-list-item__action {
-  width: 120px;
-}
-</style>
