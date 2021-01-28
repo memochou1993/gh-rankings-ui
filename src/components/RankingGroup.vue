@@ -28,19 +28,25 @@
                         cols="4"
                         class="text-right"
                       >
-                        {{ category }}
+                        <span
+                          v-text="category"
+                        />
                       </v-col>
                       <v-col
                         cols="4"
                         class="text-left"
                       >
-                        Rank
+                        <span
+                          v-text="'Rank'"
+                        />
                       </v-col>
                       <v-col
                         cols="4"
                         class="text-right"
                       >
-                        {{ type }}
+                        <span
+                          v-text="type"
+                        />
                       </v-col>
                     </v-row>
                   </v-list-item-title>
@@ -70,19 +76,26 @@
                         <span
                           v-if="rank.tags.length === 2"
                         >
-                          All
+                          <span
+                            v-if="category === 'Language'"
+                            v-text="'All'"
+                          />
+                          <span
+                            v-if="category === 'Location'"
+                            v-text="'Global'"
+                          />
                         </span>
                         <span
                           v-for="(tag, i) in rank.tags"
                           :key="i"
                         >
-                          <RankingTag
+                          <span
                             v-if="tag.includes('language')"
-                            :content="tag.replace('language:', '')"
+                            v-text="tag.replace('language:', '')"
                           />
-                          <RankingTag
+                          <span
                             v-if="tag.includes('location')"
-                            :content="tag.replace('location:', '')"
+                            v-text="tag.replace('location:', '')"
                           />
                         </span>
                       </v-col>
@@ -92,14 +105,12 @@
                       >
                         <span
                           v-if="rank.rank > rank.last"
-                        >
-                          -
-                        </span>
+                          v-text="'-'"
+                        />
                         <span
                           v-else
-                        >
-                          {{ `${rank.rank}/${rank.last}` }}
-                        </span>
+                          v-text="`${rank.rank}/${rank.last}`"
+                        />
                       </v-col>
                       <v-col
                         cols="4"
@@ -122,13 +133,11 @@
 </template>
 
 <script>
-import RankingTag from '@/components/RankingTag';
 import RankingTotalCount from '@/components/RankingTotalCount';
 
 export default {
   name: 'RankingGroup',
   components: {
-    RankingTag,
     RankingTotalCount,
   },
   props: {

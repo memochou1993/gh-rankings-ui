@@ -22,12 +22,16 @@
               />
             </v-avatar>
           </v-card-title>
-          <v-card-text>
+          <v-card-text
+            class="text-center"
+          >
             <div
+              class="title text--primary pointer"
               @click="open()"
-              class="title font-weight-light text-center pointer"
             >
-              {{ name }}
+              <span
+                v-text="name"
+              />
             </div>
           </v-card-text>
         </v-card>
@@ -35,36 +39,19 @@
       <v-col
         sm="9"
       >
-        <RankingGroup
-          :ranks="[
-            ...filter(ranks, ['repositories', 'stargazers'], 2),
-            ...filter(ranks, ['repositories', 'stargazers', 'language'])
-          ]"
-          category="Language"
-          title="Repository Stars Ranking"
-          type="Stars"
-          class="mb-3"
-        />
-        <RankingGroup
-          :ranks="[
-            ...filter(ranks, ['repositories', 'forks'], 2),
-            ...filter(ranks, ['repositories', 'forks', 'language'])
-          ]"
-          category="Language"
-          title="Repository Forks Ranking"
-          type="Forks"
-          class="mb-3"
-        />
-        <RankingGroup
-          :ranks="[
-            ...filter(ranks, ['repositories', 'watchers'], 2),
-            ...filter(ranks, ['repositories', 'watchers', 'language'])
-          ]"
-          category="Language"
-          title="Repository Watchers Ranking"
-          type="Watchers"
-          class="mb-3"
-        />
+        <span
+          v-for="(group, i) in groups"
+          :key="i"
+        >
+          <RankingGroup
+            v-if="group.ranks.length > 0"
+            :category="group.category"
+            :title="group.title"
+            :type="group.type"
+            :ranks="group.ranks"
+            class="mb-5"
+          />
+        </span>
       </v-col>
     </v-row>
   </div>
@@ -91,20 +78,79 @@ export default {
     name() {
       return this.ranks[0]?.name || '';
     },
+    groups() {
+      return [
+        {
+          category: 'Location',
+          title: 'Followers Ranking',
+          type: 'Followers',
+          ranks: [
+            ...this.filter(['followers'], 2),
+            ...this.filter(['followers', 'location']),
+          ],
+        },
+        {
+          category: 'Language',
+          title: 'Repository Stars Ranking',
+          type: 'Stars',
+          ranks: [
+            ...this.filter(['repositories', 'stargazers'], 2),
+            ...this.filter(['repositories', 'stargazers', 'language']),
+          ],
+        },
+        {
+          category: 'Language',
+          title: 'Repository Forks Ranking',
+          type: 'Forks',
+          ranks: [
+            ...this.filter(['repositories', 'forks'], 2),
+            ...this.filter(['repositories', 'forks', 'language']),
+          ],
+        },
+        {
+          category: 'Language',
+          title: 'Repository Watchers Ranking',
+          type: 'Watchers',
+          ranks: [
+            ...this.filter(['repositories', 'watchers'], 2),
+            ...this.filter(['repositories', 'watchers', 'language']),
+          ],
+        },
+        {
+          category: 'Language',
+          title: 'Stars Ranking',
+          type: 'Stars',
+          ranks: [
+            ...this.filter(['repository', 'stargazers'], 2),
+            ...this.filter(['repository', 'stargazers', 'language']),
+          ],
+        },
+        {
+          category: 'Language',
+          title: 'Forks Ranking',
+          type: 'Forks',
+          ranks: [
+            ...this.filter(['repository', 'forks'], 2),
+            ...this.filter(['repository', 'forks', 'language']),
+          ],
+        },
+        {
+          category: 'Language',
+          title: 'Watchers Ranking',
+          type: 'Watchers',
+          ranks: [
+            ...this.filter(['repository', 'watchers'], 2),
+            ...this.filter(['repository', 'watchers', 'language']),
+          ],
+        },
+      ];
+    },
   },
   methods: {
-    filter(ranks, tags, length = -1) {
-      return ranks
+    filter(tags, length = -1) {
+      return this.ranks
         .filter((rank) => tags.every((tag) => rank.tags.join(',').includes(tag)))
         .filter((rank) => length === -1 || rank.tags.length === length);
-    },
-    sort(ranks) {
-      return [
-        ...this.filter(ranks, ['followers']),
-        ...this.filter(ranks, ['stargazers']),
-        ...this.filter(ranks, ['forks']),
-        ...this.filter(ranks, ['watchers']),
-      ];
     },
     open() {
       window.open(`https://github.com/${this.name}`, '_blank', 'noreferrer noopener');
