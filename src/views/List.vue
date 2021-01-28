@@ -58,7 +58,7 @@ export default {
         this.fetch();
         return;
       }
-      if (Number(this.$route.query.page) > 100) {
+      if (Number(this.$route.query.page) > this.limit * 10) {
         this.$router.replace({ query: { ...this.$route.query, page: '1' } }).catch(() => {});
         return;
       }
@@ -75,7 +75,8 @@ export default {
     },
     pages() {
       const pages = Math.ceil(this.last / this.limit);
-      return pages > 100 ? 100 : pages;
+      const max = this.limit * 10;
+      return pages > max ? max : pages;
     },
     params() {
       return {

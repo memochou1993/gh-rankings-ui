@@ -3,13 +3,13 @@
     <v-card
       :elevation="5"
     >
-      <v-card-title
-        v-text="title"
-        class="font-weight-light"
-      />
       <v-card-text
         class="pa-0"
       >
+        <div
+          v-text="title"
+          class="headline font-weight-light text-center py-4"
+        />
         <v-list
           class="py-0"
         >

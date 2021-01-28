@@ -109,7 +109,7 @@
                         />
                         <span
                           v-else
-                          v-text="`${rank.rank}/${rank.last}`"
+                          v-text="`${rank.rank.toLocaleString()} / ${rank.last.toLocaleString()}`"
                         />
                       </v-col>
                       <v-col
