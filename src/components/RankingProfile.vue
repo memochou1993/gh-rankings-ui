@@ -4,7 +4,6 @@
       justify="center"
     >
       <v-col
-        xs="12"
         sm="3"
       >
         <v-card
@@ -34,12 +33,37 @@
         </v-card>
       </v-col>
       <v-col
-        xs="12"
         sm="9"
       >
         <RankingGroup
-          :ranks="sort(filter(ranks, ['repositories'], 2))"
-          title="Repositories Ranking"
+          :ranks="[
+            ...filter(ranks, ['repositories', 'stargazers'], 2),
+            ...filter(ranks, ['repositories', 'stargazers', 'language'])
+          ]"
+          category="Language"
+          title="Repository Stars Ranking"
+          type="Stars"
+          class="mb-3"
+        />
+        <RankingGroup
+          :ranks="[
+            ...filter(ranks, ['repositories', 'forks'], 2),
+            ...filter(ranks, ['repositories', 'forks', 'language'])
+          ]"
+          category="Language"
+          title="Repository Forks Ranking"
+          type="Forks"
+          class="mb-3"
+        />
+        <RankingGroup
+          :ranks="[
+            ...filter(ranks, ['repositories', 'watchers'], 2),
+            ...filter(ranks, ['repositories', 'watchers', 'language'])
+          ]"
+          category="Language"
+          title="Repository Watchers Ranking"
+          type="Watchers"
+          class="mb-3"
         />
       </v-col>
     </v-row>

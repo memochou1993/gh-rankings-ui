@@ -3,13 +3,13 @@
     <v-card
       :elevation="5"
     >
-      <v-card-title
-        v-text="title"
-        class="font-weight-light"
-      />
       <v-card-text
         class="pa-0"
       >
+        <div
+          v-text="title"
+          class="headline font-weight-light text-center py-4"
+        />
         <v-list
           class="py-0"
         >
@@ -21,14 +21,14 @@
               >
                 <v-list-item-content>
                   <v-list-item-title
-                    class="title font-weight-light"
+                    class="title font-weight-regular"
                   >
                     <v-row>
                       <v-col
                         cols="4"
                         class="text-right"
                       >
-                        Category
+                        {{ category }}
                       </v-col>
                       <v-col
                         cols="4"
@@ -40,7 +40,7 @@
                         cols="4"
                         class="text-right"
                       >
-                        Total Count
+                        {{ type }}
                       </v-col>
                     </v-row>
                   </v-list-item-title>
@@ -68,6 +68,11 @@
                         class="text-right"
                       >
                         <span
+                          v-if="rank.tags.length === 2"
+                        >
+                          All
+                        </span>
+                        <span
                           v-for="(tag, i) in rank.tags"
                           :key="i"
                         >
@@ -88,7 +93,7 @@
                         <span
                           v-if="rank.rank > rank.last"
                         >
-                          N/A
+                          -
                         </span>
                         <span
                           v-else
@@ -127,7 +132,15 @@ export default {
     RankingTotalCount,
   },
   props: {
+    category: {
+      type: String,
+      required: true,
+    },
     title: {
+      type: String,
+      required: true,
+    },
+    type: {
       type: String,
       required: true,
     },

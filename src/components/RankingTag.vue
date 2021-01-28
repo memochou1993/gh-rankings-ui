@@ -1,13 +1,6 @@
 <template>
   <span>
-    <v-chip
-      :color="color"
-      label
-      outlined
-      class="mr-2"
-    >
-      {{ content }}
-    </v-chip>
+    {{ content }}
   </span>
 </template>
 
