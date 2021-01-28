@@ -3,6 +3,7 @@
     <v-btn
       :ripple="false"
       text
+      x-small
     >
       <span
         v-text="rank.totalCount.toLocaleString()"

@@ -50,6 +50,9 @@
             <template
               v-for="(rank, i) in ranks"
             >
+              <v-divider
+                :key="`divider-${i}`"
+              />
               <v-list-item
                 :key="i"
                 :ripple="false"
@@ -105,10 +108,6 @@
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-divider
-                v-if="i < ranks.length - 1"
-                :key="`divider-${i}`"
-              />
             </template>
           </v-list-item-group>
         </v-list>
