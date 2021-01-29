@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import util from '@/utils/util';
+
 export default {
   name: 'RankingProfile',
   props: {
@@ -47,7 +49,7 @@ export default {
   },
   methods: {
     open() {
-      window.open(`https://github.com/${this.name}`, '_blank', 'noreferrer noopener');
+      util.open(`https://github.com/${this.name}`);
     },
   },
 };

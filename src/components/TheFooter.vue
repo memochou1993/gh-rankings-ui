@@ -20,11 +20,13 @@
 </template>
 
 <script>
+import util from '@/utils/util';
+
 export default {
   name: 'TheFooter',
   methods: {
     open() {
-      window.open('https://github.com/memochou1993', '_blank', 'noreferrer noopener');
+      util.open('https://github.com/memochou1993');
     },
   },
 };
