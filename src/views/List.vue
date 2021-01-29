@@ -4,26 +4,28 @@
       justify="center"
     >
       <v-col
-        md="6"
+        sm="6"
       >
         <v-fade-transition>
-          <div
+          <v-row
             v-if="loaded"
+            class="mt-3"
           >
-            <RankingList
-              :title="'Repository Ranking'"
-              :ranks="ranks"
-              class="my-5"
-            />
-            <v-pagination
-              v-model="page"
-              :length="pages"
-              :total-visible="9"
-              next-icon="mdi-menu-right"
-              prev-icon="mdi-menu-left"
-              class="font-weight-light my-5"
-            />
-          </div>
+            <v-col>
+              <RankingList
+                :title="'Repository Ranking'"
+                :ranks="ranks"
+              />
+              <v-pagination
+                v-model="page"
+                :length="pages"
+                :total-visible="9"
+                next-icon="mdi-menu-right"
+                prev-icon="mdi-menu-left"
+                class="font-weight-light my-5"
+              />
+            </v-col>
+          </v-row>
         </v-fade-transition>
       </v-col>
     </v-row>
@@ -58,11 +60,12 @@ export default {
         this.fetch();
         return;
       }
-      if (Number(this.$route.query.page) > this.limit * 10) {
-        this.$router.replace({ query: { ...this.$route.query, page: '1' } }).catch(() => {});
+      const { query } = this.$route;
+      if (Number(query.page) > this.pages) {
+        this.$router.replace({ query: { ...query, page: '1' } }).catch(() => {});
         return;
       }
-      this.$router.push({ query: { ...this.$route.query, page: String(after) } }).catch(() => {});
+      this.$router.push({ query: { ...query, page: String(after) } }).catch(() => {});
       this.fetch();
     },
   },
