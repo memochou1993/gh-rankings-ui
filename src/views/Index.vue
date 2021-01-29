@@ -9,7 +9,7 @@
       >
         <v-fade-transition>
           <v-row
-            v-if="loaded"
+            v-if="ranks.length > 0"
             class="mt-3"
           >
             <v-col>
@@ -45,7 +45,6 @@ export default {
     RankingList,
   },
   data: () => ({
-    loaded: false,
     page: 0,
     limit: 10,
   }),
@@ -97,17 +96,12 @@ export default {
     this.setPage(Number(this.$route.query.page) || 1);
   },
   methods: {
-    setLoaded(loaded) {
-      this.loaded = loaded;
-    },
     setPage(page) {
       this.page = page;
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
-      const ranks = data.filter((rank) => rank.totalCount > 0);
-      this.$store.commit('setRanks', ranks);
-      this.setLoaded(true);
+      this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
     },
   },
 };

@@ -9,7 +9,7 @@
       >
         <v-fade-transition>
           <v-row
-            v-if="loaded"
+            v-if="ranks.length > 0"
             class="mt-3"
           >
             <v-col
@@ -57,7 +57,6 @@ export default {
     RankingProfile,
   },
   data: () => ({
-    loaded: false,
     ranks: [],
     page: 1,
     limit: 1000,
@@ -166,21 +165,17 @@ export default {
     this.fetch();
   },
   methods: {
-    setLoaded(loaded) {
-      this.loaded = loaded;
-    },
     setRanks(ranks) {
       this.ranks = ranks;
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
       this.setRanks(data);
-      this.setLoaded(true);
     },
-    filter(tags, length = -1) {
+    filter(tags, length) {
       return this.ranks
         .filter((rank) => tags.every((tag) => rank.tags.join(',').includes(tag)))
-        .filter((rank) => length === -1 || rank.tags.length === length);
+        .filter((rank) => !length || rank.tags.length === length);
     },
   },
 };
