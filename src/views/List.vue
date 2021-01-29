@@ -48,27 +48,6 @@ export default {
     page: 0,
     limit: 10,
   }),
-  watch: {
-    $route(after) {
-      this.setPage(Number(after.query.page) || 1);
-    },
-    page(after, before) {
-      if (after === before) {
-        return;
-      }
-      if (after === 1 && before === 0) {
-        this.fetch();
-        return;
-      }
-      const { query } = this.$route;
-      if (Number(query.page) > this.pages) {
-        this.$router.replace({ query: { ...query, page: '1' } }).catch(() => {});
-        return;
-      }
-      this.$router.push({ query: { ...query, page: String(after) } }).catch(() => {});
-      this.fetch();
-    },
-  },
   computed: {
     ...mapState([
       'ranks',
@@ -90,6 +69,27 @@ export default {
         page: this.page,
         limit: this.limit,
       };
+    },
+  },
+  watch: {
+    $route(after) {
+      this.setPage(Number(after.query.page) || 1);
+    },
+    page(after, before) {
+      if (after === before) {
+        return;
+      }
+      if (after === 1 && before === 0) {
+        this.fetch();
+        return;
+      }
+      const { query } = this.$route;
+      if (Number(query.page) > this.pages) {
+        this.$router.replace({ query: { ...query, page: '1' } }).catch(() => {});
+        return;
+      }
+      this.$router.push({ query: { ...query, page: String(after) } }).catch(() => {});
+      this.fetch();
     },
   },
   created() {

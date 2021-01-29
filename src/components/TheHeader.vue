@@ -6,7 +6,11 @@
       dark
       class="headline font-weight-light"
     >
-      GitHub Rankings
+      <span
+        class="pointer"
+        @click="$router.push('/').catch(() => {})"
+        v-text="'GH Rankings'"
+      />
     </v-app-bar>
   </div>
 </template>
