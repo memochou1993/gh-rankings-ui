@@ -7,8 +7,8 @@
         class="pa-0"
       >
         <div
-          v-text="title"
           class="headline font-weight-light text-center py-4"
+          v-text="title"
         />
         <v-list
           class="py-0"
@@ -86,8 +86,8 @@
                           />
                         </span>
                         <span
-                          v-for="(tag, i) in rank.tags"
-                          :key="i"
+                          v-for="(tag) in rank.tags"
+                          :key="tag"
                         >
                           <span
                             v-if="tag.includes('language')"

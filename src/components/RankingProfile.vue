@@ -36,17 +36,13 @@
 export default {
   name: 'RankingProfile',
   props: {
-    ranks: {
-      type: Array,
+    name: {
+      type: String,
       required: true,
     },
-  },
-  computed: {
-    imageUrl() {
-      return this.ranks[0]?.imageUrl || '';
-    },
-    name() {
-      return this.ranks[0]?.name || '';
+    imageUrl: {
+      type: String,
+      required: true,
     },
   },
   methods: {

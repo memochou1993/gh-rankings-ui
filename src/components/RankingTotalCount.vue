@@ -6,13 +6,13 @@
       x-small
     >
       <span
-        v-text="rank.totalCount.toLocaleString()"
         class="title font-weight-light"
+        v-text="rank.totalCount.toLocaleString()"
       />
       <v-icon
-        v-text="icon"
         :size="20"
         right
+        v-text="icon"
       />
     </v-btn>
   </div>

@@ -39,7 +39,7 @@ import {
 import RankingList from '@/components/RankingList';
 
 export default {
-  name: 'List',
+  name: 'Index',
   components: {
     RankingList,
   },

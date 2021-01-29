@@ -7,8 +7,8 @@
         class="pa-0"
       >
         <div
-          v-text="title"
           class="headline font-weight-light text-center py-4"
+          v-text="title"
         />
         <v-list
           class="py-0"

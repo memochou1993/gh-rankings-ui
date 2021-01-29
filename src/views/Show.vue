@@ -15,7 +15,8 @@
               sm="3"
             >
               <RankingProfile
-                :ranks="ranks"
+                :name="name"
+                :image-url="imageUrl"
               />
             </v-col>
             <v-col
@@ -47,7 +48,7 @@ import RankingGroup from '@/components/RankingGroup';
 import RankingProfile from '@/components/RankingProfile';
 
 export default {
-  name: 'Profile',
+  name: 'Show',
   components: {
     RankingGroup,
     RankingProfile,
@@ -61,6 +62,9 @@ export default {
   computed: {
     name() {
       return this.$route.params.name;
+    },
+    imageUrl() {
+      return this.ranks[0]?.imageUrl || '';
     },
     groups() {
       return [
