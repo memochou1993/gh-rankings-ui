@@ -13,8 +13,8 @@
           >
             <v-col>
               <RankingList
-                :title="'Repository Ranking'"
                 :ranks="ranks"
+                :title="'Repository Ranking'"
               />
               <v-pagination
                 v-model="page"

@@ -45,7 +45,7 @@
                         class="text-right"
                       >
                         <span
-                          v-text="type"
+                          v-text="field"
                         />
                       </v-col>
                     </v-row>
@@ -145,16 +145,16 @@ export default {
       type: String,
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-    },
-    type: {
+    field: {
       type: String,
       required: true,
     },
     ranks: {
       type: Array,
+      required: true,
+    },
+    title: {
+      type: String,
       required: true,
     },
   },

@@ -66,12 +66,12 @@ export default {
     RankingTotalCount,
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
     ranks: {
       type: Array,
+      required: true,
+    },
+    title: {
+      type: String,
       required: true,
     },
   },

@@ -29,9 +29,9 @@
                   v-if="group.ranks.length > 0"
                   :key="i"
                   :category="group.category"
-                  :title="group.title"
-                  :type="group.type"
+                  :field="group.field"
                   :ranks="group.ranks"
+                  :title="group.title"
                   class="mb-6"
                 />
               </template>
@@ -55,9 +55,9 @@ export default {
   },
   data: () => ({
     loaded: false,
+    ranks: [],
     page: 1,
     limit: 1000,
-    ranks: [],
   }),
   computed: {
     name() {
@@ -70,66 +70,84 @@ export default {
       return [
         {
           category: 'Location',
-          title: 'Followers Ranking',
-          type: 'Followers',
+          field: 'Followers',
           ranks: [
             ...this.filter(['followers'], 2),
             ...this.filter(['followers', 'location']),
           ],
+          title: 'Followers Ranking',
         },
         {
           category: 'Language',
-          title: 'Repository Stars Ranking',
-          type: 'Stars',
+          field: 'Stars',
           ranks: [
             ...this.filter(['repositories', 'stargazers'], 2),
             ...this.filter(['repositories', 'stargazers', 'language']),
           ],
+          title: 'Repository Stars Ranking',
         },
         {
           category: 'Language',
-          title: 'Repository Forks Ranking',
-          type: 'Forks',
+          field: 'Forks',
           ranks: [
             ...this.filter(['repositories', 'forks'], 2),
             ...this.filter(['repositories', 'forks', 'language']),
           ],
+          title: 'Repository Forks Ranking',
         },
         {
           category: 'Language',
-          title: 'Repository Watchers Ranking',
-          type: 'Watchers',
+          field: 'Watchers',
           ranks: [
             ...this.filter(['repositories', 'watchers'], 2),
             ...this.filter(['repositories', 'watchers', 'language']),
           ],
+          title: 'Repository Watchers Ranking',
+        },
+        {
+          category: 'Location',
+          field: 'Stars',
+          ranks: [
+            ...this.filter(['gists', 'stargazers'], 2),
+            ...this.filter(['gists', 'stargazers', 'location']),
+          ],
+          title: 'Gist Stars Ranking',
+        },
+        {
+          category: 'Location',
+          field: 'Forks',
+          ranks: [
+            ...this.filter(['gists', 'forks'], 2),
+            ...this.filter(['gists', 'forks', 'location']),
+          ],
+          title: 'Gist Forks Ranking',
         },
         {
           category: 'Language',
-          title: 'Stars Ranking',
-          type: 'Stars',
+          field: 'Stars',
           ranks: [
             ...this.filter(['repository', 'stargazers'], 2),
             ...this.filter(['repository', 'stargazers', 'language']),
           ],
+          title: 'Stars Ranking',
         },
         {
           category: 'Language',
-          title: 'Forks Ranking',
-          type: 'Forks',
+          field: 'Forks',
           ranks: [
             ...this.filter(['repository', 'forks'], 2),
             ...this.filter(['repository', 'forks', 'language']),
           ],
+          title: 'Forks Ranking',
         },
         {
           category: 'Language',
-          title: 'Watchers Ranking',
-          type: 'Watchers',
+          field: 'Watchers',
           ranks: [
             ...this.filter(['repository', 'watchers'], 2),
             ...this.filter(['repository', 'watchers', 'language']),
           ],
+          title: 'Watchers Ranking',
         },
       ];
     },
