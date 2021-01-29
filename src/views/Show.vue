@@ -4,7 +4,8 @@
       justify="center"
     >
       <v-col
-        sm="8"
+        :cols="10"
+        :sm="8"
       >
         <v-fade-transition>
           <v-row
@@ -12,7 +13,8 @@
             class="mt-3"
           >
             <v-col
-              sm="3"
+              :md="2"
+              :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
             >
               <RankingProfile
                 :name="name"
@@ -20,7 +22,8 @@
               />
             </v-col>
             <v-col
-              sm="9"
+              :md="9"
+              :offset-md="3"
             >
               <template
                 v-for="(group, i) in groups"

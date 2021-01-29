@@ -6,7 +6,6 @@
       class="primary"
     >
       <v-col
-        cols="12"
         class="font-weight-light text-center"
       >
         <span

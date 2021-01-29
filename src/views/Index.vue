@@ -4,7 +4,8 @@
       justify="center"
     >
       <v-col
-        sm="6"
+        :cols="10"
+        :md="6"
       >
         <v-fade-transition>
           <v-row

@@ -25,7 +25,7 @@
                   >
                     <v-row>
                       <v-col
-                        cols="4"
+                        :cols="4"
                         class="text-right"
                       >
                         <span
@@ -33,7 +33,7 @@
                         />
                       </v-col>
                       <v-col
-                        cols="4"
+                        :cols="4"
                         class="text-left"
                       >
                         <span
@@ -41,7 +41,7 @@
                         />
                       </v-col>
                       <v-col
-                        cols="4"
+                        :cols="4"
                         class="text-right"
                       >
                         <span
@@ -70,7 +70,7 @@
                   >
                     <v-row>
                       <v-col
-                        cols="4"
+                        :cols="4"
                         class="text-right"
                       >
                         <span
@@ -100,7 +100,7 @@
                         </span>
                       </v-col>
                       <v-col
-                        cols="4"
+                        :cols="4"
                         class="text-left"
                       >
                         <span
@@ -113,7 +113,7 @@
                         />
                       </v-col>
                       <v-col
-                        cols="4"
+                        :cols="4"
                         class="text-right"
                       >
                         <RankingTotalCount
