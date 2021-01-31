@@ -29,8 +29,9 @@
                     rounded
                   >
                     <v-img
-                      :src="rank.imageUrl"
                       :alt="rank.name"
+                      :src="`${rank.imageUrl}&size=100`"
+                      lazy-src="@/assets/avatar.jpg"
                     />
                   </v-avatar>
                 </v-list-item-icon>
