@@ -5,14 +5,23 @@
     >
       <v-col
         :cols="10"
-        :md="6"
+        :sm="8"
       >
         <v-fade-transition>
           <v-row
-            v-if="$store.state.ranks.length > 0"
             class="mt-3"
           >
-            <v-col>
+            <v-col
+              :md="2"
+              :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
+            >
+              <RankingSearch />
+            </v-col>
+            <v-col
+              v-if="$store.state.ranks.length > 0"
+              :md="9"
+              :offset-md="3"
+            >
               <RankingList
                 :ranks="$store.state.ranks"
                 :title="'Repository Ranking'"
@@ -35,14 +44,16 @@
 
 <script>
 import RankingList from '@/components/RankingList';
+import RankingSearch from '@/components/RankingSearch';
 
 export default {
   name: 'Index',
   components: {
     RankingList,
+    RankingSearch,
   },
   data: () => ({
-    page: 0,
+    page: 1,
     limit: 10,
   }),
   computed: {
@@ -54,11 +65,14 @@ export default {
       const max = this.limit * 10;
       return pages > max ? max : pages;
     },
+    query() {
+      return this.$store.state.query;
+    },
     params() {
       return {
         tags: [
-          'type:user',
-          'field:repositories.stargazers',
+          this.$store.state.query.type,
+          this.$store.state.query.field,
         ],
         page: this.page,
         limit: this.limit,
@@ -73,10 +87,6 @@ export default {
       if (after === before) {
         return;
       }
-      if (after === 1 && before === 0) {
-        this.fetch();
-        return;
-      }
       const { query } = this.$route;
       if (Number(query.page) > this.pages) {
         this.$router.replace({ query: { ...query, page: '1' } }).catch(() => {});
@@ -85,9 +95,13 @@ export default {
       this.$router.push({ query: { ...query, page: String(after) } }).catch(() => {});
       this.fetch();
     },
-  },
-  created() {
-    this.setPage(Number(this.$route.query.page) || 1);
+    query() {
+      if (this.page === 1) {
+        this.fetch();
+        return;
+      }
+      this.setPage(1);
+    },
   },
   methods: {
     setPage(page) {

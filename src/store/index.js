@@ -17,11 +17,15 @@ export default new Vuex.Store({
      * @param ranks[].tags
      * @param ranks[].createdAt
      */
+    query: null,
     ranks: [],
   },
   mutations: {
     setLoading(state, loading) {
       state.loading = loading;
+    },
+    setQuery(state, query) {
+      state.query = query;
     },
     setRanks(state, ranks) {
       state.ranks = ranks;
