@@ -37,53 +37,43 @@
 </template>
 
 <script>
-const TYPE_USER = 'user';
-const TYPE_ORGANIZATION = 'organization';
-const TYPE_REPOSITORY = 'repository';
-const FIELD_FOLLOWERS = 'followers';
-const FIELD_REPOSITORIES_STARGAZERS = 'repositories.stargazers';
-const FIELD_REPOSITORIES_FORKS = 'repositories.forks';
-const FIELD_REPOSITORIES_WATCHERS = 'repositories.watchers';
-const FIELD_GISTS_STARGAZERS = 'gists.stargazers';
-const FIELD_GISTS_FORKS = 'gists.forks';
-const FIELD_STARGAZERS = 'stargazers';
-const FIELD_FORKS = 'forks';
-const FIELD_WATCHERS = 'watchers';
+import types from '@/util/types';
+import fields from '@/util/fields';
 
 export default {
   name: 'RankingSearch',
   data: () => ({
-    type: TYPE_USER,
+    type: types.user,
     types: [
-      { text: 'User', value: TYPE_USER },
-      { text: 'Organization', value: TYPE_ORGANIZATION },
-      { text: 'Repository', value: TYPE_REPOSITORY },
+      { text: 'User', value: types.user },
+      { text: 'Organization', value: types.organization },
+      { text: 'Repository', value: types.repository },
     ],
-    field: FIELD_REPOSITORIES_STARGAZERS,
+    field: fields.repositories.stargazers,
   }),
   computed: {
     fields() {
       switch (this.type) {
-        case TYPE_USER:
+        case types.user:
           return [
-            { text: 'Followers', value: FIELD_FOLLOWERS },
-            { text: 'Repo Stars', value: FIELD_REPOSITORIES_STARGAZERS },
-            { text: 'Repo Forks', value: FIELD_REPOSITORIES_FORKS },
-            { text: 'Repo Watchers', value: FIELD_REPOSITORIES_WATCHERS },
-            { text: 'Gist Stars', value: FIELD_GISTS_STARGAZERS },
-            { text: 'Gist Forks', value: FIELD_GISTS_FORKS },
+            { text: 'Followers', value: fields.followers },
+            { text: 'Repo Stars', value: fields.repositories.stargazers },
+            { text: 'Repo Forks', value: fields.repositories.forks },
+            { text: 'Repo Watchers', value: fields.repositories.watchers },
+            { text: 'Gist Stars', value: fields.gists.stargazers },
+            { text: 'Gist Forks', value: fields.gists.forks },
           ];
-        case TYPE_ORGANIZATION:
+        case types.organization:
           return [
-            { text: 'Repo Stars', value: FIELD_REPOSITORIES_STARGAZERS },
-            { text: 'Repo Forks', value: FIELD_REPOSITORIES_FORKS },
-            { text: 'Repo Watchers', value: FIELD_REPOSITORIES_WATCHERS },
+            { text: 'Repo Stars', value: fields.repositories.stargazers },
+            { text: 'Repo Forks', value: fields.repositories.forks },
+            { text: 'Repo Watchers', value: fields.repositories.watchers },
           ];
-        case TYPE_REPOSITORY:
+        case types.repository:
           return [
-            { text: 'Stars', value: FIELD_STARGAZERS },
-            { text: 'Forks', value: FIELD_FORKS },
-            { text: 'Watchers', value: FIELD_WATCHERS },
+            { text: 'Stars', value: fields.stargazers },
+            { text: 'Forks', value: fields.forks },
+            { text: 'Watchers', value: fields.watchers },
           ];
         default:
           return [];
@@ -112,32 +102,32 @@ export default {
       this.field = field;
     },
     switchField(field) {
-      const isOwner = (type) => type === TYPE_USER || type === TYPE_ORGANIZATION;
-      const isRepository = (type) => type === TYPE_REPOSITORY;
+      const isOwner = (type) => type === types.user || type === types.organization;
+      const isRepository = (type) => type === types.repository;
       switch (true) {
-        case this.field.includes(FIELD_STARGAZERS) && isRepository(field):
-          this.setField(FIELD_STARGAZERS);
+        case this.field.includes(fields.stargazers) && isRepository(field):
+          this.setField(fields.stargazers);
           break;
-        case this.field.includes(FIELD_STARGAZERS) && isOwner(field):
-          this.setField(FIELD_REPOSITORIES_STARGAZERS);
+        case this.field.includes(fields.stargazers) && isOwner(field):
+          this.setField(fields.repositories.stargazers);
           break;
-        case this.field.includes(FIELD_FORKS) && isRepository(field):
-          this.setField(FIELD_FORKS);
+        case this.field.includes(fields.forks) && isRepository(field):
+          this.setField(fields.forks);
           break;
-        case this.field.includes(FIELD_FORKS) && isOwner(field):
-          this.setField(FIELD_REPOSITORIES_FORKS);
+        case this.field.includes(fields.forks) && isOwner(field):
+          this.setField(fields.repositories.forks);
           break;
-        case this.field.includes(FIELD_WATCHERS) && isRepository(field):
-          this.setField(FIELD_WATCHERS);
+        case this.field.includes(fields.watchers) && isRepository(field):
+          this.setField(fields.watchers);
           break;
-        case this.field.includes(FIELD_WATCHERS) && isOwner(field):
-          this.setField(FIELD_REPOSITORIES_WATCHERS);
+        case this.field.includes(fields.watchers) && isOwner(field):
+          this.setField(fields.repositories.watchers);
           break;
         case isRepository(field):
-          this.setField(FIELD_STARGAZERS);
+          this.setField(fields.stargazers);
           break;
         default:
-          this.setField(FIELD_REPOSITORIES_STARGAZERS);
+          this.setField(fields.repositories.stargazers);
       }
     },
   },

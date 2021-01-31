@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import util from '@/utils/util';
+import helpers from '@/util/helpers';
 
 export default {
   name: 'TheFooter',
   methods: {
     open() {
-      util.open('https://github.com/memochou1993');
+      helpers.open('https://github.com/memochou1993');
     },
   },
 };

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import util from '@/utils/util';
+import helpers from '@/util/helpers';
 
 export default {
   name: 'RankingProfile',
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     open() {
-      util.open(`https://github.com/${this.name}`);
+      helpers.open(`https://github.com/${this.name}`);
     },
   },
 };
