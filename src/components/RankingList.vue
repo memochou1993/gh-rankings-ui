@@ -30,7 +30,7 @@
                   >
                     <v-img
                       :alt="rank.name"
-                      :src="`${rank.imageUrl}&size=100`"
+                      :src="rank.imageUrl"
                       lazy-src="@/assets/avatar.jpg"
                     />
                   </v-avatar>
