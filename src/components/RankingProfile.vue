@@ -20,13 +20,10 @@
         class="text-center"
       >
         <div
-          class="title text--primary pointer"
+          class="title font-weight-regular text--primary pointer"
           @click="open()"
-        >
-          <span
-            v-text="name"
-          />
-        </div>
+          v-text="name"
+        />
       </v-card-text>
     </v-card>
   </div>

@@ -7,30 +7,55 @@
         class="text-center"
       >
         <div
-          class="title text--primary pointer"
+          class="title font-weight-regular text--primary"
+          v-text="'Search'"
+        />
+        <v-card
+          outlined
+          class="my-2"
         >
-          <span
-            v-text="'Search'"
-          />
           <v-select
             v-model="type"
             :items="types"
+            :menu-props="{ offsetY: true }"
+            color="primary"
             dense
             flat
             hide-details
             solo
             class="font-weight-light"
-          />
+          >
+            <span
+              slot="item"
+              slot-scope="{ item }"
+              class="font-weight-light"
+              v-text="item.text"
+            />
+          </v-select>
+        </v-card>
+        <v-card
+          outlined
+          class="my-2"
+        >
           <v-select
             v-model="field"
             :items="fields"
+            :menu-props="{ offsetY: true }"
+            color="primary"
             dense
             flat
             hide-details
             solo
             class="font-weight-light"
-          />
-        </div>
+          >
+            <span
+              slot="item"
+              slot-scope="{ item }"
+              class="font-weight-light"
+              v-text="item.text"
+            />
+          </v-select>
+        </v-card>
       </v-card-text>
     </v-card>
   </div>
