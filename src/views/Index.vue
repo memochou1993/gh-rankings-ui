@@ -9,12 +9,12 @@
       >
         <v-fade-transition>
           <v-row
-            v-if="ranks.length > 0"
+            v-if="$store.state.ranks.length > 0"
             class="mt-3"
           >
             <v-col>
               <RankingList
-                :ranks="ranks"
+                :ranks="$store.state.ranks"
                 :title="'Repository Ranking'"
               />
               <v-pagination
@@ -34,9 +34,6 @@
 </template>
 
 <script>
-import {
-  mapState,
-} from 'vuex';
 import RankingList from '@/components/RankingList';
 
 export default {
@@ -49,11 +46,8 @@ export default {
     limit: 10,
   }),
   computed: {
-    ...mapState([
-      'ranks',
-    ]),
     last() {
-      return this.ranks[0]?.last || 0;
+      return this.$store.state.ranks[0]?.last || 0;
     },
     pages() {
       const pages = Math.ceil(this.last / this.limit);
