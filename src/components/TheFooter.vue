@@ -11,7 +11,7 @@
         <span
           class="pointer"
           @click="open()"
-          v-text="`© ${new Date().getFullYear()} Memo Chou`"
+          v-text="`© ${new Date().getFullYear()} GH Rankings`"
         />
       </v-col>
     </v-footer>
