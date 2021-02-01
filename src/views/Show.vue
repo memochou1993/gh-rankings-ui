@@ -170,6 +170,10 @@ export default {
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
+      if (data.length < 1) {
+        this.$router.push('/');
+        return;
+      }
       this.setRanks(data);
     },
     filter(tags, length) {
