@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import types from '@/util/types';
 import fields from '@/util/fields';
+import types from '@/util/types';
 
 Vue.use(Vuex);
 
