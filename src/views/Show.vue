@@ -63,7 +63,7 @@ export default {
   }),
   computed: {
     name() {
-      return this.$route.params.name;
+      return this.ranks[0]?.name || '';
     },
     imageUrl() {
       return this.ranks[0]?.imageUrl || '';
@@ -155,7 +155,7 @@ export default {
     },
     params() {
       return {
-        name: this.name,
+        name: this.$route.params.name,
         page: this.page,
         limit: this.limit,
       };
@@ -170,10 +170,6 @@ export default {
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
-      if (data.length < 1) {
-        this.$router.push('/');
-        return;
-      }
       this.setRanks(data);
     },
     filter(tags, length) {

@@ -65,39 +65,37 @@ export default {
       const max = this.limit * 10;
       return pages > max ? max : pages;
     },
-    query() {
-      return this.$store.state.query;
-    },
     params() {
       return {
-        tags: [
-          `type:${this.$store.state.query.type}`,
-          `field:${this.$store.state.query.field}`,
-        ],
+        type: this.$store.state.query.type,
+        field: this.$store.state.query.field,
         page: this.page,
         limit: this.limit,
       };
     },
   },
   watch: {
-    $route(after) {
-      this.setPage(Number(after.query.page) || 1);
+    $route() {
+      this.restore();
       this.fetch();
     },
     page(after) {
-      if (Number(this.$route.query.page) === after) {
+      if (after === Number(this.$route.query.page)) {
         return;
       }
       this.$router.push({ query: { ...this.$route.query, page: String(after) } });
     },
   },
   created() {
-    this.setPage(Number(this.$route.query.page) || 1);
+    this.restore();
     this.fetch();
   },
   methods: {
     setPage(page) {
       this.page = page;
+    },
+    restore() {
+      this.setPage(Number(this.$route.query.page) || 1);
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
