@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import types from '@/util/types';
+import fields from '@/util/fields';
 
 Vue.use(Vuex);
 
@@ -17,7 +19,10 @@ export default new Vuex.Store({
      * @param ranks[].tags
      * @param ranks[].createdAt
      */
-    query: null,
+    query: {
+      type: types.user,
+      field: fields.repositories.stargazers,
+    },
     ranks: [],
   },
   mutations: {

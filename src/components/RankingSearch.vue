@@ -68,13 +68,13 @@ import fields from '@/util/fields';
 export default {
   name: 'RankingSearch',
   data: () => ({
-    type: types.user,
+    type: '',
     types: [
       { text: 'User', value: types.user },
       { text: 'Organization', value: types.organization },
       { text: 'Repository', value: types.repository },
     ],
-    field: fields.repositories.stargazers,
+    field: '',
   }),
   computed: {
     fields() {
@@ -106,8 +106,8 @@ export default {
     },
     query() {
       return {
-        type: `type:${this.type}`,
-        field: `field:${this.field}`,
+        type: this.type,
+        field: this.field,
       };
     },
   },
@@ -120,9 +120,12 @@ export default {
     },
   },
   created() {
-    this.$store.commit('setQuery', this.query);
+    this.setType(this.$store.state.query.type);
   },
   methods: {
+    setType(type) {
+      this.type = type;
+    },
     setField(field) {
       this.field = field;
     },
