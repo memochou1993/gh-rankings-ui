@@ -68,13 +68,13 @@ import fields from '@/util/fields';
 export default {
   name: 'RankingSearch',
   data: () => ({
-    type: '',
+    type: types.user,
     types: [
       { text: 'User', value: types.user },
       { text: 'Organization', value: types.organization },
       { text: 'Repository', value: types.repository },
     ],
-    field: '',
+    field: fields.repositories.stargazers,
   }),
   computed: {
     fields() {
@@ -113,14 +113,27 @@ export default {
   },
   watch: {
     type(after) {
+      // FIXME
+      console.log('type changed');
       this.switchField(after);
+      this.$store.commit('setQuery', { ...this.$store.state.query, type: after });
+      if (after === this.$route.query.type) {
+        return;
+      }
+      this.$router.push({ query: { ...this.$route.query, type: after, page: '1' } });
     },
-    query(after) {
-      this.$store.commit('setQuery', after);
+    field(after) {
+      // FIXME
+      console.log('field changed');
+      this.$store.commit('setQuery', { ...this.$store.state.query, field: after });
+      if (after === this.$route.query.field) {
+        return;
+      }
+      this.$router.push({ query: { ...this.$route.query, field: after, page: '1' } });
     },
   },
   created() {
-    this.setType(this.$store.state.query.type);
+    this.restore();
   },
   methods: {
     setType(type) {
@@ -157,6 +170,10 @@ export default {
         default:
           this.setField(fields.repositories.stargazers);
       }
+    },
+    restore() {
+      this.setType(this.$store.state.query.type);
+      this.setField(this.$store.state.query.field);
     },
   },
 };

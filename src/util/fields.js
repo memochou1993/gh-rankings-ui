@@ -6,8 +6,8 @@ const fields = {
     watchers: 'repositories.watchers',
   },
   gists: {
-    stargazers: 'stargazers',
-    forks: 'forks',
+    stargazers: 'gists.stargazers',
+    forks: 'gists.forks',
   },
   stargazers: 'stargazers',
   forks: 'forks',
