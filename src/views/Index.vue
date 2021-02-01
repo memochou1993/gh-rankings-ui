@@ -33,6 +33,7 @@
                 next-icon="mdi-menu-right"
                 prev-icon="mdi-menu-left"
                 class="font-weight-light my-5"
+                @input="fetch()"
               />
             </v-col>
           </v-row>
@@ -80,27 +81,9 @@ export default {
     },
   },
   watch: {
-    $route(after) {
-      this.setPage(Number(after.query.page) || 1);
-    },
-    page(after, before) {
-      if (after === before) {
-        return;
-      }
-      const { query } = this.$route;
-      if (Number(query.page) > this.pages) {
-        this.$router.replace({ query: { ...query, page: '1' } }).catch(() => {});
-        return;
-      }
-      this.$router.push({ query: { ...query, page: String(after) } }).catch(() => {});
-      this.fetch();
-    },
     query() {
-      if (this.page === 1) {
-        this.fetch();
-        return;
-      }
       this.setPage(1);
+      this.fetch();
     },
   },
   methods: {
