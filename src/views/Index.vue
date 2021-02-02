@@ -9,6 +9,7 @@
       >
         <v-fade-transition>
           <v-row
+            v-if="loaded"
             class="mt-3"
           >
             <v-col
@@ -18,7 +19,6 @@
               <RankingSearch />
             </v-col>
             <v-col
-              v-if="loaded"
               :md="9"
               :offset-md="3"
             >

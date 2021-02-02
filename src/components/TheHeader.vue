@@ -8,7 +8,7 @@
     >
       <span
         class="pointer"
-        @click="$router.push('/').catch(() => {})"
+        @click="reload()"
         v-text="'GH Rankings'"
       />
     </v-app-bar>
@@ -18,5 +18,10 @@
 <script>
 export default {
   name: 'TheHeader',
+  methods: {
+    reload() {
+      window.location.assign('/');
+    },
+  },
 };
 </script>
