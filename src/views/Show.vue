@@ -9,36 +9,47 @@
       >
         <v-fade-transition>
           <v-row
-            v-if="ranks.length > 0"
+            v-if="loaded"
             class="mt-3"
           >
-            <v-col
-              :md="2"
-              :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
+            <template
+              v-if="ranks.length > 0"
             >
-              <RankingProfile
-                :name="name"
-                :image-url="imageUrl"
-              />
-            </v-col>
-            <v-col
-              :md="9"
-              :offset-md="3"
-            >
-              <template
-                v-for="(group, i) in groups"
+              <v-col
+                :md="2"
+                :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
               >
-                <RankingGroup
-                  v-if="group.ranks.length > 0"
-                  :key="i"
-                  :category="group.category"
-                  :field="group.field"
-                  :ranks="group.ranks"
-                  :title="group.title"
-                  class="mb-6"
+                <RankingProfile
+                  :name="name"
+                  :image-url="imageUrl"
                 />
-              </template>
-            </v-col>
+              </v-col>
+              <v-col
+                :md="9"
+                :offset-md="3"
+              >
+                <template
+                  v-for="(group, i) in groups"
+                >
+                  <RankingGroup
+                    v-if="group.ranks.length > 0"
+                    :key="i"
+                    :category="group.category"
+                    :field="group.field"
+                    :ranks="group.ranks"
+                    :title="group.title"
+                    class="mb-6"
+                  />
+                </template>
+              </v-col>
+            </template>
+            <template
+              v-else
+            >
+              <v-col>
+                <RankingNoData />
+              </v-col>
+            </template>
           </v-row>
         </v-fade-transition>
       </v-col>
@@ -48,15 +59,18 @@
 
 <script>
 import RankingGroup from '@/components/RankingGroup';
+import RankingNoData from '@/components/RankingNoData';
 import RankingProfile from '@/components/RankingProfile';
 
 export default {
   name: 'Show',
   components: {
     RankingGroup,
+    RankingNoData,
     RankingProfile,
   },
   data: () => ({
+    loaded: false,
     ranks: [],
     page: 1,
     limit: 1000,
@@ -165,11 +179,15 @@ export default {
     this.fetch();
   },
   methods: {
+    setLoaded(loaded) {
+      this.loaded = loaded;
+    },
     setRanks(ranks) {
       this.ranks = ranks;
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
+      this.setLoaded(true);
       this.setRanks(data);
     },
     filter(tags, length) {

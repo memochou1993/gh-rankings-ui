@@ -73,7 +73,7 @@
                         :cols="4"
                         class="text-right"
                       >
-                        <span
+                        <template
                           v-if="rank.tags.length === 2"
                         >
                           <span
@@ -84,20 +84,21 @@
                             v-if="category === 'Location'"
                             v-text="'Global'"
                           />
-                        </span>
-                        <span
+                        </template>
+                        <template
                           v-for="(tag) in rank.tags"
-                          :key="tag"
                         >
                           <span
                             v-if="tag.includes('language')"
+                            :key="tag"
                             v-text="tag.replace('language:', '')"
                           />
                           <span
                             v-if="tag.includes('location')"
+                            :key="tag"
                             v-text="tag.replace('location:', '')"
                           />
-                        </span>
+                        </template>
                       </v-col>
                       <v-col
                         :cols="4"

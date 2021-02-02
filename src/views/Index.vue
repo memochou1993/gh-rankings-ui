@@ -18,22 +18,31 @@
               <RankingSearch />
             </v-col>
             <v-col
-              v-if="$store.state.ranks.length > 0"
+              v-if="loaded"
               :md="9"
               :offset-md="3"
             >
-              <RankingList
-                :ranks="$store.state.ranks"
-                :title="'Repository Ranking'"
-              />
-              <v-pagination
-                v-model="page"
-                :length="pages"
-                :total-visible="9"
-                next-icon="mdi-menu-right"
-                prev-icon="mdi-menu-left"
-                class="font-weight-light my-5"
-              />
+              <template
+                v-if="$store.state.ranks.length > 0"
+              >
+                <RankingList
+                  :ranks="$store.state.ranks"
+                  :title="'Repository Ranking'"
+                />
+                <v-pagination
+                  v-model="page"
+                  :length="pages"
+                  :total-visible="9"
+                  next-icon="mdi-menu-right"
+                  prev-icon="mdi-menu-left"
+                  class="font-weight-light my-5"
+                />
+              </template>
+              <template
+                v-else
+              >
+                <RankingNoData />
+              </template>
             </v-col>
           </v-row>
         </v-fade-transition>
@@ -44,15 +53,18 @@
 
 <script>
 import RankingList from '@/components/RankingList';
+import RankingNoData from '@/components/RankingNoData';
 import RankingSearch from '@/components/RankingSearch';
 
 export default {
   name: 'Index',
   components: {
     RankingList,
+    RankingNoData,
     RankingSearch,
   },
   data: () => ({
+    loaded: false,
     page: 1,
     limit: 10,
   }),
@@ -61,9 +73,13 @@ export default {
       return this.$store.state.ranks[0]?.last || 0;
     },
     pages() {
-      const pages = Math.ceil(this.last / this.limit);
-      const max = this.limit * 10;
-      return pages > max ? max : pages;
+      const last = Math.ceil(this.last / this.limit);
+      const limit = this.limit * 10;
+      const pages = last > limit ? limit : last;
+      if (last > limit && this.page > pages) {
+        return last;
+      }
+      return pages;
     },
     params() {
       return {
@@ -93,6 +109,9 @@ export default {
     this.fetch();
   },
   methods: {
+    setLoaded(loaded) {
+      this.loaded = loaded;
+    },
     setPage(page) {
       this.page = page;
     },
@@ -118,6 +137,7 @@ export default {
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
+      this.setLoaded(true);
       this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
     },
   },
