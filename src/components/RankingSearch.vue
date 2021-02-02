@@ -129,29 +129,29 @@ export default {
     setField(field) {
       this.field = field;
     },
-    switchField(field) {
-      const isOwner = (type) => type === types.user || type === types.organization;
-      const isRepository = (type) => type === types.repository;
+    switchField(type) {
+      const isOwner = () => type === types.user || type === types.organization;
+      const isRepository = () => type === types.repository;
       switch (true) {
-        case this.field.includes(fields.stargazers) && isRepository(field):
+        case this.field.includes(fields.stargazers) && isRepository():
           this.setField(fields.stargazers);
           break;
-        case this.field.includes(fields.stargazers) && isOwner(field):
+        case this.field.includes(fields.stargazers) && isOwner():
           this.setField(fields.repositories.stargazers);
           break;
-        case this.field.includes(fields.forks) && isRepository(field):
+        case this.field.includes(fields.forks) && isRepository():
           this.setField(fields.forks);
           break;
-        case this.field.includes(fields.forks) && isOwner(field):
+        case this.field.includes(fields.forks) && isOwner():
           this.setField(fields.repositories.forks);
           break;
-        case this.field.includes(fields.watchers) && isRepository(field):
+        case this.field.includes(fields.watchers) && isRepository():
           this.setField(fields.watchers);
           break;
-        case this.field.includes(fields.watchers) && isOwner(field):
+        case this.field.includes(fields.watchers) && isOwner():
           this.setField(fields.repositories.watchers);
           break;
-        case isRepository(field):
+        case isRepository():
           this.setField(fields.stargazers);
           break;
         default:
@@ -175,10 +175,9 @@ export default {
       if (after.field !== before.field) {
         this.$store.commit('setQuery', { ...this.$store.state.query, field: after.field });
       }
-      if (
-        after.type === query.type
-        && after.field === query.field
-      ) {
+      const isSameType = after.type === query.type;
+      const isSameField = after.field === query.field;
+      if (isSameType && isSameField) {
         return;
       }
       this.$router.push({
