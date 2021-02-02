@@ -112,24 +112,11 @@ export default {
     },
   },
   watch: {
-    type(after) {
-      // FIXME
-      console.log('type changed');
-      this.switchField(after);
-      this.$store.commit('setQuery', { ...this.$store.state.query, type: after });
-      if (after === this.$route.query.type) {
-        return;
-      }
-      this.$router.push({ query: { ...this.$route.query, type: after, page: '1' } });
+    $route() {
+      this.restore();
     },
-    field(after) {
-      // FIXME
-      console.log('field changed');
-      this.$store.commit('setQuery', { ...this.$store.state.query, field: after });
-      if (after === this.$route.query.field) {
-        return;
-      }
-      this.$router.push({ query: { ...this.$route.query, field: after, page: '1' } });
+    query(after, before) {
+      this.updateRoute(after, before);
     },
   },
   created() {
@@ -172,8 +159,36 @@ export default {
       }
     },
     restore() {
+      this.$store.commit('setQuery', {
+        type: this.$route.query.type || this.$store.state.query.type,
+        field: this.$route.query.field || this.$store.state.query.field,
+      });
       this.setType(this.$store.state.query.type);
       this.setField(this.$store.state.query.field);
+    },
+    updateRoute(after, before) {
+      const { query } = this.$route;
+      if (after.type !== before.type) {
+        this.switchField(after.type);
+        this.$store.commit('setQuery', { ...this.$store.state.query, type: after.type });
+      }
+      if (after.field !== before.field) {
+        this.$store.commit('setQuery', { ...this.$store.state.query, field: after.field });
+      }
+      if (
+        after.type === query.type
+        && after.field === query.field
+      ) {
+        return;
+      }
+      this.$router.push({
+        query: {
+          ...query,
+          type: this.type,
+          field: this.field,
+          page: '1',
+        },
+      });
     },
   },
 };

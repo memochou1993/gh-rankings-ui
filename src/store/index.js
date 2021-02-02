@@ -40,8 +40,6 @@ export default new Vuex.Store({
     fetch({
       commit,
     }, params) {
-      // FIXME
-      console.log('dispatch', params);
       commit('setLoading', true);
       return new Promise((resolve, reject) => {
         axios.get('/', { params })

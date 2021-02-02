@@ -96,13 +96,8 @@ export default {
     },
     restore() {
       this.setPage(Number(this.$route.query.page) || 1);
-      this.$store.commit('setQuery', {
-        type: this.$route.query.type || this.$store.state.query.type,
-        field: this.$route.query.field || this.$store.state.query.field,
-      });
     },
     async fetch() {
-      console.log('fetch');
       const { data } = await this.$store.dispatch('fetch', this.params);
       this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
     },
