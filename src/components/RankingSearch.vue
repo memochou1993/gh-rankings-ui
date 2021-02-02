@@ -110,17 +110,23 @@ export default {
         field: this.field,
       };
     },
+    isSameType() {
+      return this.type === this.$route.query.type;
+    },
+    isSameField() {
+      return this.field === this.$route.query.field;
+    },
   },
   watch: {
     $route() {
-      this.restore();
+      this.retrieve();
     },
     query(after, before) {
       this.updateRoute(after, before);
     },
   },
   created() {
-    this.restore();
+    this.retrieve();
   },
   methods: {
     setType(type) {
@@ -158,26 +164,26 @@ export default {
           this.setField(fields.repositories.stargazers);
       }
     },
-    restore() {
-      this.$store.commit('setQuery', {
-        type: this.$route.query.type || this.$store.state.query.type,
-        field: this.$route.query.field || this.$store.state.query.field,
-      });
+    retrieve() {
       this.setType(this.$store.state.query.type);
       this.setField(this.$store.state.query.field);
+    },
+    restore() {
+      this.$store.commit('setQuery', {
+        type: this.type,
+        field: this.field,
+      });
     },
     updateRoute(after, before) {
       const { query } = this.$route;
       if (after.type !== before.type) {
         this.switchField(after.type);
-        this.$store.commit('setQuery', { ...this.$store.state.query, type: after.type });
+        this.restore();
       }
       if (after.field !== before.field) {
-        this.$store.commit('setQuery', { ...this.$store.state.query, field: after.field });
+        this.restore();
       }
-      const isSameType = after.type === query.type;
-      const isSameField = after.field === query.field;
-      if (isSameType && isSameField) {
+      if (this.isSameType && this.isSameField) {
         return;
       }
       this.$router.push({

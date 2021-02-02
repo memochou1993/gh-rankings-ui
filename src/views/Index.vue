@@ -73,20 +73,22 @@ export default {
         limit: this.limit,
       };
     },
+    isSamePage() {
+      return this.page === Number(this.$route.query.page);
+    },
   },
   watch: {
     $route() {
+      this.retrieve();
       this.restore();
       this.fetch();
     },
     page(after) {
-      if (after === Number(this.$route.query.page)) {
-        return;
-      }
-      this.$router.push({ query: { ...this.$route.query, page: String(after) } });
+      this.updateRoute(after);
     },
   },
   created() {
+    this.retrieve();
     this.restore();
     this.fetch();
   },
@@ -94,8 +96,25 @@ export default {
     setPage(page) {
       this.page = page;
     },
-    restore() {
+    retrieve() {
       this.setPage(Number(this.$route.query.page) || 1);
+    },
+    restore() {
+      this.$store.commit('setQuery', {
+        type: this.$route.query.type || this.$store.state.query.type,
+        field: this.$route.query.field || this.$store.state.query.field,
+      });
+    },
+    updateRoute(after) {
+      if (this.isSamePage) {
+        return;
+      }
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          page: String(after),
+        },
+      });
     },
     async fetch() {
       const { data } = await this.$store.dispatch('fetch', this.params);
