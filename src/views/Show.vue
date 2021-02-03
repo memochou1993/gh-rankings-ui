@@ -86,97 +86,73 @@ export default {
     groups() {
       return [
         {
+          title: 'Followers Ranking',
+          category: 'Location',
+          ranks: this.filter([fields.followers.value]),
+        },
+        {
+          title: 'Repository Stars Ranking',
           category: 'Location',
           ranks: [
-            ...this.filter([types.user.value, fields.followers.value]),
-            ...this.filter([types.user.value, fields.followers.value, 'location']),
+            ...this.filter([fields.repositoryStars.value], 2),
+            ...this.filter([fields.repositoryStars.value, 'location']),
           ],
-          title: `${fields.followers.text} Ranking`,
         },
         {
+          title: 'Repository Forks Ranking',
           category: 'Location',
           ranks: [
-            ...this.filter([types.user.value, fields.repositoryStars.value]),
-            ...this.filter([types.user.value, fields.repositoryStars.value, 'location']),
+            ...this.filter([fields.repositoryForks.value], 2),
+            ...this.filter([fields.repositoryForks.value, 'location']),
           ],
-          title: `${fields.repositoryStars.text} Ranking`,
         },
         {
+          title: 'Repository Watchers Ranking',
           category: 'Location',
           ranks: [
-            ...this.filter([types.user.value, fields.repositoryForks.value]),
-            ...this.filter([types.user.value, fields.repositoryForks.value, 'location']),
+            ...this.filter([fields.repositoryWatchers.value], 2),
+            ...this.filter([fields.repositoryWatchers.value, 'location']),
           ],
-          title: `${fields.repositoryForks.text} Ranking`,
         },
         {
+          title: 'Repository Stars Ranking by Language',
+          category: 'Language',
+          ranks: this.filter([fields.repositoryStars.value, 'language']),
+        },
+        {
+          title: 'Repository Forks Ranking by Language',
+          category: 'Language',
+          ranks: this.filter([fields.repositoryForks.value, 'language']),
+        },
+        {
+          title: 'Repository Watchers Ranking by Language',
+          category: 'Language',
+          ranks: this.filter([fields.repositoryWatchers.value, 'language']),
+        },
+        {
+          title: 'Gist Stars Ranking',
           category: 'Location',
-          ranks: [
-            ...this.filter([types.user.value, fields.repositoryWatchers.value]),
-            ...this.filter([types.user.value, fields.repositoryWatchers.value, 'location']),
-          ],
-          title: `${fields.repositoryWatchers.text} Ranking`,
+          ranks: this.filter([fields.gistStars.value]),
         },
         {
-          category: 'Language',
-          ranks: [
-            ...this.filter([types.user.value, fields.repositoryStars.value, 'language']),
-          ],
-          title: `${fields.repositoryStars.text} Ranking by Language`,
-        },
-        {
-          category: 'Language',
-          ranks: [
-            ...this.filter([types.user.value, fields.repositoryForks.value, 'language']),
-          ],
-          title: `${fields.repositoryForks.text} Ranking by Language`,
-        },
-        {
-          category: 'Language',
-          ranks: [
-            ...this.filter([types.user.value, fields.repositoryWatchers.value, 'language']),
-          ],
-          title: `${fields.repositoryWatchers.text} Ranking by Language`,
-        },
-        {
+          title: 'Gist Forks Ranking',
           category: 'Location',
-          ranks: [
-            ...this.filter([types.user.value, fields.gistStars.value]),
-            ...this.filter([types.user.value, fields.gistStars.value, 'location']),
-          ],
-          title: `${fields.gistStars.text} Ranking`,
+          ranks: this.filter([fields.gistForks.value]),
         },
         {
-          category: 'Location',
-          ranks: [
-            ...this.filter([types.user.value, fields.gistForks.value]),
-            ...this.filter([types.user.value, fields.gistForks.value, 'location']),
-          ],
-          title: `${fields.gistForks.text} Ranking`,
-        },
-        {
+          title: 'Stars Ranking',
           category: 'Language',
-          ranks: [
-            ...this.filter([types.repository.value, fields.stars.value]),
-            ...this.filter([types.repository.value, fields.stars.value, 'language']),
-          ],
-          title: `${fields.stars.text} Ranking`,
+          ranks: this.filter([types.repository.value, fields.stars.value]),
         },
         {
+          title: 'Forks Ranking',
           category: 'Language',
-          ranks: [
-            ...this.filter([types.repository.value, fields.forks.value]),
-            ...this.filter([types.repository.value, fields.forks.value, 'language']),
-          ],
-          title: `${fields.forks.text} Ranking`,
+          ranks: this.filter([types.repository.value, fields.forks.value]),
         },
         {
+          title: 'Watchers Ranking',
           category: 'Language',
-          ranks: [
-            ...this.filter([types.repository.value, fields.watchers.value]),
-            ...this.filter([types.repository.value, fields.watchers.value, 'language']),
-          ],
-          title: `${fields.watchers.text} Ranking`,
+          ranks: this.filter([types.repository.value, fields.watchers.value]),
         },
       ];
     },
@@ -207,10 +183,10 @@ export default {
           this.setLoaded(true);
         });
     },
-    filter(tags) {
+    filter(tags, length) {
       return this.ranks
         .filter((rank) => tags.every((tag) => rank.tags.join(',').includes(tag)))
-        .filter((rank) => rank.tags.length === tags.length);
+        .filter((rank) => !length || rank.tags.length === length);
     },
   },
 };
