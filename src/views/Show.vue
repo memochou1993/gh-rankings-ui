@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import fields from '@/util/fields';
+import types from '@/util/types';
 import RankingError from '@/components/RankingError';
 import RankingGroup from '@/components/RankingGroup';
 import RankingProfile from '@/components/RankingProfile';
@@ -88,8 +90,8 @@ export default {
           category: 'Location',
           field: 'Followers',
           ranks: [
-            ...this.filter(['followers'], 2),
-            ...this.filter(['followers', 'location']),
+            ...this.filter([fields.followers], 2),
+            ...this.filter([fields.followers, 'location']),
           ],
           title: 'Followers Ranking',
         },
@@ -97,53 +99,8 @@ export default {
           category: 'Language',
           field: 'Stars',
           ranks: [
-            ...this.filter(['repositories', 'stargazers'], 2),
-            ...this.filter(['repositories', 'stargazers', 'language']),
-          ],
-          title: 'Repository Stars Ranking',
-        },
-        {
-          category: 'Language',
-          field: 'Forks',
-          ranks: [
-            ...this.filter(['repositories', 'forks'], 2),
-            ...this.filter(['repositories', 'forks', 'language']),
-          ],
-          title: 'Repository Forks Ranking',
-        },
-        {
-          category: 'Language',
-          field: 'Watchers',
-          ranks: [
-            ...this.filter(['repositories', 'watchers'], 2),
-            ...this.filter(['repositories', 'watchers', 'language']),
-          ],
-          title: 'Repository Watchers Ranking',
-        },
-        {
-          category: 'Location',
-          field: 'Stars',
-          ranks: [
-            ...this.filter(['gists', 'stargazers'], 2),
-            ...this.filter(['gists', 'stargazers', 'location']),
-          ],
-          title: 'Gist Stars Ranking',
-        },
-        {
-          category: 'Location',
-          field: 'Forks',
-          ranks: [
-            ...this.filter(['gists', 'forks'], 2),
-            ...this.filter(['gists', 'forks', 'location']),
-          ],
-          title: 'Gist Forks Ranking',
-        },
-        {
-          category: 'Language',
-          field: 'Stars',
-          ranks: [
-            ...this.filter(['repository', 'stargazers'], 2),
-            ...this.filter(['repository', 'stargazers', 'language']),
+            ...this.filter([types.repository, fields.stargazers], 2),
+            ...this.filter([types.repository, fields.stargazers, 'language']),
           ],
           title: 'Stars Ranking',
         },
@@ -151,8 +108,8 @@ export default {
           category: 'Language',
           field: 'Forks',
           ranks: [
-            ...this.filter(['repository', 'forks'], 2),
-            ...this.filter(['repository', 'forks', 'language']),
+            ...this.filter([types.repository, fields.forks], 2),
+            ...this.filter([types.repository, fields.forks, 'language']),
           ],
           title: 'Forks Ranking',
         },
@@ -160,10 +117,55 @@ export default {
           category: 'Language',
           field: 'Watchers',
           ranks: [
-            ...this.filter(['repository', 'watchers'], 2),
-            ...this.filter(['repository', 'watchers', 'language']),
+            ...this.filter([types.repository, fields.watchers], 2),
+            ...this.filter([types.repository, fields.watchers, 'language']),
           ],
           title: 'Watchers Ranking',
+        },
+        {
+          category: 'Language',
+          field: 'Stars',
+          ranks: [
+            ...this.filter([fields.repositories.stargazers], 2),
+            ...this.filter([fields.repositories.stargazers, 'language']),
+          ],
+          title: 'Repository Stars Ranking',
+        },
+        {
+          category: 'Language',
+          field: 'Forks',
+          ranks: [
+            ...this.filter([fields.repositories.forks], 2),
+            ...this.filter([fields.repositories.forks, 'language']),
+          ],
+          title: 'Repository Forks Ranking',
+        },
+        {
+          category: 'Language',
+          field: 'Watchers',
+          ranks: [
+            ...this.filter([fields.repositories.watchers], 2),
+            ...this.filter([fields.repositories.watchers, 'language']),
+          ],
+          title: 'Repository Watchers Ranking',
+        },
+        {
+          category: 'Location',
+          field: 'Stars',
+          ranks: [
+            ...this.filter([fields.gists.stargazers], 2),
+            ...this.filter([fields.gists.stargazers, 'location']),
+          ],
+          title: 'Gist Stars Ranking',
+        },
+        {
+          category: 'Location',
+          field: 'Forks',
+          ranks: [
+            ...this.filter([fields.gists.forks], 2),
+            ...this.filter([fields.gists.forks, 'location']),
+          ],
+          title: 'Gist Forks Ranking',
         },
       ];
     },

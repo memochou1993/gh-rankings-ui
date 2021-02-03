@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import fields from '@/util/fields';
+
 export default {
   name: 'RankingTotalCount',
   props: {
@@ -31,13 +33,13 @@ export default {
     icon() {
       const tags = this.rank.tags.join(',');
       switch (true) {
-        case tags.includes('followers'):
+        case tags.includes(fields.followers):
           return 'mdi-account-group-outline ';
-        case tags.includes('watchers'):
+        case tags.includes(fields.watchers):
           return 'mdi-eye-outline';
-        case tags.includes('stargazers'):
+        case tags.includes(fields.stargazers):
           return 'mdi-star-outline';
-        case tags.includes('forks'):
+        case tags.includes(fields.forks):
           return 'mdi-source-fork';
         default:
           return '';
