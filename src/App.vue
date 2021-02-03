@@ -27,9 +27,11 @@ export default {
 
 <style lang="scss">
 .pointer {
-  cursor: pointer;
+  &, input {
+    cursor: pointer;
+  }
 }
 .primary-gradient {
-  background-image: linear-gradient(to right top, #061D30, #2C4C68);
+  background-image: linear-gradient(to right, #061D30, #2C4C68);
 }
 </style>

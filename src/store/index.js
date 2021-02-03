@@ -3,11 +3,17 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import fields from '@/util/fields';
 import types from '@/util/types';
+import languages from '@/assets/language/index.json';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    /**
+     * @param languages
+     * @param languages[].name
+     */
+    languages,
     /**
      * @param ranks
      * @param ranks[].name

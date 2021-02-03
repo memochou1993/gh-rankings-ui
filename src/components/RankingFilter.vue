@@ -56,6 +56,31 @@
             />
           </v-select>
         </v-card>
+        <v-card
+          outlined
+          class="my-2"
+        >
+          <v-autocomplete
+            v-model="language"
+            :disabled="!type.includes('repo') && !field.includes('repo')"
+            :items="$store.state.languages"
+            dense
+            flat
+            hide-details
+            hide-no-data
+            item-text="name"
+            label="Language"
+            solo
+            class="font-weight-light pointer"
+          >
+            <span
+              slot="item"
+              slot-scope="{ item }"
+              class="font-weight-light"
+              v-text="item.name"
+            />
+          </v-autocomplete>
+        </v-card>
       </v-card-text>
     </v-card>
   </div>
@@ -75,6 +100,7 @@ export default {
       types.repository,
     ],
     field: fields.repositoryStars.value,
+    language: '',
   }),
   computed: {
     fields() {
