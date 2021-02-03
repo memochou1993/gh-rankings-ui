@@ -1,6 +1,6 @@
 [submodule "src/assets/language"]
 	path = src/assets/language
-	url = git@github.com:memochou1993/gh-rankings-languages.git
+	url = git@github.com:memochou1993/gh-rankings-language.git
 [submodule "src/assets/location"]
 	path = src/assets/location
-	url = git@github.com:memochou1993/gh-rankings-locations.git
+	url = git@github.com:memochou1993/gh-rankings-location.git
