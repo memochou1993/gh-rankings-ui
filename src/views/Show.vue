@@ -47,7 +47,7 @@
               v-else
             >
               <v-col>
-                <RankingNoData />
+                <RankingError />
               </v-col>
             </template>
           </v-row>
@@ -58,15 +58,15 @@
 </template>
 
 <script>
+import RankingError from '@/components/RankingError';
 import RankingGroup from '@/components/RankingGroup';
-import RankingNoData from '@/components/RankingNoData';
 import RankingProfile from '@/components/RankingProfile';
 
 export default {
   name: 'Show',
   components: {
+    RankingError,
     RankingGroup,
-    RankingNoData,
     RankingProfile,
   },
   data: () => ({
@@ -186,9 +186,13 @@ export default {
       this.ranks = ranks;
     },
     async fetch() {
-      const { data } = await this.$store.dispatch('fetch', this.params);
-      this.setLoaded(true);
-      this.setRanks(data);
+      this.$store.dispatch('fetch', this.params)
+        .then(({ data }) => {
+          this.setRanks(data);
+        })
+        .finally(() => {
+          this.setLoaded(true);
+        });
     },
     filter(tags, length) {
       return this.ranks

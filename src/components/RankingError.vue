@@ -7,7 +7,7 @@
         class="title font-weight-light text-center py-16"
       >
         <span
-          v-text="'Not Found'"
+          v-text="message"
         />
       </v-card-text>
     </v-card>
@@ -16,6 +16,11 @@
 
 <script>
 export default {
-  name: 'RankingNoData',
+  name: 'RankingError',
+  computed: {
+    message() {
+      return this.$store.state.error?.message || 'No ranking found';
+    },
+  },
 };
 </script>

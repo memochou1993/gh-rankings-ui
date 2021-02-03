@@ -41,7 +41,7 @@
               <template
                 v-else
               >
-                <RankingNoData />
+                <RankingError />
               </template>
             </v-col>
           </v-row>
@@ -52,15 +52,15 @@
 </template>
 
 <script>
+import RankingError from '@/components/RankingError';
 import RankingList from '@/components/RankingList';
-import RankingNoData from '@/components/RankingNoData';
 import RankingSearch from '@/components/RankingSearch';
 
 export default {
   name: 'Index',
   components: {
+    RankingError,
     RankingList,
-    RankingNoData,
     RankingSearch,
   },
   data: () => ({
@@ -136,9 +136,13 @@ export default {
       });
     },
     async fetch() {
-      const { data } = await this.$store.dispatch('fetch', this.params);
-      this.setLoaded(true);
-      this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
+      this.$store.dispatch('fetch', this.params)
+        .then(({ data }) => {
+          this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
+        })
+        .finally(() => {
+          this.setLoaded(true);
+        });
     },
   },
 };

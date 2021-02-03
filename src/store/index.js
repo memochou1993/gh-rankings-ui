@@ -8,7 +8,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    loading: false,
     /**
      * @param ranks
      * @param ranks[].name
@@ -19,38 +18,44 @@ export default new Vuex.Store({
      * @param ranks[].tags
      * @param ranks[].createdAt
      */
+    ranks: [],
+    /**
+     * @param error
+     */
+    error: null,
+    /**
+     * @param query
+     * @param query.type
+     * @param query.field
+     */
     query: {
       type: types.user,
       field: fields.repositories.stargazers,
     },
-    ranks: [],
   },
   mutations: {
-    setLoading(state, loading) {
-      state.loading = loading;
+    setRanks(state, ranks) {
+      state.ranks = ranks;
+    },
+    setError(state, error) {
+      state.error = error;
     },
     setQuery(state, query) {
       state.query = query;
-    },
-    setRanks(state, ranks) {
-      state.ranks = ranks;
     },
   },
   actions: {
     fetch({
       commit,
     }, params) {
-      commit('setLoading', true);
       return new Promise((resolve, reject) => {
         axios.get('/', { params })
           .then(({ data }) => {
             resolve(data);
           })
           .catch((error) => {
+            commit('setError', error);
             reject(error);
-          })
-          .finally(() => {
-            commit('setLoading', false);
           });
       });
     },
