@@ -73,18 +73,10 @@
                         :cols="4"
                         class="text-right"
                       >
-                        <template
-                          v-if="rank.tags.length === 2"
-                        >
-                          <span
-                            v-if="category === 'Language'"
-                            v-text="'All'"
-                          />
-                          <span
-                            v-if="category === 'Location'"
-                            v-text="'Global'"
-                          />
-                        </template>
+                        <span
+                          v-if="rank.tags.length < 3"
+                          v-text="'Global'"
+                        />
                         <template
                           v-for="(tag) in rank.tags"
                         >

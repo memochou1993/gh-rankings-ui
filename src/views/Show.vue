@@ -94,7 +94,7 @@ export default {
           title: `${fields.followers.text} Ranking`,
         },
         {
-          category: 'Language',
+          category: 'Location',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryStars.value]),
             ...this.filter([types.user.value, fields.repositoryStars.value, 'location']),
@@ -102,7 +102,7 @@ export default {
           title: `${fields.repositoryStars.text} Ranking`,
         },
         {
-          category: 'Language',
+          category: 'Location',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryForks.value]),
             ...this.filter([types.user.value, fields.repositoryForks.value, 'location']),
@@ -110,7 +110,7 @@ export default {
           title: `${fields.repositoryForks.text} Ranking`,
         },
         {
-          category: 'Language',
+          category: 'Location',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryWatchers.value]),
             ...this.filter([types.user.value, fields.repositoryWatchers.value, 'location']),
