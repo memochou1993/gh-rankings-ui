@@ -1,12 +1,13 @@
 <template>
   <div>
     <v-footer
+      app
+      color="primary primary-gradient"
       dark
       padless
-      class="primary"
     >
       <v-col
-        class="font-weight-light text-center"
+        class="font-weight-light text-center py-2"
       >
         <span
           class="pointer"

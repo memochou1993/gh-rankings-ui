@@ -2,7 +2,11 @@
   <v-app>
     <TheHeader />
     <v-main>
-      <router-view />
+      <v-container
+        fluid
+      >
+        <router-view />
+      </v-container>
     </v-main>
     <TheFooter />
   </v-app>
@@ -24,5 +28,8 @@ export default {
 <style lang="scss">
 .pointer {
   cursor: pointer;
+}
+.primary-gradient {
+  background-image: linear-gradient(to right top, #061D30, #2C4C68);
 }
 </style>
