@@ -1,4 +1,4 @@
-# github-rankings-client
+# gh-rankings-client
 
 ## Project setup
 ```
