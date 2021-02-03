@@ -1,4 +1,4 @@
-const types = {
+export default {
   user: {
     text: 'User',
     value: 'user',
@@ -12,5 +12,3 @@ const types = {
     value: 'repository',
   },
 };
-
-export default types;

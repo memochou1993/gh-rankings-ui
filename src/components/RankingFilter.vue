@@ -87,8 +87,8 @@
 </template>
 
 <script>
-import types from '@/util/types';
-import fields from '@/util/fields';
+import fields from '@/assets/field';
+import types from '@/assets/type';
 
 export default {
   name: 'RankingFilter',

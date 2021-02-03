@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import fields from '@/util/fields';
-import types from '@/util/types';
+import fields from '@/assets/field';
+import types from '@/assets/type';
 import RankingError from '@/components/RankingError';
 import RankingGroup from '@/components/RankingGroup';
 import RankingProfile from '@/components/RankingProfile';

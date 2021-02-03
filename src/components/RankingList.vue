@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import fields from '@/util/fields';
-import types from '@/util/types';
+import fields from '@/assets/field';
+import types from '@/assets/type';
 import RankingCount from '@/components/RankingCount';
 
 export default {

@@ -1,4 +1,4 @@
-const fields = {
+export default {
   followers: {
     text: 'Followers',
     value: 'followers',
@@ -36,5 +36,3 @@ const fields = {
     value: 'watchers',
   },
 };
-
-export default fields;

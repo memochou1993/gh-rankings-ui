@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import fields from '@/util/fields';
+import fields from '@/assets/field';
 
 export default {
   name: 'RankingCount',
