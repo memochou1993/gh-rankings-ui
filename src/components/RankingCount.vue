@@ -22,7 +22,7 @@
 import fields from '@/util/fields';
 
 export default {
-  name: 'RankingTotalCount',
+  name: 'RankingCount',
   props: {
     rank: {
       type: Object,

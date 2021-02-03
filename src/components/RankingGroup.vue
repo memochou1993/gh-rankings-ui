@@ -109,7 +109,7 @@
                         :cols="4"
                         class="text-right"
                       >
-                        <RankingTotalCount
+                        <RankingCount
                           :rank="rank"
                         />
                       </v-col>
@@ -127,12 +127,12 @@
 
 <script>
 import fields from '@/util/fields';
-import RankingTotalCount from '@/components/RankingTotalCount';
+import RankingCount from '@/components/RankingCount';
 
 export default {
   name: 'RankingGroup',
   components: {
-    RankingTotalCount,
+    RankingCount,
   },
   props: {
     category: {

@@ -41,7 +41,7 @@
                   />
                 </v-list-item-content>
                 <v-list-item-action>
-                  <RankingTotalCount
+                  <RankingCount
                     :rank="rank"
                   />
                 </v-list-item-action>
@@ -61,12 +61,12 @@
 <script>
 import fields from '@/util/fields';
 import types from '@/util/types';
-import RankingTotalCount from '@/components/RankingTotalCount';
+import RankingCount from '@/components/RankingCount';
 
 export default {
   name: 'RankingList',
   components: {
-    RankingTotalCount,
+    RankingCount,
   },
   computed: {
     type() {

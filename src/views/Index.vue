@@ -16,7 +16,7 @@
               :md="2"
               :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
             >
-              <RankingSearch />
+              <RankingFilter />
             </v-col>
             <v-col
               :md="9"
@@ -50,15 +50,15 @@
 
 <script>
 import RankingError from '@/components/RankingError';
+import RankingFilter from '@/components/RankingFilter';
 import RankingList from '@/components/RankingList';
-import RankingSearch from '@/components/RankingSearch';
 
 export default {
   name: 'Index',
   components: {
     RankingError,
+    RankingFilter,
     RankingList,
-    RankingSearch,
   },
   data: () => ({
     loaded: false,

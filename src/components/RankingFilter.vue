@@ -66,7 +66,7 @@ import types from '@/util/types';
 import fields from '@/util/fields';
 
 export default {
-  name: 'RankingSearch',
+  name: 'RankingFilter',
   data: () => ({
     type: types.user.value,
     types: [
