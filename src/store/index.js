@@ -29,8 +29,8 @@ export default new Vuex.Store({
      * @param query.field
      */
     query: {
-      type: types.user,
-      field: fields.repositories.stargazers,
+      type: types.user.value,
+      field: fields.repositoryStars.value,
     },
   },
   mutations: {

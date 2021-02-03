@@ -25,10 +25,7 @@
               <template
                 v-if="$store.state.ranks.length > 0"
               >
-                <RankingList
-                  :ranks="$store.state.ranks"
-                  :title="'Repository Ranking'"
-                />
+                <RankingList />
                 <v-pagination
                   v-model="page"
                   :length="pages"

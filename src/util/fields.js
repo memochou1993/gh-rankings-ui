@@ -1,17 +1,40 @@
 const fields = {
-  followers: 'followers',
-  repositories: {
-    stargazers: 'repositories.stargazers',
-    forks: 'repositories.forks',
-    watchers: 'repositories.watchers',
+  followers: {
+    text: 'Followers',
+    value: 'followers',
   },
-  gists: {
-    stargazers: 'gists.stargazers',
-    forks: 'gists.forks',
+  repositoryStars: {
+    text: 'Repository Stars',
+    value: 'repositories.stargazers',
   },
-  stargazers: 'stargazers',
-  forks: 'forks',
-  watchers: 'watchers',
+  repositoryForks: {
+    text: 'Repository Forks',
+    value: 'repositories.forks',
+  },
+  repositoryWatchers: {
+    text: 'Repository Watchers',
+    value: 'repositories.watchers',
+  },
+  gistStars: {
+    text: 'Gist Stars',
+    value: 'gists.stargazers',
+  },
+  gistForks: {
+    text: 'Gist Forks',
+    value: 'gists.forks',
+  },
+  stars: {
+    text: 'Stars',
+    value: 'stargazers',
+  },
+  forks: {
+    text: 'Forks',
+    value: 'forks',
+  },
+  watchers: {
+    text: 'Watchers',
+    value: 'watchers',
+  },
 };
 
 export default fields;

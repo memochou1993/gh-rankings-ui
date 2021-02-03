@@ -68,37 +68,37 @@ import fields from '@/util/fields';
 export default {
   name: 'RankingSearch',
   data: () => ({
-    type: types.user,
+    type: types.user.value,
     types: [
-      { text: 'User', value: types.user },
-      { text: 'Organization', value: types.organization },
-      { text: 'Repository', value: types.repository },
+      types.user,
+      types.organization,
+      types.repository,
     ],
-    field: fields.repositories.stargazers,
+    field: fields.repositoryStars.value,
   }),
   computed: {
     fields() {
       switch (this.type) {
-        case types.user:
+        case types.user.value:
           return [
-            { text: 'Followers', value: fields.followers },
-            { text: 'Repo Stars', value: fields.repositories.stargazers },
-            { text: 'Repo Forks', value: fields.repositories.forks },
-            { text: 'Repo Watchers', value: fields.repositories.watchers },
-            { text: 'Gist Stars', value: fields.gists.stargazers },
-            { text: 'Gist Forks', value: fields.gists.forks },
+            fields.followers,
+            fields.repositoryStars,
+            fields.repositoryForks,
+            fields.repositoryWatchers,
+            fields.gistStars,
+            fields.gistForks,
           ];
-        case types.organization:
+        case types.organization.value:
           return [
-            { text: 'Repo Stars', value: fields.repositories.stargazers },
-            { text: 'Repo Forks', value: fields.repositories.forks },
-            { text: 'Repo Watchers', value: fields.repositories.watchers },
+            fields.repositoryStars,
+            fields.repositoryForks,
+            fields.repositoryWatchers,
           ];
-        case types.repository:
+        case types.repository.value:
           return [
-            { text: 'Stars', value: fields.stargazers },
-            { text: 'Forks', value: fields.forks },
-            { text: 'Watchers', value: fields.watchers },
+            fields.stars,
+            fields.forks,
+            fields.watchers,
           ];
         default:
           return [];
@@ -136,32 +136,32 @@ export default {
       this.field = field;
     },
     switchField(type) {
-      const isOwner = () => type === types.user || type === types.organization;
-      const isRepository = () => type === types.repository;
+      const isOwner = () => type === types.user.value || type === types.organization.value;
+      const isRepository = () => type === types.repository.value;
       switch (true) {
-        case this.field.includes(fields.stargazers) && isRepository():
-          this.setField(fields.stargazers);
+        case this.field.includes(fields.stars.value) && isRepository():
+          this.setField(fields.stars.value);
           break;
-        case this.field.includes(fields.stargazers) && isOwner():
-          this.setField(fields.repositories.stargazers);
+        case this.field.includes(fields.stars.value) && isOwner():
+          this.setField(fields.repositoryStars.value);
           break;
-        case this.field.includes(fields.forks) && isRepository():
-          this.setField(fields.forks);
+        case this.field.includes(fields.forks.value) && isRepository():
+          this.setField(fields.forks.value);
           break;
-        case this.field.includes(fields.forks) && isOwner():
-          this.setField(fields.repositories.forks);
+        case this.field.includes(fields.forks.value) && isOwner():
+          this.setField(fields.repositoryForks.value);
           break;
-        case this.field.includes(fields.watchers) && isRepository():
-          this.setField(fields.watchers);
+        case this.field.includes(fields.watchers.value) && isRepository():
+          this.setField(fields.watchers.value);
           break;
-        case this.field.includes(fields.watchers) && isOwner():
-          this.setField(fields.repositories.watchers);
+        case this.field.includes(fields.watchers.value) && isOwner():
+          this.setField(fields.repositoryWatchers.value);
           break;
         case isRepository():
-          this.setField(fields.stargazers);
+          this.setField(fields.stars.value);
           break;
         default:
-          this.setField(fields.repositories.stargazers);
+          this.setField(fields.repositoryStars.value);
       }
     },
     retrieve() {

@@ -15,7 +15,7 @@
         >
           <v-list-item-group>
             <template
-              v-for="(rank, i) in ranks"
+              v-for="(rank, i) in $store.state.ranks"
             >
               <v-list-item
                 :key="i"
@@ -47,7 +47,7 @@
                 </v-list-item-action>
               </v-list-item>
               <v-divider
-                v-if="i < ranks.length - 1"
+                v-if="i < $store.state.ranks.length - 1"
                 :key="`divider-${i}`"
               />
             </template>
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import fields from '@/util/fields';
+import types from '@/util/types';
 import RankingTotalCount from '@/components/RankingTotalCount';
 
 export default {
@@ -66,14 +68,19 @@ export default {
   components: {
     RankingTotalCount,
   },
-  props: {
-    ranks: {
-      type: Array,
-      required: true,
+  computed: {
+    type() {
+      return Object
+        .values(types)
+        .find((type) => type.value === this.$store.state.query.type);
     },
-    title: {
-      type: String,
-      required: true,
+    tield() {
+      return Object
+        .values(fields)
+        .find((field) => field.value === this.$store.state.query.field);
+    },
+    title() {
+      return `${this.type.text} ${this.tield.text} Ranking`;
     },
   },
 };
