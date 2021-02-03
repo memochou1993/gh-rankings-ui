@@ -134,6 +134,7 @@
 </template>
 
 <script>
+import fields from '@/util/fields';
 import RankingTotalCount from '@/components/RankingTotalCount';
 
 export default {
@@ -146,10 +147,6 @@ export default {
       type: String,
       required: true,
     },
-    field: {
-      type: String,
-      required: true,
-    },
     ranks: {
       type: Array,
       required: true,
@@ -157,6 +154,22 @@ export default {
     title: {
       type: String,
       required: true,
+    },
+  },
+  computed: {
+    field() {
+      switch (true) {
+        case this.title.includes(fields.followers.text):
+          return fields.followers.text;
+        case this.title.includes(fields.stars.text):
+          return fields.stars.text;
+        case this.title.includes(fields.forks.text):
+          return fields.forks.text;
+        case this.title.includes(fields.watchers.text):
+          return fields.watchers.text;
+        default:
+          return '';
+      }
     },
   },
 };

@@ -35,7 +35,6 @@
                     v-if="group.ranks.length > 0"
                     :key="i"
                     :category="group.category"
-                    :field="group.field"
                     :ranks="group.ranks"
                     :title="group.title"
                     class="mb-6"
@@ -88,7 +87,6 @@ export default {
       return [
         {
           category: 'Location',
-          field: 'Followers',
           ranks: [
             ...this.filter([types.user.value, fields.followers.value]),
             ...this.filter([types.user.value, fields.followers.value, 'location']),
@@ -97,7 +95,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Stars',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryStars.value]),
             ...this.filter([types.user.value, fields.repositoryStars.value, 'location']),
@@ -106,7 +103,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Forks',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryForks.value]),
             ...this.filter([types.user.value, fields.repositoryForks.value, 'location']),
@@ -115,7 +111,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Watchers',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryWatchers.value]),
             ...this.filter([types.user.value, fields.repositoryWatchers.value, 'location']),
@@ -124,7 +119,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Stars',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryStars.value, 'language']),
           ],
@@ -132,7 +126,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Forks',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryForks.value, 'language']),
           ],
@@ -140,7 +133,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Watchers',
           ranks: [
             ...this.filter([types.user.value, fields.repositoryWatchers.value, 'language']),
           ],
@@ -148,7 +140,6 @@ export default {
         },
         {
           category: 'Location',
-          field: 'Stars',
           ranks: [
             ...this.filter([types.user.value, fields.gistStars.value]),
             ...this.filter([types.user.value, fields.gistStars.value, 'location']),
@@ -157,7 +148,6 @@ export default {
         },
         {
           category: 'Location',
-          field: 'Forks',
           ranks: [
             ...this.filter([types.user.value, fields.gistForks.value]),
             ...this.filter([types.user.value, fields.gistForks.value, 'location']),
@@ -166,7 +156,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Stars',
           ranks: [
             ...this.filter([types.repository.value, fields.stars.value]),
             ...this.filter([types.repository.value, fields.stars.value, 'language']),
@@ -175,7 +164,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Forks',
           ranks: [
             ...this.filter([types.repository.value, fields.forks.value]),
             ...this.filter([types.repository.value, fields.forks.value, 'language']),
@@ -184,7 +172,6 @@ export default {
         },
         {
           category: 'Language',
-          field: 'Watchers',
           ranks: [
             ...this.filter([types.repository.value, fields.watchers.value]),
             ...this.filter([types.repository.value, fields.watchers.value, 'language']),
