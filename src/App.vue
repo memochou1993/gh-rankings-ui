@@ -27,8 +27,8 @@ export default {
 
 <style lang="scss">
 .pointer {
-  &, input {
-    cursor: pointer;
+  &, .v-input__slot, input {
+    cursor: pointer !important;
   }
 }
 .primary-gradient {
