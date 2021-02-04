@@ -4,3 +4,9 @@
     class="mx-auto"
   />
 </template>
+
+<script>
+export default {
+  name: 'RankingLoader',
+};
+</script>
