@@ -89,7 +89,7 @@ import fields from '@/assets/field';
 import types from '@/assets/type';
 
 export default {
-  name: 'AppFilter',
+  name: 'AppSearch',
   data: () => ({
     type: types.user.value,
     types: [

@@ -15,7 +15,7 @@
             :md="2"
             :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
           >
-            <AppFilter />
+            <AppSearch />
           </v-col>
           <v-col
             :md="9"
@@ -54,14 +54,14 @@
 <script>
 import RankingError from '@/components/RankingError';
 import RankingLoader from '@/components/RankingLoader';
-import AppFilter from './filter';
 import AppRanking from './ranking';
+import AppSearch from './search';
 
 export default {
   name: 'Home',
   components: {
-    AppFilter,
     AppRanking,
+    AppSearch,
     RankingError,
     RankingLoader,
   },
