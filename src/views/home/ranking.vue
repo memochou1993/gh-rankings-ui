@@ -16,7 +16,7 @@
             v-for="(rank, i) in $store.state.ranks"
           >
             <v-list-item
-              :key="i"
+              :key="rank.name"
               :to="`/${rank.name}`"
               class="body-1 font-weight-light"
             >

@@ -4,10 +4,25 @@
     rounded
   >
     <v-img
-      :alt="alt"
+      :aspect-ratio="1"
       :src="src"
-      lazy-src="@/assets/avatar.jpg"
-    />
+      class="grey lighten-2"
+    >
+      <template
+        v-slot:placeholder
+      >
+        <v-row
+          align="center"
+          justify="center"
+          class="fill-height ma-0"
+        >
+          <v-progress-circular
+            :indeterminate="!loaded"
+            color="grey lighten-5"
+          />
+        </v-row>
+      </template>
+    </v-img>
   </v-avatar>
 </template>
 
@@ -27,6 +42,19 @@ export default {
     src: {
       type: String,
       required: true,
+    },
+  },
+  data: () => ({
+    loaded: false,
+  }),
+  mounted() {
+    setTimeout(() => {
+      this.setLoaded(true);
+    }, 1000);
+  },
+  methods: {
+    setLoaded(loaded) {
+      this.loaded = loaded;
     },
   },
 };
