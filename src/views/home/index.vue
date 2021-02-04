@@ -1,53 +1,51 @@
 <template>
-  <div>
-    <v-row
-      justify="center"
+  <v-row
+    justify="center"
+  >
+    <v-col
+      :cols="10"
+      :sm="8"
     >
-      <v-col
-        :cols="10"
-        :sm="8"
-      >
-        <v-fade-transition>
-          <v-row
-            v-if="loaded"
-            class="mt-3"
+      <v-fade-transition>
+        <v-row
+          v-if="loaded"
+          class="mt-3"
+        >
+          <v-col
+            :md="2"
+            :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
           >
-            <v-col
-              :md="2"
-              :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
+            <RankingFilter />
+          </v-col>
+          <v-col
+            :md="9"
+            :offset-md="3"
+          >
+            <template
+              v-if="$store.state.ranks.length > 0"
             >
-              <RankingFilter />
-            </v-col>
-            <v-col
-              :md="9"
-              :offset-md="3"
+              <RankingList />
+              <v-pagination
+                v-model="page"
+                :length="pages"
+                :total-visible="9"
+                next-icon="mdi-menu-right"
+                prev-icon="mdi-menu-left"
+                class="font-weight-light my-5"
+              />
+            </template>
+            <template
+              v-else
             >
-              <template
-                v-if="$store.state.ranks.length > 0"
-              >
-                <RankingList />
-                <v-pagination
-                  v-model="page"
-                  :length="pages"
-                  :total-visible="9"
-                  next-icon="mdi-menu-right"
-                  prev-icon="mdi-menu-left"
-                  class="font-weight-light my-5"
-                />
-              </template>
-              <template
-                v-else
-              >
-                <RankingError
-                  :message="$store.state.error.message || 'No ranking found'"
-                />
-              </template>
-            </v-col>
-          </v-row>
-        </v-fade-transition>
-      </v-col>
-    </v-row>
-  </div>
+              <RankingError
+                :message="$store.state.error.message || 'No ranking found'"
+              />
+            </template>
+          </v-col>
+        </v-row>
+      </v-fade-transition>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

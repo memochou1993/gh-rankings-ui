@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <v-card
-      :elevation="5"
+  <v-card
+    :elevation="5"
+  >
+    <v-card-title
+      class="headline"
     >
-      <v-card-title
-        class="headline"
-      >
-        <RankingAvatar
-          :alt="name"
-          :src="imageUrl"
-          size="100%"
-        />
-      </v-card-title>
-      <v-card-text
-        class="text-center"
-      >
-        <div
-          class="title font-weight-regular text--primary pointer"
-          @click="open()"
-          v-text="name"
-        />
-      </v-card-text>
-    </v-card>
-  </div>
+      <RankingAvatar
+        :alt="name"
+        :src="imageUrl"
+        size="100%"
+      />
+    </v-card-title>
+    <v-card-text
+      class="text-center"
+    >
+      <div
+        class="title font-weight-regular text--primary pointer"
+        @click="open()"
+        v-text="name"
+      />
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

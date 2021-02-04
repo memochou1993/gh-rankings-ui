@@ -1,89 +1,87 @@
 <template>
-  <div>
-    <v-card
-      :elevation="5"
+  <v-card
+    :elevation="5"
+  >
+    <v-card-text
+      class="text-center"
     >
-      <v-card-text
-        class="text-center"
+      <div
+        class="title font-weight-regular text--primary"
+        v-text="'Search'"
+      />
+      <v-card
+        outlined
+        class="my-2"
       >
-        <div
-          class="title font-weight-regular text--primary"
-          v-text="'Search'"
-        />
-        <v-card
-          outlined
-          class="my-2"
+        <v-select
+          v-model="type"
+          :items="types"
+          :menu-props="{ offsetY: true }"
+          color="primary"
+          dense
+          flat
+          hide-details
+          solo
+          class="font-weight-light"
         >
-          <v-select
-            v-model="type"
-            :items="types"
-            :menu-props="{ offsetY: true }"
-            color="primary"
-            dense
-            flat
-            hide-details
-            solo
+          <span
+            slot="item"
+            slot-scope="{ item }"
             class="font-weight-light"
-          >
-            <span
-              slot="item"
-              slot-scope="{ item }"
-              class="font-weight-light"
-              v-text="item.text"
-            />
-          </v-select>
-        </v-card>
-        <v-card
-          outlined
-          class="my-2"
+            v-text="item.text"
+          />
+        </v-select>
+      </v-card>
+      <v-card
+        outlined
+        class="my-2"
+      >
+        <v-select
+          v-model="field"
+          :items="fields"
+          :menu-props="{ offsetY: true }"
+          color="primary"
+          dense
+          flat
+          hide-details
+          solo
+          class="font-weight-light"
         >
-          <v-select
-            v-model="field"
-            :items="fields"
-            :menu-props="{ offsetY: true }"
-            color="primary"
-            dense
-            flat
-            hide-details
-            solo
+          <span
+            slot="item"
+            slot-scope="{ item }"
             class="font-weight-light"
-          >
-            <span
-              slot="item"
-              slot-scope="{ item }"
-              class="font-weight-light"
-              v-text="item.text"
-            />
-          </v-select>
-        </v-card>
-        <v-card
-          outlined
-          class="my-2"
+            v-text="item.text"
+          />
+        </v-select>
+      </v-card>
+      <v-card
+        outlined
+        class="my-2"
+      >
+        <v-autocomplete
+          v-model="language"
+          :disabled="!type.includes('repo') && !field.includes('repo')"
+          :items="$store.state.languages"
+          dense
+          flat
+          hide-details
+          hide-no-data
+          item-text="name"
+          label="Language"
+          solo
+          class="font-weight-light pointer"
         >
-          <v-autocomplete
-            v-model="language"
-            :disabled="!type.includes('repo') && !field.includes('repo')"
-            :items="$store.state.languages"
-            dense
-            flat
-            hide-details
-            hide-no-data
-            item-text="name"
-            label="Language"
-            solo
-            class="font-weight-light pointer"
-          >
-            <span
-              slot="item"
-              slot-scope="{ item }"
-              class="font-weight-light"
-              v-text="item.name"
-            />
-          </v-autocomplete>
-        </v-card>
-      </v-card-text>
-    </v-card>
-  </div>
+          <span
+            slot="item"
+            slot-scope="{ item }"
+            class="font-weight-light"
+            v-text="item.name"
+          />
+        </v-autocomplete>
+      </v-card>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

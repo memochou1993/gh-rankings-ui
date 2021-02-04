@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <v-card
-      :elevation="5"
+  <v-card
+    :elevation="5"
+  >
+    <v-card-text
+      class="title font-weight-light text-center py-16"
     >
-      <v-card-text
-        class="title font-weight-light text-center py-16"
-      >
-        <span
-          v-text="message"
-        />
-      </v-card-text>
-    </v-card>
-  </div>
+      <span
+        v-text="message"
+      />
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

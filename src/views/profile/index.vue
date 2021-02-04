@@ -1,61 +1,59 @@
 <template>
-  <div>
-    <v-row
-      justify="center"
+  <v-row
+    justify="center"
+  >
+    <v-col
+      :cols="10"
+      :sm="8"
     >
-      <v-col
-        :cols="10"
-        :sm="8"
-      >
-        <v-fade-transition>
-          <v-row
-            v-if="loaded"
-            class="mt-3"
+      <v-fade-transition>
+        <v-row
+          v-if="loaded"
+          class="mt-3"
+        >
+          <template
+            v-if="ranks.length > 0"
           >
-            <template
-              v-if="ranks.length > 0"
+            <v-col
+              :md="2"
+              :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
             >
-              <v-col
-                :md="2"
-                :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
-              >
-                <RankingProfile
-                  :name="name"
-                  :image-url="imageUrl"
-                />
-              </v-col>
-              <v-col
-                :md="9"
-                :offset-md="3"
-              >
-                <template
-                  v-for="(group, i) in groups"
-                >
-                  <RankingGroup
-                    v-if="group.ranks.length > 0"
-                    :key="i"
-                    :category="group.category"
-                    :ranks="group.ranks"
-                    :title="group.title"
-                    class="mb-6"
-                  />
-                </template>
-              </v-col>
-            </template>
-            <template
-              v-else
+              <RankingProfile
+                :name="name"
+                :image-url="imageUrl"
+              />
+            </v-col>
+            <v-col
+              :md="9"
+              :offset-md="3"
             >
-              <v-col>
-                <RankingError
-                  :message="$store.state.error.message || 'No ranking found'"
+              <template
+                v-for="(group, i) in groups"
+              >
+                <RankingGroup
+                  v-if="group.ranks.length > 0"
+                  :key="i"
+                  :category="group.category"
+                  :ranks="group.ranks"
+                  :title="group.title"
+                  class="mb-6"
                 />
-              </v-col>
-            </template>
-          </v-row>
-        </v-fade-transition>
-      </v-col>
-    </v-row>
-  </div>
+              </template>
+            </v-col>
+          </template>
+          <template
+            v-else
+          >
+            <v-col>
+              <RankingError
+                :message="$store.state.error.message || 'No ranking found'"
+              />
+            </v-col>
+          </template>
+        </v-row>
+      </v-fade-transition>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

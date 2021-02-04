@@ -1,127 +1,125 @@
 <template>
-  <div>
-    <v-card
-      :elevation="5"
+  <v-card
+    :elevation="5"
+  >
+    <v-card-text
+      class="pa-0"
     >
-      <v-card-text
-        class="pa-0"
+      <RankingTitle
+        :title="title"
+      />
+      <v-list
+        class="py-0"
       >
-        <RankingTitle
-          :title="title"
-        />
-        <v-list
-          class="py-0"
-        >
-          <v-list-item-group>
-            <template>
-              <v-list-item
-                :ripple="false"
-                inactive
-              >
-                <v-list-item-content>
-                  <v-list-item-title
-                    class="title font-weight-regular"
-                  >
-                    <v-row>
-                      <v-col
-                        :cols="4"
-                        class="text-right"
-                      >
-                        <span
-                          v-text="category"
-                        />
-                      </v-col>
-                      <v-col
-                        :cols="4"
-                        class="text-left"
-                      >
-                        <span
-                          v-text="'Rank'"
-                        />
-                      </v-col>
-                      <v-col
-                        :cols="4"
-                        class="text-right"
-                      >
-                        <span
-                          v-text="field"
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-            <template
-              v-for="(rank, i) in ranks"
+        <v-list-item-group>
+          <template>
+            <v-list-item
+              :ripple="false"
+              inactive
             >
-              <v-divider
-                :key="`divider-${i}`"
-              />
-              <v-list-item
-                :key="i"
-                :ripple="false"
-                inactive
-              >
-                <v-list-item-content>
-                  <v-list-item-title
-                    class="body-1 font-weight-light"
-                  >
-                    <v-row>
-                      <v-col
-                        :cols="4"
-                        class="text-right"
+              <v-list-item-content>
+                <v-list-item-title
+                  class="title font-weight-regular"
+                >
+                  <v-row>
+                    <v-col
+                      :cols="4"
+                      class="text-right"
+                    >
+                      <span
+                        v-text="category"
+                      />
+                    </v-col>
+                    <v-col
+                      :cols="4"
+                      class="text-left"
+                    >
+                      <span
+                        v-text="'Rank'"
+                      />
+                    </v-col>
+                    <v-col
+                      :cols="4"
+                      class="text-right"
+                    >
+                      <span
+                        v-text="field"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <template
+            v-for="(rank, i) in ranks"
+          >
+            <v-divider
+              :key="`divider-${i}`"
+            />
+            <v-list-item
+              :key="i"
+              :ripple="false"
+              inactive
+            >
+              <v-list-item-content>
+                <v-list-item-title
+                  class="body-1 font-weight-light"
+                >
+                  <v-row>
+                    <v-col
+                      :cols="4"
+                      class="text-right"
+                    >
+                      <span
+                        v-if="rank.tags.length < 3"
+                        v-text="'Global'"
+                      />
+                      <template
+                        v-for="(tag) in rank.tags"
                       >
                         <span
-                          v-if="rank.tags.length < 3"
-                          v-text="'Global'"
-                        />
-                        <template
-                          v-for="(tag) in rank.tags"
-                        >
-                          <span
-                            v-if="tag.includes('language')"
-                            :key="tag"
-                            v-text="tag.replace('language:', '')"
-                          />
-                          <span
-                            v-if="tag.includes('location')"
-                            :key="tag"
-                            v-text="tag.replace('location:', '')"
-                          />
-                        </template>
-                      </v-col>
-                      <v-col
-                        :cols="4"
-                        class="text-left"
-                      >
-                        <span
-                          v-if="rank.rank > rank.last"
-                          v-text="'-'"
+                          v-if="tag.includes('language')"
+                          :key="tag"
+                          v-text="tag.replace('language:', '')"
                         />
                         <span
-                          v-else
-                          v-text="`${rank.rank.toLocaleString()} / ${rank.last.toLocaleString()}`"
+                          v-if="tag.includes('location')"
+                          :key="tag"
+                          v-text="tag.replace('location:', '')"
                         />
-                      </v-col>
-                      <v-col
-                        :cols="4"
-                        class="text-right"
-                      >
-                        <RankingCount
-                          :rank="rank"
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-          </v-list-item-group>
-        </v-list>
-      </v-card-text>
-    </v-card>
-  </div>
+                      </template>
+                    </v-col>
+                    <v-col
+                      :cols="4"
+                      class="text-left"
+                    >
+                      <span
+                        v-if="rank.rank > rank.last"
+                        v-text="'-'"
+                      />
+                      <span
+                        v-else
+                        v-text="`${rank.rank.toLocaleString()} / ${rank.last.toLocaleString()}`"
+                      />
+                    </v-col>
+                    <v-col
+                      :cols="4"
+                      class="text-right"
+                    >
+                      <RankingCount
+                        :rank="rank"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+        </v-list-item-group>
+      </v-list>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

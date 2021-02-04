@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <v-btn
-      :ripple="false"
-      text
-      x-small
-    >
-      <span
-        class="body-1 font-weight-light"
-        v-text="rank.totalCount.toLocaleString()"
-      />
-      <v-icon
-        :size="20"
-        right
-        v-text="icon"
-      />
-    </v-btn>
-  </div>
+  <v-btn
+    :ripple="false"
+    text
+    x-small
+  >
+    <span
+      class="body-1 font-weight-light"
+      v-text="rank.totalCount.toLocaleString()"
+    />
+    <v-icon
+      :size="20"
+      right
+      v-text="icon"
+    />
+  </v-btn>
 </template>
 
 <script>
