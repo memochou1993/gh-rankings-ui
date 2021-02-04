@@ -25,7 +25,7 @@ export default {
   name: 'TheFooter',
   methods: {
     open() {
-      helpers.open('https://github.com/memochou1993');
+      helpers.open('https://github.com/memochou1993/gh-rankings');
     },
   },
 };
