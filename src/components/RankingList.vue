@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import fields from '@/util/fields';
-import types from '@/util/types';
+import fields from '@/assets/field';
+import types from '@/assets/type';
 import RankingCount from '@/components/RankingCount';
 
 export default {
@@ -74,13 +74,15 @@ export default {
         .values(types)
         .find((type) => type.value === this.$store.state.query.type);
     },
-    tield() {
+    field() {
       return Object
         .values(fields)
         .find((field) => field.value === this.$store.state.query.field);
     },
     title() {
-      return `${this.type.text} ${this.tield.text} Ranking`;
+      const type = this.type.text;
+      const field = this.field.text.replace('Repo', 'Repository');
+      return `${type} ${field} Ranking`;
     },
   },
 };

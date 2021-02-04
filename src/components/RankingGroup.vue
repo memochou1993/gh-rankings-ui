@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import fields from '@/util/fields';
+import fields from '@/assets/field';
 import RankingCount from '@/components/RankingCount';
 
 export default {

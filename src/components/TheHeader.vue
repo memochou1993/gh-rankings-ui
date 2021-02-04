@@ -2,8 +2,9 @@
   <div>
     <v-app-bar
       app
-      color="primary"
+      color="primary primary-gradient"
       dark
+      dense
       class="headline font-weight-light"
     >
       <span

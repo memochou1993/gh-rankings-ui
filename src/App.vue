@@ -2,7 +2,11 @@
   <v-app>
     <TheHeader />
     <v-main>
-      <router-view />
+      <v-container
+        fluid
+      >
+        <router-view />
+      </v-container>
     </v-main>
     <TheFooter />
   </v-app>
@@ -23,6 +27,11 @@ export default {
 
 <style lang="scss">
 .pointer {
-  cursor: pointer;
+  &, .v-input__slot, input {
+    cursor: pointer !important;
+  }
+}
+.primary-gradient {
+  background-image: linear-gradient(to right, #061D30, #2C4C68);
 }
 </style>

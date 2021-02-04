@@ -1,18 +1,18 @@
-const fields = {
+export default {
   followers: {
     text: 'Followers',
     value: 'followers',
   },
   repositoryStars: {
-    text: 'Repository Stars',
+    text: 'Repo Stars',
     value: 'repositories.stargazers',
   },
   repositoryForks: {
-    text: 'Repository Forks',
+    text: 'Repo Forks',
     value: 'repositories.forks',
   },
   repositoryWatchers: {
-    text: 'Repository Watchers',
+    text: 'Repo Watchers',
     value: 'repositories.watchers',
   },
   gistStars: {
@@ -36,5 +36,3 @@ const fields = {
     value: 'watchers',
   },
 };
-
-export default fields;
