@@ -63,6 +63,8 @@
           v-model="language"
           :disabled="!type.includes('repo') && !field.includes('repo')"
           :items="$store.state.languages"
+          clearable
+          clear-icon="mdi-close"
           dense
           flat
           hide-details
@@ -142,7 +144,7 @@ export default {
       return this.field === this.$route.query.field;
     },
     isSameLanguage() {
-      return this.language === this.$route.query.language;
+      return this.language === (this.$route.query.language || '');
     },
   },
   watch: {
@@ -215,7 +217,6 @@ export default {
       });
     },
     updateRoute(after, before) {
-      const { query } = this.$route;
       if (after.type !== before.type) {
         this.switchField();
         this.restore();
@@ -230,14 +231,16 @@ export default {
       if (this.isSameType && this.isSameField && this.isSameLanguage) {
         return;
       }
+      const query = {
+        ...this.$route.query,
+        type: this.type,
+        field: this.field,
+        language: this.language,
+        page: '1',
+      };
+      Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
       this.$router.push({
-        query: {
-          ...query,
-          type: this.type,
-          field: this.field,
-          language: this.language,
-          page: '1',
-        },
+        query,
       });
     },
   },
