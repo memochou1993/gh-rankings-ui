@@ -132,6 +132,7 @@ export default {
       return {
         type: this.type,
         field: this.field,
+        language: this.language,
       };
     },
     isSameType() {
@@ -139,6 +140,9 @@ export default {
     },
     isSameField() {
       return this.field === this.$route.query.field;
+    },
+    isSameLanguage() {
+      return this.language === this.$route.query.language;
     },
   },
   watch: {
@@ -159,9 +163,14 @@ export default {
     setField(field) {
       this.field = field;
     },
-    switchField(type) {
-      const isOwner = () => type === types.user.value || type === types.organization.value;
-      const isRepository = () => type === types.repository.value;
+    setLanguage(language) {
+      this.language = language;
+    },
+    switchField() {
+      const isUser = () => this.type === types.user.value;
+      const isOrganization = () => this.type === types.organization.value;
+      const isOwner = () => isUser() || isOrganization();
+      const isRepository = () => this.type === types.repository.value;
       switch (true) {
         case this.field.includes(fields.stars.value) && isRepository():
           this.setField(fields.stars.value);
@@ -188,26 +197,37 @@ export default {
           this.setField(fields.repositoryStars.value);
       }
     },
+    switchLanguage() {
+      if (!this.type.includes('repo') && !this.field.includes('repo')) {
+        this.setLanguage('');
+      }
+    },
     retrieve() {
       this.setType(this.$store.state.query.type);
       this.setField(this.$store.state.query.field);
+      this.setLanguage(this.$store.state.query.language);
     },
     restore() {
       this.$store.commit('setQuery', {
         type: this.type,
         field: this.field,
+        language: this.language,
       });
     },
     updateRoute(after, before) {
       const { query } = this.$route;
       if (after.type !== before.type) {
-        this.switchField(after.type);
+        this.switchField();
         this.restore();
       }
       if (after.field !== before.field) {
+        this.switchLanguage();
         this.restore();
       }
-      if (this.isSameType && this.isSameField) {
+      if (after.language !== before.language) {
+        this.restore();
+      }
+      if (this.isSameType && this.isSameField && this.isSameLanguage) {
         return;
       }
       this.$router.push({
@@ -215,6 +235,7 @@ export default {
           ...query,
           type: this.type,
           field: this.field,
+          language: this.language,
           page: '1',
         },
       });

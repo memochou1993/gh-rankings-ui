@@ -37,6 +37,7 @@ export default new Vuex.Store({
     query: {
       type: types.user.value,
       field: fields.repositoryStars.value,
+      language: '',
     },
   },
   mutations: {

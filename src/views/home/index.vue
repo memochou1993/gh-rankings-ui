@@ -87,6 +87,7 @@ export default {
       return {
         type: this.$store.state.query.type,
         field: this.$store.state.query.field,
+        language: this.$store.state.query.language,
         page: this.page,
         limit: this.limit,
       };
@@ -124,6 +125,7 @@ export default {
       this.$store.commit('setQuery', {
         type: this.$route.query.type || this.$store.state.query.type,
         field: this.$route.query.field || this.$store.state.query.field,
+        language: this.$route.query.language || this.$store.state.query.language,
       });
     },
     updateRoute(after) {
