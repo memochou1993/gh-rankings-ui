@@ -38,7 +38,9 @@
               <template
                 v-else
               >
-                <RankingError />
+                <RankingError
+                  :message="$store.state.error.message || 'No ranking found'"
+                />
               </template>
             </v-col>
           </v-row>
@@ -50,8 +52,8 @@
 
 <script>
 import RankingError from '@/components/RankingError';
-import RankingFilter from '@/components/RankingFilter';
-import RankingList from '@/components/RankingList';
+import RankingFilter from './filter';
+import RankingList from './list';
 
 export default {
   name: 'Index',
@@ -137,6 +139,7 @@ export default {
         .then(({ data }) => {
           this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
         })
+        .catch(() => {})
         .finally(() => {
           this.setLoaded(true);
         });

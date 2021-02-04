@@ -46,7 +46,9 @@
               v-else
             >
               <v-col>
-                <RankingError />
+                <RankingError
+                  :message="$store.state.error.message || 'No ranking found'"
+                />
               </v-col>
             </template>
           </v-row>
@@ -179,6 +181,7 @@ export default {
         .then(({ data }) => {
           this.setRanks(data);
         })
+        .catch(() => {})
         .finally(() => {
           this.setLoaded(true);
         });

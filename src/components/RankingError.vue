@@ -17,9 +17,10 @@
 <script>
 export default {
   name: 'RankingError',
-  computed: {
-    message() {
-      return this.$store.state.error?.message || 'No ranking found';
+  props: {
+    message: {
+      type: String,
+      required: true,
     },
   },
 };

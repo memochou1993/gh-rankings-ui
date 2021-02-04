@@ -11,7 +11,7 @@
       >
         <span
           class="pointer"
-          @click="open()"
+          @click="explore()"
           v-text="`© ${new Date().getFullYear()} GH Rankings`"
         />
       </v-col>
@@ -25,7 +25,7 @@ import helpers from '@/util/helpers';
 export default {
   name: 'TheFooter',
   methods: {
-    open() {
+    explore() {
       helpers.open('https://github.com/memochou1993/gh-rankings');
     },
   },
