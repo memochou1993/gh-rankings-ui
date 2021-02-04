@@ -51,6 +51,9 @@
             </v-col>
           </template>
         </v-row>
+        <RankingLoader
+          v-else
+        />
       </v-fade-transition>
     </v-col>
   </v-row>
@@ -61,6 +64,7 @@ import fields from '@/assets/field';
 import types from '@/assets/type';
 import RankingError from '@/components/RankingError';
 import RankingGroup from '@/components/RankingGroup';
+import RankingLoader from '@/components/RankingLoader';
 import RankingProfile from '@/components/RankingProfile';
 
 export default {
@@ -68,6 +72,7 @@ export default {
   components: {
     RankingError,
     RankingGroup,
+    RankingLoader,
     RankingProfile,
   },
   data: () => ({

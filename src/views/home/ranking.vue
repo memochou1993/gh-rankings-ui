@@ -58,7 +58,7 @@ import RankingCount from '@/components/RankingCount';
 import RankingTitle from '@/components/RankingTitle';
 
 export default {
-  name: 'RankingList',
+  name: 'AppRanking',
   components: {
     RankingAvatar,
     RankingCount,

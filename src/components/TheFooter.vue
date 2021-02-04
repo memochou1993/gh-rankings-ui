@@ -1,6 +1,5 @@
 <template>
   <v-footer
-    app
     color="primary primary-gradient"
     dark
     padless

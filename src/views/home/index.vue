@@ -15,7 +15,7 @@
             :md="2"
             :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
           >
-            <RankingFilter />
+            <AppFilter />
           </v-col>
           <v-col
             :md="9"
@@ -24,7 +24,7 @@
             <template
               v-if="$store.state.ranks.length > 0"
             >
-              <RankingList />
+              <AppRanking />
               <v-pagination
                 v-model="page"
                 :length="pages"
@@ -43,6 +43,9 @@
             </template>
           </v-col>
         </v-row>
+        <RankingLoader
+          v-else
+        />
       </v-fade-transition>
     </v-col>
   </v-row>
@@ -50,15 +53,17 @@
 
 <script>
 import RankingError from '@/components/RankingError';
-import RankingFilter from './filter';
-import RankingList from './list';
+import RankingLoader from '@/components/RankingLoader';
+import AppFilter from './filter';
+import AppRanking from './ranking';
 
 export default {
   name: 'Home',
   components: {
+    AppFilter,
+    AppRanking,
     RankingError,
-    RankingFilter,
-    RankingList,
+    RankingLoader,
   },
   data: () => ({
     loaded: false,

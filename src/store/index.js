@@ -28,7 +28,7 @@ export default new Vuex.Store({
     /**
      * @param error
      */
-    error: null,
+    error: {},
     /**
      * @param query
      * @param query.type

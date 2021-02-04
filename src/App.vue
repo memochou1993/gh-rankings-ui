@@ -26,12 +26,21 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.primary-gradient {
+  background-image: linear-gradient(to right, #061D30, #2C4C68);
+}
+
 .pointer {
   &, .v-input__slot, input {
     cursor: pointer !important;
   }
-}
-.primary-gradient {
-  background-image: linear-gradient(to right, #061D30, #2C4C68);
 }
 </style>
