@@ -71,11 +71,11 @@ export default {
     limit: 10,
   }),
   computed: {
-    last() {
-      return this.$store.state.ranks[0]?.last || 0;
+    totalRank() {
+      return this.$store.state.ranks[0]?.totalRank || 0;
     },
     pages() {
-      const last = Math.ceil(this.last / this.limit);
+      const last = Math.ceil(this.totalRank / this.limit);
       const limit = this.limit * 10;
       const pages = last > limit ? limit : last;
       if (last > limit && this.page > pages) {

@@ -19,7 +19,7 @@ export default new Vuex.Store({
      * @param ranks[].name
      * @param ranks[].imageUrl
      * @param ranks[].rank
-     * @param ranks[].last
+     * @param ranks[].totalRank
      * @param ranks[].totalCount
      * @param ranks[].tags
      * @param ranks[].createdAt
