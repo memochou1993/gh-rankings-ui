@@ -65,7 +65,7 @@
               >
                 <v-list-item-content>
                   <v-list-item-title
-                    class="title font-weight-light"
+                    class="body-1 font-weight-light"
                   >
                     <v-row>
                       <v-col

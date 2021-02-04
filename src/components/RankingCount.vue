@@ -6,7 +6,7 @@
       x-small
     >
       <span
-        class="title font-weight-light"
+        class="body-1 font-weight-light"
         v-text="rank.totalCount.toLocaleString()"
       />
       <v-icon
