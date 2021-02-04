@@ -6,9 +6,8 @@
       <v-card-text
         class="pa-0"
       >
-        <div
-          class="headline font-weight-light text-center py-4"
-          v-text="title"
+        <RankingTitle
+          :title="title"
         />
         <v-list
           class="py-0"
@@ -58,12 +57,14 @@ import fields from '@/assets/field';
 import types from '@/assets/type';
 import RankingAvatar from '@/components/RankingAvatar';
 import RankingCount from '@/components/RankingCount';
+import RankingTitle from '@/components/RankingTitle';
 
 export default {
   name: 'RankingList',
   components: {
     RankingAvatar,
     RankingCount,
+    RankingTitle,
   },
   computed: {
     type() {

@@ -6,9 +6,8 @@
       <v-card-text
         class="pa-0"
       >
-        <div
-          class="headline font-weight-light text-center py-4"
-          v-text="title"
+        <RankingTitle
+          :title="title"
         />
         <v-list
           class="py-0"
@@ -128,11 +127,13 @@
 <script>
 import fields from '@/assets/field';
 import RankingCount from '@/components/RankingCount';
+import RankingTitle from '@/components/RankingTitle';
 
 export default {
   name: 'RankingGroup',
   components: {
     RankingCount,
+    RankingTitle,
   },
   props: {
     category: {
