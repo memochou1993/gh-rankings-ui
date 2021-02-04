@@ -56,7 +56,7 @@ import RankingFilter from './filter';
 import RankingList from './list';
 
 export default {
-  name: 'Index',
+  name: 'Home',
   components: {
     RankingError,
     RankingFilter,

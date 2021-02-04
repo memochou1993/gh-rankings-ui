@@ -25,15 +25,10 @@
                 <v-list-item-icon
                   class="my-2"
                 >
-                  <v-avatar
-                    rounded
-                  >
-                    <v-img
-                      :alt="rank.name"
-                      :src="rank.imageUrl"
-                      lazy-src="@/assets/avatar.jpg"
-                    />
-                  </v-avatar>
+                  <RankingAvatar
+                    :alt="rank.name"
+                    :src="rank.imageUrl"
+                  />
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title
@@ -61,11 +56,13 @@
 <script>
 import fields from '@/assets/field';
 import types from '@/assets/type';
+import RankingAvatar from '@/components/RankingAvatar';
 import RankingCount from '@/components/RankingCount';
 
 export default {
   name: 'RankingList',
   components: {
+    RankingAvatar,
     RankingCount,
   },
   computed: {

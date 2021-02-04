@@ -6,15 +6,11 @@
       <v-card-title
         class="headline"
       >
-        <v-avatar
-          rounded
+        <RankingAvatar
+          :alt="name"
+          :src="imageUrl"
           size="100%"
-        >
-          <v-img
-            :alt="name"
-            :src="imageUrl"
-          />
-        </v-avatar>
+        />
       </v-card-title>
       <v-card-text
         class="text-center"
@@ -31,9 +27,13 @@
 
 <script>
 import helpers from '@/util/helpers';
+import RankingAvatar from '@/components/RankingAvatar';
 
 export default {
   name: 'RankingProfile',
+  components: {
+    RankingAvatar,
+  },
   props: {
     name: {
       type: String,

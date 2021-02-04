@@ -66,7 +66,7 @@ import RankingGroup from '@/components/RankingGroup';
 import RankingProfile from '@/components/RankingProfile';
 
 export default {
-  name: 'Show',
+  name: 'Profile',
   components: {
     RankingError,
     RankingGroup,
