@@ -71,36 +71,16 @@
                       :cols="4"
                       class="text-right"
                     >
-                      <span
-                        v-if="rank.tags.length < 3"
-                        v-text="'Global'"
+                      <RankingTag
+                        :rank="rank"
                       />
-                      <template
-                        v-for="(tag) in rank.tags"
-                      >
-                        <span
-                          v-if="tag.includes('language')"
-                          :key="tag"
-                          v-text="tag.replace('language:', '')"
-                        />
-                        <span
-                          v-if="tag.includes('location')"
-                          :key="tag"
-                          v-text="tag.replace('location:', '')"
-                        />
-                      </template>
                     </v-col>
                     <v-col
                       :cols="4"
                       class="text-left"
                     >
-                      <span
-                        v-if="rank.rank > rank.last"
-                        v-text="'-'"
-                      />
-                      <span
-                        v-else
-                        v-text="`${rank.rank.toLocaleString()} / ${rank.last.toLocaleString()}`"
+                      <RankingRank
+                        :rank="rank"
                       />
                     </v-col>
                     <v-col
@@ -125,13 +105,17 @@
 <script>
 import fields from '@/assets/field';
 import RankingCount from '@/components/RankingCount';
+import RankingTag from '@/components/RankingTag';
 import RankingTitle from '@/components/RankingTitle';
+import RankingRank from '@/components/RankingRank';
 
 export default {
   name: 'RankingGroup',
   components: {
     RankingCount,
+    RankingTag,
     RankingTitle,
+    RankingRank,
   },
   props: {
     category: {
