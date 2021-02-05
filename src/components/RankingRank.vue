@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     text() {
-      return this.rank.rank <= this.rank.totalRank ? `${this.rank.rank.toLocaleString()} / ${this.rank.totalRank.toLocaleString()}` : '-';
+      return this.rank.rank <= this.rank.rankCount ? `${this.rank.rank.toLocaleString()} / ${this.rank.rankCount.toLocaleString()}` : '-';
     },
   },
 };
