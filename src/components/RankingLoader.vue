@@ -1,29 +1,29 @@
 <template>
-  <v-row>
-    <v-col
-      :cols="12"
-      :md="2"
-      :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
-    >
+  <v-card
+    :elevation="5"
+  >
+    <v-card-text>
       <v-skeleton-loader
-        type="card"
+        :height="height"
+        :type="type"
+        tile
       />
-    </v-col>
-    <v-col
-      :cols="12"
-      :md="9"
-      :offset-md="3"
-    >
-      <v-skeleton-loader
-        height="1200"
-        type="list-item-avatar-two-line,list-item-avatar-two-line,list-item-avatar-two-line"
-      />
-    </v-col>
-  </v-row>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
 export default {
   name: 'RankingLoader',
+  props: {
+    height: {
+      type: Number,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>

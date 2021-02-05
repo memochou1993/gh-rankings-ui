@@ -8,54 +8,59 @@
       class="mt-6"
     >
       <v-fade-transition>
-        <v-row
-          v-if="loaded"
-        >
-          <template
-            v-if="ranks.length > 0"
+        <v-row>
+          <v-col
+            :cols="12"
+            :md="2"
+            :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
           >
-            <v-col
-              :cols="12"
-              :md="2"
-              :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
-            >
-              <RankingProfile
-                :name="name"
-                :image-url="imageUrl"
-              />
-            </v-col>
-            <v-col
-              :cols="12"
-              :md="9"
-              :offset-md="3"
+            <RankingProfile
+              v-if="loaded"
+              :name="name"
+              :image-url="imageUrl"
+            />
+            <RankingLoader
+              v-else
+              :height="200"
+              type="card"
+            />
+          </v-col>
+          <v-col
+            :cols="12"
+            :md="9"
+            :offset-md="3"
+          >
+            <template
+              v-if="loaded"
             >
               <template
-                v-for="(group, i) in groups"
+                v-if="ranks.length > 0"
               >
-                <RankingGroup
-                  v-if="group.ranks.length > 0"
-                  :key="i"
-                  :category="group.category"
-                  :ranks="group.ranks"
-                  :title="group.title"
-                  class="mb-6"
-                />
+                <template
+                  v-for="(group, i) in groups"
+                >
+                  <RankingGroup
+                    v-if="group.ranks.length > 0"
+                    :key="i"
+                    :category="group.category"
+                    :ranks="group.ranks"
+                    :title="group.title"
+                    class="mb-6"
+                  />
+                </template>
               </template>
-            </v-col>
-          </template>
-          <template
-            v-else
-          >
-            <v-col>
               <RankingError
-                :message="$store.state.error.message || 'No ranking found'"
+                v-else
+                :message="$store.state.error.message"
               />
-            </v-col>
-          </template>
+            </template>
+            <RankingLoader
+              v-else
+              :height="600"
+              type="list-item-avatar-two-line@3"
+            />
+          </v-col>
         </v-row>
-        <RankingLoader
-          v-else
-        />
       </v-fade-transition>
     </v-col>
   </v-row>

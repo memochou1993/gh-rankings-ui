@@ -6,7 +6,7 @@
       class="title font-weight-light text-center py-16"
     >
       <span
-        v-text="message"
+        v-text="message || 'No ranking found'"
       />
     </v-card-text>
   </v-card>

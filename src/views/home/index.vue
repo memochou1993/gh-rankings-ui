@@ -8,9 +8,7 @@
       class="mt-6"
     >
       <v-fade-transition>
-        <v-row
-          v-if="loaded"
-        >
+        <v-row>
           <v-col
             :cols="12"
             :md="2"
@@ -24,30 +22,36 @@
             :offset-md="3"
           >
             <template
-              v-if="$store.state.ranks.length > 0"
+              v-if="loaded"
             >
-              <AppRanking />
-              <v-pagination
-                v-model="page"
-                :length="pages"
-                :total-visible="9"
-                next-icon="mdi-menu-right"
-                prev-icon="mdi-menu-left"
-                class="font-weight-light my-5"
-              />
+              <template
+                v-if="$store.state.ranks.length > 0"
+              >
+                <AppRanking />
+                <v-pagination
+                  v-model="page"
+                  :length="pages"
+                  :total-visible="9"
+                  next-icon="mdi-menu-right"
+                  prev-icon="mdi-menu-left"
+                  class="font-weight-light my-5"
+                />
+              </template>
+              <template
+                v-else
+              >
+                <RankingError
+                  :message="$store.state.error.message"
+                />
+              </template>
             </template>
-            <template
+            <RankingLoader
               v-else
-            >
-              <RankingError
-                :message="$store.state.error.message || 'No ranking found'"
-              />
-            </template>
+              :height="600"
+              type="list-item-avatar-two-line@3"
+            />
           </v-col>
         </v-row>
-        <RankingLoader
-          v-else
-        />
       </v-fade-transition>
     </v-col>
   </v-row>
