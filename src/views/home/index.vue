@@ -5,19 +5,21 @@
     <v-col
       :cols="10"
       :sm="8"
+      class="mt-6"
     >
       <v-fade-transition>
         <v-row
           v-if="loaded"
-          class="mt-3"
         >
           <v-col
+            :cols="12"
             :md="2"
             :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
           >
             <AppSearch />
           </v-col>
           <v-col
+            :cols="12"
             :md="9"
             :offset-md="3"
           >

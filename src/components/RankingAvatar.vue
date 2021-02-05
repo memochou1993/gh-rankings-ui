@@ -18,7 +18,8 @@
         >
           <v-progress-circular
             :indeterminate="!loaded"
-            color="grey lighten-5"
+            :width="1"
+            color="grey lighten-4"
           />
         </v-row>
       </template>
