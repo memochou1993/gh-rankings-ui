@@ -178,6 +178,7 @@ export default {
     },
   },
   created() {
+    helpers.scrollToTop();
     this.fetch();
   },
   methods: {
