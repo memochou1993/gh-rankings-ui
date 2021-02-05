@@ -51,13 +51,13 @@
               </template>
               <RankingError
                 v-else
-                :message="$store.state.error.message"
+                :message="$store.state.error.message || ''"
               />
             </template>
             <RankingLoader
               v-else
               :height="600"
-              type="list-item-avatar-two-line@3"
+              type="list-item-two-line@5"
             />
           </v-col>
         </v-row>

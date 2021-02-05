@@ -1,15 +1,20 @@
 <template>
-  <v-card
-    :elevation="5"
-  >
-    <v-card-text>
-      <v-skeleton-loader
-        :height="height"
-        :type="type"
-        tile
-      />
-    </v-card-text>
-  </v-card>
+  <div>
+    <v-card
+      :elevation="5"
+    >
+      <v-card-text>
+        <v-skeleton-loader
+          :height="height"
+          :type="type"
+          tile
+        />
+      </v-card-text>
+    </v-card>
+    <v-sheet
+      height="600"
+    />
+  </div>
 </template>
 
 <script>

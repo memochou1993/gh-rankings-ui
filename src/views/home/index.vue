@@ -14,7 +14,7 @@
             :md="2"
             :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
           >
-            <AppSearch />
+            <Search />
           </v-col>
           <v-col
             :cols="12"
@@ -27,7 +27,7 @@
               <template
                 v-if="$store.state.ranks.length > 0"
               >
-                <AppRanking />
+                <Ranking />
                 <v-pagination
                   v-model="page"
                   :length="pages"
@@ -37,18 +37,15 @@
                   class="font-weight-light my-5"
                 />
               </template>
-              <template
+              <RankingError
                 v-else
-              >
-                <RankingError
-                  :message="$store.state.error.message"
-                />
-              </template>
+                :message="$store.state.error.message || ''"
+              />
             </template>
             <RankingLoader
               v-else
-              :height="600"
-              type="list-item-avatar-two-line@3"
+              :height="400"
+              type="list-item-two-line@5"
             />
           </v-col>
         </v-row>
@@ -60,16 +57,16 @@
 <script>
 import RankingError from '@/components/RankingError';
 import RankingLoader from '@/components/RankingLoader';
-import AppRanking from './ranking';
-import AppSearch from './search';
+import Ranking from './ranking';
+import Search from './search';
 
 export default {
   name: 'Home',
   components: {
-    AppRanking,
-    AppSearch,
+    Ranking,
     RankingError,
     RankingLoader,
+    Search,
   },
   data: () => ({
     loaded: false,
@@ -77,11 +74,9 @@ export default {
     limit: 10,
   }),
   computed: {
-    totalRank() {
-      return this.$store.state.ranks[0]?.totalRank || 0;
-    },
     pages() {
-      const last = Math.ceil(this.totalRank / this.limit);
+      const total = this.$store.state.ranks[0]?.totalRank || 0;
+      const last = Math.ceil(total / this.limit);
       const limit = this.limit * 10;
       const pages = last > limit ? limit : last;
       if (last > limit && this.page > pages) {
