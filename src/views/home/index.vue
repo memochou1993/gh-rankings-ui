@@ -142,7 +142,7 @@ export default {
     async fetch() {
       this.$store.dispatch('fetch', this.params)
         .then(({ data }) => {
-          this.$store.commit('setRanks', data.filter((rank) => rank.totalCount > 0));
+          this.$store.commit('setRanks', data.filter((rank) => rank.itemCount > 0));
         })
         .catch(() => {})
         .finally(() => {

@@ -6,7 +6,7 @@
   >
     <span
       class="body-1 font-weight-light"
-      v-text="rank.totalCount.toLocaleString()"
+      v-text="rank.itemCount.toLocaleString()"
     />
     <v-icon
       :size="20"
