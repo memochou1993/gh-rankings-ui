@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import helpers from '@/util/helpers';
 import fields from '@/assets/field';
 import types from '@/assets/type';
 import RankingError from '@/components/RankingError';
@@ -192,8 +193,9 @@ export default {
           this.setRanks(data);
         })
         .catch(() => {})
-        .finally(() => {
-          this.setLoaded(true);
+        .finally(async () => {
+          await helpers.defer(0.25);
+          await this.setLoaded(true);
         });
     },
     filter(tags, length) {

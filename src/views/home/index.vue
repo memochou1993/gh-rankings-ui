@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import helpers from '@/util/helpers';
 import RankingError from '@/components/RankingError';
 import RankingLoader from '@/components/RankingLoader';
 import Ranking from './ranking';
@@ -147,8 +148,9 @@ export default {
           this.$store.commit('setRanks', data.filter((rank) => rank.itemCount > 0));
         })
         .catch(() => {})
-        .finally(() => {
-          this.setLoaded(true);
+        .finally(async () => {
+          await helpers.defer(0.25);
+          await this.setLoaded(true);
         });
     },
   },
