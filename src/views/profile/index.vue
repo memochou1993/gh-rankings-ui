@@ -21,7 +21,7 @@
             />
             <RankingLoader
               v-else
-              :height="200"
+              :height="160"
               type="card"
             />
           </v-col>

@@ -19,7 +19,7 @@ export default new Vuex.Store({
      * @param ranks[].name
      * @param ranks[].imageUrl
      * @param ranks[].rank
-     * @param ranks[].totalRank
+     * @param ranks[].rankCount
      * @param ranks[].totalCount
      * @param ranks[].tags
      * @param ranks[].createdAt
@@ -38,6 +38,14 @@ export default new Vuex.Store({
       type: types.user.value,
       field: fields.repositoryStars.value,
       language: '',
+    },
+  },
+  getters: {
+    rankCount(state) {
+      return state.ranks[0]?.rankCount || 0;
+    },
+    createdAt(state) {
+      return state.ranks[0]?.createdAt || '';
     },
   },
   mutations: {
