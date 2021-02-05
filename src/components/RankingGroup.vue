@@ -12,45 +12,43 @@
         class="py-0"
       >
         <v-list-item-group>
-          <template>
-            <v-list-item
-              :ripple="false"
-              inactive
-            >
-              <v-list-item-content>
-                <v-list-item-title
-                  class="title font-weight-regular"
-                >
-                  <v-row>
-                    <v-col
-                      :cols="4"
-                      class="text-right"
-                    >
-                      <span
-                        v-text="category"
-                      />
-                    </v-col>
-                    <v-col
-                      :cols="4"
-                      class="text-left"
-                    >
-                      <span
-                        v-text="'Rank'"
-                      />
-                    </v-col>
-                    <v-col
-                      :cols="4"
-                      class="text-right"
-                    >
-                      <span
-                        v-text="field"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
+          <v-list-item
+            :ripple="false"
+            inactive
+          >
+            <v-list-item-content>
+              <v-list-item-title
+                class="title font-weight-regular"
+              >
+                <v-row>
+                  <v-col
+                    :cols="4"
+                    class="text-right"
+                  >
+                    <span
+                      v-text="category"
+                    />
+                  </v-col>
+                  <v-col
+                    :cols="4"
+                    class="text-left"
+                  >
+                    <span
+                      v-text="'Rank'"
+                    />
+                  </v-col>
+                  <v-col
+                    :cols="4"
+                    class="text-right"
+                  >
+                    <span
+                      v-text="field"
+                    />
+                  </v-col>
+                </v-row>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <template
             v-for="(rank, i) in ranks"
           >
@@ -87,7 +85,7 @@
                       :cols="4"
                       class="text-right"
                     >
-                      <RankingCount
+                      <RankingItemCount
                         :rank="rank"
                       />
                     </v-col>
@@ -104,7 +102,7 @@
 
 <script>
 import fields from '@/assets/field';
-import RankingCount from '@/components/RankingCount';
+import RankingItemCount from '@/components/RankingItemCount';
 import RankingTag from '@/components/RankingTag';
 import RankingTitle from '@/components/RankingTitle';
 import RankingRank from '@/components/RankingRank';
@@ -112,7 +110,7 @@ import RankingRank from '@/components/RankingRank';
 export default {
   name: 'RankingGroup',
   components: {
-    RankingCount,
+    RankingItemCount,
     RankingTag,
     RankingTitle,
     RankingRank,

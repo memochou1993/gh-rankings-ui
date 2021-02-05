@@ -34,7 +34,7 @@
                 />
               </v-list-item-content>
               <v-list-item-action>
-                <RankingCount
+                <RankingItemCount
                   :rank="rank"
                 />
               </v-list-item-action>
@@ -54,14 +54,14 @@
 import fields from '@/assets/field';
 import types from '@/assets/type';
 import RankingAvatar from '@/components/RankingAvatar';
-import RankingCount from '@/components/RankingCount';
+import RankingItemCount from '@/components/RankingItemCount';
 import RankingTitle from '@/components/RankingTitle';
 
 export default {
   name: 'AppRanking',
   components: {
     RankingAvatar,
-    RankingCount,
+    RankingItemCount,
     RankingTitle,
   },
   computed: {

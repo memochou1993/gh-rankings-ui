@@ -20,7 +20,7 @@
 import fields from '@/assets/field';
 
 export default {
-  name: 'RankingCount',
+  name: 'RankingItemCount',
   props: {
     rank: {
       type: Object,
