@@ -5,7 +5,7 @@
     <v-col
       :cols="10"
       :sm="8"
-      class="mt-6"
+      class="py-10"
     >
       <v-fade-transition>
         <v-row>

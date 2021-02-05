@@ -5,7 +5,7 @@
     <v-col
       :cols="10"
       :sm="8"
-      class="mt-6"
+      class="py-10"
     >
       <v-fade-transition>
         <v-row>
@@ -34,7 +34,7 @@
                   :total-visible="9"
                   next-icon="mdi-menu-right"
                   prev-icon="mdi-menu-left"
-                  class="font-weight-light my-5"
+                  class="font-weight-light py-6"
                 />
               </template>
               <RankingError
