@@ -88,6 +88,7 @@ export default {
         type: this.$store.state.query.type,
         field: this.$store.state.query.field,
         language: this.$store.state.query.language,
+        location: this.$store.state.query.location,
         page: this.page,
         limit: this.limit,
       };
@@ -126,6 +127,7 @@ export default {
         type: this.$route.query.type || this.$store.state.query.type,
         field: this.$route.query.field || this.$store.state.query.field,
         language: this.$route.query.language || this.$store.state.query.language,
+        location: this.$route.query.location || this.$store.state.query.location,
       });
     },
     updateRoute(after) {

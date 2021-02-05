@@ -4,16 +4,12 @@ import axios from 'axios';
 import fields from '@/assets/field';
 import types from '@/assets/type';
 import languages from '@/assets/language/index.json';
+import locations from '@/assets/location/index.json';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    /**
-     * @param languages
-     * @param languages[].name
-     */
-    languages,
     /**
      * @param ranks
      * @param ranks[].name
@@ -38,7 +34,18 @@ export default new Vuex.Store({
       type: types.user.value,
       field: fields.repositoryStars.value,
       language: '',
+      location: '',
     },
+    /**
+     * @param languages
+     * @param languages[].name
+     */
+    languages,
+    /**
+     * @param locations
+     * @param locations[].name
+     */
+    locations,
   },
   getters: {
     rankCount(state) {

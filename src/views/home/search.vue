@@ -82,6 +82,32 @@
           />
         </v-autocomplete>
       </v-card>
+      <v-card
+        outlined
+        class="my-2"
+      >
+        <v-autocomplete
+          v-model="location"
+          :items="$store.state.locations"
+          clearable
+          clear-icon="mdi-close"
+          dense
+          flat
+          hide-details
+          hide-no-data
+          item-text="name"
+          label="Location"
+          solo
+          class="font-weight-light pointer"
+        >
+          <span
+            slot="item"
+            slot-scope="{ item }"
+            class="font-weight-light"
+            v-text="item.name"
+          />
+        </v-autocomplete>
+      </v-card>
     </v-card-text>
   </v-card>
 </template>
@@ -101,6 +127,7 @@ export default {
     ],
     field: fields.repositoryStars.value,
     language: '',
+    location: '',
   }),
   computed: {
     fields() {
@@ -135,16 +162,12 @@ export default {
         type: this.type,
         field: this.field,
         language: this.language,
+        location: this.location,
       };
     },
-    isSameType() {
-      return this.type === this.$route.query.type;
-    },
-    isSameField() {
-      return this.field === this.$route.query.field;
-    },
-    isSameLanguage() {
-      return this.language === (this.$route.query.language || '');
+    isSameQuery() {
+      const isSame = (key) => this[key] === (this.$route.query[key] || '');
+      return ['type', 'field', 'language', 'location'].every(isSame);
     },
   },
   watch: {
@@ -167,6 +190,9 @@ export default {
     },
     setLanguage(language) {
       this.language = language;
+    },
+    setLocation(location) {
+      this.location = location;
     },
     switchField() {
       const isUser = () => this.type === types.user.value;
@@ -208,12 +234,14 @@ export default {
       this.setType(this.$store.state.query.type);
       this.setField(this.$store.state.query.field);
       this.setLanguage(this.$store.state.query.language);
+      this.setLocation(this.$store.state.query.location);
     },
     restore() {
       this.$store.commit('setQuery', {
         type: this.type,
         field: this.field,
         language: this.language,
+        location: this.location,
       });
     },
     updateRoute(after, before) {
@@ -228,7 +256,10 @@ export default {
       if (after.language !== before.language) {
         this.restore();
       }
-      if (this.isSameType && this.isSameField && this.isSameLanguage) {
+      if (after.location !== before.location) {
+        this.restore();
+      }
+      if (this.isSameQuery) {
         return;
       }
       const query = {
@@ -236,6 +267,7 @@ export default {
         type: this.type,
         field: this.field,
         language: this.language,
+        location: this.location,
         page: '1',
       };
       Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
