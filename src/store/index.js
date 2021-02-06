@@ -44,8 +44,15 @@ export default new Vuex.Store({
     /**
      * @param locations
      * @param locations[].name
+     * @param locations[].cities
      */
-    locations,
+    locations: (() => {
+      const reducer = (acc, location) => acc.concat(location, location.cities.map((city) => {
+        const name = `${city.name}, ${location.name}`;
+        return { name };
+      }));
+      return Array.from(locations).reduce(reducer, []);
+    })(),
   },
   getters: {
     rankCount(state) {
