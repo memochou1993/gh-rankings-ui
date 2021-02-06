@@ -20,8 +20,10 @@ export default {
   },
   methods: {
     find(target) {
-      const text = this.rank.tags.find((tag) => String(tag).includes(target));
-      return text ? text.replace(`${target}:`, '') : '';
+      const text = this.rank.tags.find((tag) => String(tag).includes(target)) || '';
+      const prefix = `${target}:`;
+      const [tag] = text.replace(prefix, '').split(', ');
+      return tag;
     },
   },
 };
