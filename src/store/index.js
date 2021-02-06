@@ -49,11 +49,8 @@ export default new Vuex.Store({
      * @param locations[].cities
      */
     locations: (() => {
-      const reducer = (acc, location) => acc.concat(location, location.cities.map((city) => {
-        const name = `${city.name}, ${location.name}`;
-        return { name };
-      }));
-      return Array.from(locations).reduce(reducer, []);
+      const reducer = (acc, val) => acc.concat(val.cities.map((city) => ({ name: `${city.name}, ${val.name}` })));
+      return Array.from(locations).concat(Array.from(locations).reduce(reducer, []));
     })(),
   },
   getters: {
