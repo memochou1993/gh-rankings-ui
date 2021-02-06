@@ -115,6 +115,7 @@
       >
         <v-text-field
           v-model="name"
+          autocomplete="off"
           clearable
           clear-icon="mdi-close"
           dense
@@ -255,6 +256,11 @@ export default {
     setName(name) {
       this.name = name;
     },
+    switchType() {
+      if (this.name.includes('/')) {
+        this.setType(types.repository.value);
+      }
+    },
     switchField() {
       const isUser = () => this.type === types.user.value;
       const isOrganization = () => this.type === types.organization.value;
@@ -330,6 +336,7 @@ export default {
         this.restore();
       }
       if (!isSame('name')) {
+        this.switchType();
         this.restore();
       }
       if (this.isSameQuery) {
