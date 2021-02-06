@@ -61,7 +61,7 @@
       >
         <v-autocomplete
           v-model="language"
-          :disabled="!type.includes('repo') && !field.includes('repo')"
+          :disabled="isLanguageDisabled"
           :items="$store.state.languages"
           append-icon="mdi-close"
           dense
@@ -88,6 +88,7 @@
       >
         <v-autocomplete
           v-model="location"
+          :disabled="isLocationDisabled"
           :items="$store.state.locations"
           append-icon="mdi-close"
           dense
@@ -165,6 +166,28 @@ export default {
         location: this.location,
       };
     },
+    isLanguageDisabled() {
+      return !this.isRepositoryField;
+    },
+    isLocationDisabled() {
+      return !this.isOwnerType;
+    },
+    isOwnerType() {
+      return [
+        types.user.value,
+        types.organization.value,
+      ].includes(this.type);
+    },
+    isRepositoryField() {
+      return [
+        fields.repositoryStars.value,
+        fields.repositoryForks.value,
+        fields.repositoryWatchers.value,
+        fields.stars.value,
+        fields.forks.value,
+        fields.watchers.value,
+      ].includes(this.field);
+    },
     isSameQuery() {
       const isSame = (key) => this[key] === (this.$route.query[key] || '');
       return ['type', 'field', 'language', 'location'].every(isSame);
@@ -226,8 +249,13 @@ export default {
       }
     },
     switchLanguage() {
-      if (!this.type.includes('repo') && !this.field.includes('repo')) {
+      if (this.isLanguageDisabled) {
         this.setLanguage('');
+      }
+    },
+    switchLocation() {
+      if (this.isLocationDisabled) {
+        this.setLocation('');
       }
     },
     retrieve() {
@@ -247,6 +275,7 @@ export default {
     updateRoute(after, before) {
       if (after.type !== before.type) {
         this.switchField();
+        this.switchLocation();
         this.restore();
       }
       if (after.field !== before.field) {
