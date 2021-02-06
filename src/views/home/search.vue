@@ -169,10 +169,10 @@ export default {
       };
     },
     isLanguageDisabled() {
-      return !this.isRepositoryField;
+      return !this.isRepositoryField || !!this.location;
     },
     isLocationDisabled() {
-      return !this.isOwnerType;
+      return !this.isOwnerType || !!this.language;
     },
     isOwnerType() {
       return [
