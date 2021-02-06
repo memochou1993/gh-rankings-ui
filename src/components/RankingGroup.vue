@@ -59,7 +59,9 @@
               :key="i"
               :to="search(rank.tags)"
             >
-              <v-list-item-content>
+              <v-list-item-content
+                @click="resetQuery()"
+              >
                 <v-list-item-title
                   class="body-1 font-weight-light"
                 >
@@ -152,10 +154,10 @@ export default {
         field: '',
         language: '',
         location: '',
+        name: '',
       });
     },
     search(tags) {
-      this.resetQuery();
       return {
         name: 'home',
         query: Object.fromEntries(tags.map((tag) => String(tag).split(':'))),
