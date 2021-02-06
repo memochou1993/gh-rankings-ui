@@ -79,13 +79,13 @@ export default {
   }),
   computed: {
     pages() {
-      if (this.$store.state.ranks.length < this.limit) {
+      if (this.$store.state.ranks.length === 1) {
         return 1;
       }
       const last = Math.ceil(this.$store.getters.rankCount / this.limit);
       const max = this.limit * 10;
       const pages = last > max ? max : last;
-      if (last > max && this.page > pages) {
+      if (this.page > pages) {
         return last;
       }
       return pages;
