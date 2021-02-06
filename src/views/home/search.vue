@@ -63,7 +63,8 @@
           v-model="language"
           :disabled="isLanguageDisabled"
           :items="$store.state.languages"
-          append-icon="mdi-close"
+          clearable
+          clear-icon="mdi-close"
           dense
           flat
           hide-details
@@ -72,7 +73,6 @@
           label="Language"
           solo
           class="font-weight-light pointer"
-          @click:append="setLanguage('')"
         >
           <span
             slot="item"
@@ -90,7 +90,8 @@
           v-model="location"
           :disabled="isLocationDisabled"
           :items="$store.state.locations"
-          append-icon="mdi-close"
+          clearable
+          clear-icon="mdi-close"
           dense
           flat
           hide-details
@@ -99,7 +100,6 @@
           label="Location"
           solo
           class="font-weight-light pointer"
-          @click:append="setLocation('')"
         >
           <span
             slot="item"
@@ -196,6 +196,16 @@ export default {
   watch: {
     $route() {
       this.retrieve();
+    },
+    language(after) {
+      if (after === null) {
+        this.setLanguage('');
+      }
+    },
+    location(after) {
+      if (after === null) {
+        this.setLocation('');
+      }
     },
     query(after, before) {
       this.updateRoute(after, before);
