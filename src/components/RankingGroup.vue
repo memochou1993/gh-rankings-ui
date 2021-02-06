@@ -57,8 +57,7 @@
             />
             <v-list-item
               :key="i"
-              :ripple="false"
-              inactive
+              :to="search(rank.tags)"
             >
               <v-list-item-content>
                 <v-list-item-title
@@ -143,6 +142,24 @@ export default {
         default:
           return '';
       }
+    },
+  },
+  methods: {
+    resetQuery() {
+      this.$store.commit('setQuery', {
+        ...this.$route.query,
+        type: '',
+        field: '',
+        language: '',
+        location: '',
+      });
+    },
+    search(tags) {
+      this.resetQuery();
+      return {
+        name: 'home',
+        query: Object.fromEntries(tags.map((tag) => String(tag).split(':'))),
+      };
     },
   },
 };

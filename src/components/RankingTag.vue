@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     find(target) {
-      const text = this.rank.tags.find((tag) => tag.includes(target));
+      const text = this.rank.tags.find((tag) => String(tag).includes(target));
       return text ? text.replace(`${target}:`, '') : '';
     },
   },
