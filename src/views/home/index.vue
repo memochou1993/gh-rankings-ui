@@ -145,6 +145,7 @@ export default {
         field: this.$route.query.field || this.$store.state.query.field,
         language: this.$route.query.language || this.$store.state.query.language,
         location: this.$route.query.location || this.$store.state.query.location,
+        name: this.$route.query.name || this.$store.state.query.name,
       });
     },
     updateRoute(after) {

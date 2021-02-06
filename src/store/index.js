@@ -31,12 +31,16 @@ export default new Vuex.Store({
      * @param query
      * @param query.type
      * @param query.field
+     * @param query.language
+     * @param query.location
+     * @param query.name
      */
     query: {
       type: types.user.value,
       field: fields.repositoryStars.value,
       language: '',
       location: '',
+      name: '',
     },
     /**
      * @param languages

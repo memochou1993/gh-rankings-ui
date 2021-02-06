@@ -109,6 +109,22 @@
           />
         </v-autocomplete>
       </v-card>
+      <v-card
+        outlined
+        class="my-2"
+      >
+        <v-text-field
+          v-model="name"
+          clearable
+          clear-icon="mdi-close"
+          dense
+          flat
+          hide-details
+          label="Name"
+          solo
+          class="font-weight-light"
+        />
+      </v-card>
     </v-card-text>
   </v-card>
 </template>
@@ -131,6 +147,7 @@ export default {
     field: fields.repositoryStars.value,
     language: '',
     location: '',
+    name: '',
   }),
   computed: {
     fields() {
@@ -166,6 +183,7 @@ export default {
         field: this.field,
         language: this.language,
         location: this.location,
+        name: this.name,
       };
     },
     isLanguageDisabled() {
@@ -192,7 +210,7 @@ export default {
     },
     isSameQuery() {
       const isSame = (key) => this[key] === (this.$route.query[key] || '');
-      return ['type', 'field', 'language', 'location'].every(isSame);
+      return ['type', 'field', 'language', 'location', 'name'].every(isSame);
     },
   },
   watch: {
@@ -207,6 +225,11 @@ export default {
     location(after) {
       if (after === null) {
         this.setLocation('');
+      }
+    },
+    name(after) {
+      if (after === null) {
+        this.setName('');
       }
     },
     query(after, before) {
@@ -228,6 +251,9 @@ export default {
     },
     setLocation(location) {
       this.location = location;
+    },
+    setName(name) {
+      this.name = name;
     },
     switchField() {
       const isUser = () => this.type === types.user.value;
@@ -275,6 +301,7 @@ export default {
       this.setField(this.$store.state.query.field);
       this.setLanguage(this.$store.state.query.language);
       this.setLocation(this.$store.state.query.location);
+      this.setName(this.$store.state.query.name);
     },
     restore() {
       this.$store.commit('setQuery', {
@@ -282,22 +309,27 @@ export default {
         field: this.field,
         language: this.language,
         location: this.location,
+        name: this.name,
       });
     },
     updateRoute(after, before) {
-      if (after.type !== before.type) {
+      const isSame = (key) => after[key] === before[key];
+      if (!isSame('type')) {
         this.switchField();
         this.switchLocation();
         this.restore();
       }
-      if (after.field !== before.field) {
+      if (!isSame('field')) {
         this.switchLanguage();
         this.restore();
       }
-      if (after.language !== before.language) {
+      if (!isSame('language')) {
         this.restore();
       }
-      if (after.location !== before.location) {
+      if (!isSame('location')) {
+        this.restore();
+      }
+      if (!isSame('name')) {
         this.restore();
       }
       if (this.isSameQuery) {
@@ -309,6 +341,7 @@ export default {
         field: this.field,
         language: this.language,
         location: this.location,
+        name: this.name,
         page: '1',
       };
       Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
