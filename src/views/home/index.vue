@@ -84,18 +84,23 @@ export default {
       }
       return pages;
     },
-    params() {
+    query() {
       return {
-        type: this.$store.state.query.type,
-        field: this.$store.state.query.field,
-        language: this.$store.state.query.language,
-        location: this.$store.state.query.location,
         page: this.page,
         limit: this.limit,
       };
     },
+    params() {
+      return {
+        ...this.$store.state.query,
+        ...this.query,
+      };
+    },
     isSamePage() {
-      return this.page === Number(this.$route.query.page);
+      return this.page === (Number(this.$route.query.page) || 1);
+    },
+    isSameLimit() {
+      return this.limit === (Number(this.$route.query.limit) || 10);
     },
   },
   watch: {
@@ -104,7 +109,7 @@ export default {
       this.restore();
       this.fetch();
     },
-    page(after) {
+    query(after) {
       this.updateRoute(after);
     },
   },
@@ -120,8 +125,12 @@ export default {
     setPage(page) {
       this.page = page;
     },
+    setLimit(limit) {
+      this.limit = limit;
+    },
     retrieve() {
       this.setPage(Number(this.$route.query.page) || 1);
+      this.setLimit(Number(this.$route.query.limit) || 10);
     },
     restore() {
       this.$store.commit('setQuery', {
@@ -132,15 +141,16 @@ export default {
       });
     },
     updateRoute(after) {
-      if (this.isSamePage) {
+      if (this.isSamePage && this.isSameLimit) {
         return;
       }
-      this.$router.push({
-        query: {
-          ...this.$route.query,
-          page: String(after),
-        },
-      });
+      const query = {
+        ...this.$route.query,
+        page: after.page !== 1 ? String(after.page) : 0,
+        limit: after.limit !== 10 ? String(after.limit) : 0,
+      };
+      Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
+      this.$router.push({ query });
     },
     async fetch() {
       this.$store.dispatch('fetch', this.params)

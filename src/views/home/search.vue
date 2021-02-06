@@ -63,8 +63,7 @@
           v-model="language"
           :disabled="!type.includes('repo') && !field.includes('repo')"
           :items="$store.state.languages"
-          clearable
-          clear-icon="mdi-close"
+          append-icon="mdi-close"
           dense
           flat
           hide-details
@@ -73,6 +72,7 @@
           label="Language"
           solo
           class="font-weight-light pointer"
+          @click:append="setLanguage('')"
         >
           <span
             slot="item"
@@ -89,8 +89,7 @@
         <v-autocomplete
           v-model="location"
           :items="$store.state.locations"
-          clearable
-          clear-icon="mdi-close"
+          append-icon="mdi-close"
           dense
           flat
           hide-details
@@ -99,6 +98,7 @@
           label="Location"
           solo
           class="font-weight-light pointer"
+          @click:append="setLocation('')"
         >
           <span
             slot="item"
@@ -271,9 +271,7 @@ export default {
         page: '1',
       };
       Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
-      this.$router.push({
-        query,
-      });
+      this.$router.push({ query });
     },
   },
 };
