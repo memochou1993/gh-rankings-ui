@@ -114,8 +114,10 @@
 </template>
 
 <script>
-import fields from '@/assets/field';
-import types from '@/assets/type';
+import {
+  types,
+  fields,
+} from '@/assets';
 
 export default {
   name: 'AppSearch',

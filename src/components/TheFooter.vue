@@ -17,13 +17,15 @@
 </template>
 
 <script>
-import helpers from '@/util/helpers';
+import {
+  open,
+} from '@/helpers';
 
 export default {
   name: 'TheFooter',
   methods: {
     explore() {
-      helpers.open('https://github.com/memochou1993/gh-rankings');
+      open('https://github.com/memochou1993/gh-rankings');
     },
   },
 };

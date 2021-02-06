@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import fields from '@/assets/field';
-import types from '@/assets/type';
-import languages from '@/assets/language/index.json';
-import locations from '@/assets/location/index.json';
+import {
+  types,
+  fields,
+  languages,
+  locations,
+} from '@/assets';
 
 Vue.use(Vuex);
 

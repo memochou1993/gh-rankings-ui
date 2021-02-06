@@ -51,8 +51,10 @@
 </template>
 
 <script>
-import fields from '@/assets/field';
-import types from '@/assets/type';
+import {
+  types,
+  fields,
+} from '@/assets';
 import RankingAvatar from '@/components/RankingAvatar';
 import RankingItemCount from '@/components/RankingItemCount';
 import RankingTitle from '@/components/RankingTitle';

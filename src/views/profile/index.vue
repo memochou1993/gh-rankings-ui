@@ -67,9 +67,14 @@
 </template>
 
 <script>
-import helpers from '@/util/helpers';
-import fields from '@/assets/field';
-import types from '@/assets/type';
+import {
+  types,
+  fields,
+} from '@/assets';
+import {
+  defer,
+  scrollToTop,
+} from '@/helpers';
 import RankingError from '@/components/RankingError';
 import RankingGroup from '@/components/RankingGroup';
 import RankingLoader from '@/components/RankingLoader';
@@ -178,7 +183,7 @@ export default {
     },
   },
   beforeRouteEnter(to, from, next) {
-    helpers.scrollToTop();
+    scrollToTop();
     next();
   },
   created() {
@@ -198,7 +203,7 @@ export default {
         })
         .catch(() => {})
         .finally(async () => {
-          await helpers.defer(0.25);
+          await defer(0.25);
           await this.setLoaded(true);
         });
     },

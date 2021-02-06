@@ -24,7 +24,9 @@
 </template>
 
 <script>
-import helpers from '@/util/helpers';
+import {
+  open,
+} from '@/helpers';
 import RankingAvatar from '@/components/RankingAvatar';
 
 export default {
@@ -44,7 +46,7 @@ export default {
   },
   methods: {
     open() {
-      helpers.open(`https://github.com/${this.name}`);
+      open(`https://github.com/${this.name}`);
     },
   },
 };

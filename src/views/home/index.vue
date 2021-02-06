@@ -55,7 +55,10 @@
 </template>
 
 <script>
-import helpers from '@/util/helpers';
+import {
+  defer,
+  scrollToTop,
+} from '@/helpers';
 import RankingError from '@/components/RankingError';
 import RankingLoader from '@/components/RankingLoader';
 import Ranking from './ranking';
@@ -114,7 +117,7 @@ export default {
     },
   },
   beforeRouteEnter(to, from, next) {
-    helpers.scrollToTop();
+    scrollToTop();
     next();
   },
   created() {
@@ -163,7 +166,7 @@ export default {
         })
         .catch(() => {})
         .finally(async () => {
-          await helpers.defer(0.25);
+          await defer(0.25);
           await this.setLoaded(true);
         });
     },
