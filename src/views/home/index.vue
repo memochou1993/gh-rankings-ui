@@ -113,6 +113,10 @@ export default {
       this.updateRoute(after);
     },
   },
+  beforeRouteEnter(to, from, next) {
+    helpers.scrollToTop();
+    next();
+  },
   created() {
     this.retrieve();
     this.restore();

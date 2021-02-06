@@ -177,8 +177,11 @@ export default {
       };
     },
   },
-  created() {
+  beforeRouteEnter(to, from, next) {
     helpers.scrollToTop();
+    next();
+  },
+  created() {
     this.fetch();
   },
   methods: {
