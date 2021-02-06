@@ -12,7 +12,7 @@
       </v-card-text>
     </v-card>
     <v-sheet
-      :height="600"
+      :height="800"
     />
   </div>
 </template>

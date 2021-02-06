@@ -57,7 +57,7 @@
             <RankingLoader
               v-else
               :height="600"
-              type="list-item-two-line@5"
+              type="list-item-two-line@3"
             />
           </v-col>
         </v-row>
