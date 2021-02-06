@@ -3,7 +3,8 @@
     :elevation="5"
   >
     <v-card-title
-      class="headline"
+      class="pointer"
+      @click="open()"
     >
       <RankingAvatar
         :alt="name"
