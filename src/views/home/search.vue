@@ -234,7 +234,8 @@ export default {
       }
     },
     query(after, before) {
-      this.updateRoute(after, before);
+      this.switchQuery(after, before);
+      this.updateRoute();
     },
   },
   created() {
@@ -318,27 +319,27 @@ export default {
         name: this.name,
       });
     },
-    updateRoute(after, before) {
+    switchQuery(after, before) {
       const isSame = (key) => after[key] === before[key];
       if (!isSame('type')) {
         this.switchField();
         this.switchLocation();
-        this.restore();
       }
       if (!isSame('field')) {
         this.switchLanguage();
-        this.restore();
       }
       if (!isSame('language')) {
-        this.restore();
+        this.switchLocation();
       }
       if (!isSame('location')) {
-        this.restore();
+        this.switchLanguage();
       }
       if (!isSame('name')) {
         this.switchType();
-        this.restore();
       }
+      this.restore();
+    },
+    updateRoute() {
       if (this.isSameQuery) {
         return;
       }

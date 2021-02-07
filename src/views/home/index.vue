@@ -79,7 +79,7 @@ export default {
   }),
   computed: {
     pages() {
-      if (this.$store.state.ranks.length === 1) {
+      if (this.$store.state.query.name !== '') {
         return 1;
       }
       const last = Math.ceil(this.$store.getters.rankCount / this.limit);
@@ -107,6 +107,9 @@ export default {
     },
     isSameLimit() {
       return this.limit === (Number(this.$route.query.limit) || 10);
+    },
+    isSameQuery() {
+      return this.isSamePage && this.isSameLimit;
     },
   },
   watch: {
@@ -152,7 +155,7 @@ export default {
       });
     },
     updateRoute(after) {
-      if (this.isSamePage && this.isSameLimit) {
+      if (this.isSameQuery) {
         return;
       }
       const query = {
