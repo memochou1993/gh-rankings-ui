@@ -55,6 +55,9 @@ import {
   types,
   fields,
 } from '@/assets';
+import {
+  parseTag,
+} from '@/helpers';
 import RankingAvatar from '@/components/RankingAvatar';
 import RankingItemCount from '@/components/RankingItemCount';
 import RankingTitle from '@/components/RankingTitle';
@@ -71,18 +74,13 @@ export default {
       return this.$store.state.ranks[0]?.tags || [];
     },
     type() {
-      return Object.values(types).find((f) => f.value === this.find('type')).title;
+      return Object.values(types).find((type) => type.value === parseTag(this.tags, 'type')).title;
     },
     field() {
-      return Object.values(fields).find((f) => f.value === this.find('field')).title;
+      return Object.values(fields).find((field) => field.value === parseTag(this.tags, 'field')).title;
     },
     title() {
       return `${this.type} ${this.field} Ranking`;
-    },
-  },
-  methods: {
-    find(target) {
-      return this.tags.find((tag) => String(tag).includes(target))?.split(':').pop();
     },
   },
 };

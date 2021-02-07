@@ -5,6 +5,10 @@
 </template>
 
 <script>
+import {
+  parseTag,
+} from '@/helpers';
+
 export default {
   name: 'RankingTag',
   props: {
@@ -15,15 +19,9 @@ export default {
   },
   computed: {
     text() {
-      return this.find('language') || this.find('location') || 'Global';
-    },
-  },
-  methods: {
-    find(target) {
-      const text = this.rank.tags.find((tag) => String(tag).includes(target)) || '';
-      const prefix = `${target}:`;
-      const [tag] = text.replace(prefix, '').split(', ');
-      return tag;
+      const language = parseTag(this.rank.tags, 'language');
+      const location = parseTag(this.rank.tags, 'location')?.split(', ').shift();
+      return language || location || 'Global';
     },
   },
 };
