@@ -48,6 +48,9 @@
                     class="mb-6"
                   />
                 </template>
+                <RankingTimestamp
+                  :ranks="ranks"
+                />
               </template>
               <RankingError
                 v-else
@@ -79,6 +82,7 @@ import RankingError from '@/components/RankingError';
 import RankingGroup from '@/components/RankingGroup';
 import RankingLoader from '@/components/RankingLoader';
 import RankingProfile from '@/components/RankingProfile';
+import RankingTimestamp from '@/components/RankingTimestamp';
 
 export default {
   name: 'Profile',
@@ -87,6 +91,7 @@ export default {
     RankingGroup,
     RankingLoader,
     RankingProfile,
+    RankingTimestamp,
   },
   data: () => ({
     loaded: false,

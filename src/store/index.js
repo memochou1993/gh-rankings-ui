@@ -61,9 +61,6 @@ export default new Vuex.Store({
     rankCount(state) {
       return state.ranks[0]?.rankCount || 0;
     },
-    createdAt(state) {
-      return state.ranks[0]?.createdAt || '';
-    },
   },
   mutations: {
     setRanks(state, ranks) {
