@@ -122,10 +122,6 @@ export default {
       this.updateRoute(after);
     },
   },
-  beforeRouteEnter(to, from, next) {
-    scrollToTop();
-    next();
-  },
   created() {
     this.retrieve();
     this.restore();
@@ -177,6 +173,10 @@ export default {
           await this.setLoaded(true);
         });
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    scrollToTop();
+    next();
   },
 };
 </script>

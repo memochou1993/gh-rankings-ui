@@ -182,10 +182,6 @@ export default {
       };
     },
   },
-  beforeRouteEnter(to, from, next) {
-    scrollToTop();
-    next();
-  },
   created() {
     this.fetch();
   },
@@ -212,6 +208,10 @@ export default {
         .filter((rank) => tags.every((tag) => rank.tags.join(',').includes(tag)))
         .filter((rank) => !length || rank.tags.length === length);
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    scrollToTop();
+    next();
   },
 };
 </script>

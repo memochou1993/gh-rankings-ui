@@ -67,20 +67,22 @@ export default {
     RankingTitle,
   },
   computed: {
+    tags() {
+      return this.$store.state.ranks[0]?.tags || [];
+    },
     type() {
-      return Object
-        .values(types)
-        .find((type) => type.value === this.$store.state.query.type);
+      return Object.values(types).find((f) => f.value === this.find('type')).title;
     },
     field() {
-      return Object
-        .values(fields)
-        .find((field) => field.value === this.$store.state.query.field);
+      return Object.values(fields).find((f) => f.value === this.find('field')).title;
     },
     title() {
-      const type = this.type.text;
-      const field = this.field.text.replace('Repo', 'Repository');
-      return `${type} ${field} Ranking`;
+      return `${this.type} ${this.field} Ranking`;
+    },
+  },
+  methods: {
+    find(target) {
+      return this.tags.find((tag) => String(tag).includes(target))?.split(':').pop();
     },
   },
 };
