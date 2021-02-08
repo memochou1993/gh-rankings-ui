@@ -15,6 +15,7 @@
       >
         <v-select
           v-model="type"
+          :disabled="!$store.state.loaded"
           :items="types"
           :menu-props="{ offsetY: true }"
           color="primary"
@@ -38,6 +39,7 @@
       >
         <v-select
           v-model="field"
+          :disabled="!$store.state.loaded"
           :items="fields"
           :menu-props="{ offsetY: true }"
           color="primary"
@@ -61,7 +63,7 @@
       >
         <v-autocomplete
           v-model="language"
-          :disabled="isLanguageDisabled"
+          :disabled="isLanguageDisabled || !$store.state.loaded"
           :items="$store.state.languages"
           clearable
           clear-icon="mdi-close"
@@ -88,7 +90,7 @@
       >
         <v-autocomplete
           v-model="location"
-          :disabled="isLocationDisabled"
+          :disabled="isLocationDisabled || !$store.state.loaded"
           :items="$store.state.locations"
           clearable
           clear-icon="mdi-close"
@@ -115,6 +117,7 @@
       >
         <v-text-field
           v-model="name"
+          :disabled="!$store.state.loaded"
           autocomplete="off"
           clearable
           clear-icon="mdi-close"
