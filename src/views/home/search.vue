@@ -117,6 +117,7 @@
       >
         <v-text-field
           v-model="name"
+          autocapitalize="off"
           autocomplete="off"
           clearable
           clear-icon="mdi-close"
