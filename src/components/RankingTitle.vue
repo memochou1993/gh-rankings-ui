@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-h6 text-sm-h5 font-weight-light text-center py-4"
+    class="text-h6 text-sm-h5 font-weight-light text-center pa-4"
     v-text="title"
   />
 </template>
