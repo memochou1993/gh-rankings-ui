@@ -22,6 +22,7 @@
             <RankingLoader
               v-else
               :height="160"
+              :sheet="false"
               type="card"
             />
           </v-col>
@@ -75,7 +76,6 @@ import {
   fields,
 } from '@/assets';
 import {
-  defer,
   scrollToTop,
 } from '@/helpers';
 import RankingError from '@/components/RankingError';
@@ -203,9 +203,8 @@ export default {
           this.setRanks(data);
         })
         .catch(() => {})
-        .finally(async () => {
-          await defer(0.25);
-          await this.setLoaded(true);
+        .finally(() => {
+          this.setLoaded(true);
         });
     },
     filter(tags, length) {

@@ -12,6 +12,7 @@
       </v-card-text>
     </v-card>
     <v-sheet
+      v-show="sheet"
       :height="600"
     />
   </div>
@@ -24,6 +25,11 @@ export default {
     height: {
       type: Number,
       required: true,
+    },
+    sheet: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
     type: {
       type: String,

@@ -55,10 +55,6 @@
 </template>
 
 <script>
-import {
-  defer,
-  scrollToTop,
-} from '@/helpers';
 import RankingError from '@/components/RankingError';
 import RankingLoader from '@/components/RankingLoader';
 import Ranking from './ranking';
@@ -125,6 +121,10 @@ export default {
   created() {
     this.retrieve();
     this.restore();
+    if (this.$store.state.ranks.length > 0) {
+      this.setLoaded(true);
+      return;
+    }
     this.fetch();
   },
   methods: {
@@ -163,20 +163,16 @@ export default {
       this.$router.push({ query });
     },
     async fetch() {
+      this.setLoaded(false);
       this.$store.dispatch('fetch', this.params)
         .then(({ data }) => {
           this.$store.commit('setRanks', data.filter((rank) => rank.itemCount > 0));
         })
         .catch(() => {})
-        .finally(async () => {
-          await defer(0.25);
-          await this.setLoaded(true);
+        .finally(() => {
+          this.setLoaded(true);
         });
     },
-  },
-  beforeRouteEnter(to, from, next) {
-    scrollToTop();
-    next();
   },
 };
 </script>
