@@ -60,7 +60,7 @@
               :to="search(rank.tags)"
             >
               <v-list-item-content
-                @click="resetQuery()"
+                @click="reset()"
               >
                 <v-list-item-title
                   class="body-1 font-weight-light"
@@ -147,7 +147,8 @@ export default {
     },
   },
   methods: {
-    resetQuery() {
+    reset() {
+      this.$store.commit('setRanks', []);
       this.$store.commit('setQuery', {
         ...this.$route.query,
         type: '',

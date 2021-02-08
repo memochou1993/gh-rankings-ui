@@ -3,7 +3,7 @@
     justify="center"
   >
     <v-col
-      :cols="10"
+      :cols="12"
       :sm="8"
       class="py-10"
     >
