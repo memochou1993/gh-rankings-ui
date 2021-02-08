@@ -117,7 +117,6 @@
       >
         <v-text-field
           v-model="name"
-          :disabled="!$store.state.loaded"
           autocomplete="off"
           clearable
           clear-icon="mdi-close"
