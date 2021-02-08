@@ -22,21 +22,11 @@
             :offset-md="3"
           >
             <template
-              v-if="loaded"
+              v-if="$store.state.loaded"
             >
-              <template
+              <Ranking
                 v-if="$store.state.ranks.length > 0"
-              >
-                <Ranking />
-                <v-pagination
-                  v-model="page"
-                  :length="pages"
-                  :total-visible="9"
-                  next-icon="mdi-menu-right"
-                  prev-icon="mdi-menu-left"
-                  class="font-weight-light py-6"
-                />
-              </template>
+              />
               <RankingError
                 v-else
                 :message="$store.state.error.message || ''"
@@ -44,8 +34,18 @@
             </template>
             <RankingLoader
               v-else
-              :height="800"
+              :height="64 * limit + (limit - 1)"
               :type="`list-item-two-line@${limit}`"
+            />
+            <v-pagination
+              v-if="$store.state.ranks.length > 0"
+              v-model="page"
+              :disabled="!$store.state.loaded"
+              :length="pages"
+              :total-visible="9"
+              next-icon="mdi-menu-right"
+              prev-icon="mdi-menu-left"
+              class="font-weight-light py-6"
             />
           </v-col>
         </v-row>
@@ -69,7 +69,6 @@ export default {
     Search,
   },
   data: () => ({
-    loaded: false,
     page: 1,
     limit: 10,
   }),
@@ -122,15 +121,12 @@ export default {
     this.retrieve();
     this.restore();
     if (this.$store.state.ranks.length > 0) {
-      this.setLoaded(true);
+      this.$store.commit('setLoaded', true);
       return;
     }
     this.fetch();
   },
   methods: {
-    setLoaded(loaded) {
-      this.loaded = loaded;
-    },
     setPage(page) {
       this.page = page;
     },
@@ -163,15 +159,11 @@ export default {
       this.$router.push({ query });
     },
     async fetch() {
-      this.setLoaded(false);
       this.$store.dispatch('fetch', this.params)
         .then(({ data }) => {
           this.$store.commit('setRanks', data.filter((rank) => rank.itemCount > 0));
         })
-        .catch(() => {})
-        .finally(() => {
-          this.setLoaded(true);
-        });
+        .catch(() => {});
     },
   },
 };

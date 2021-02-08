@@ -22,7 +22,6 @@
             <RankingLoader
               v-else
               :height="160"
-              :sheet="false"
               type="card"
             />
           </v-col>

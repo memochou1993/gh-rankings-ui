@@ -28,6 +28,10 @@ export default new Vuex.Store({
      */
     error: {},
     /**
+     * @param loaded
+     */
+    loaded: false,
+    /**
      * @param query
      * @param query.type
      * @param query.field
@@ -69,6 +73,9 @@ export default new Vuex.Store({
     setError(state, error) {
       state.error = error;
     },
+    setLoaded(state, loaded) {
+      state.loaded = loaded;
+    },
     setQuery(state, query) {
       state.query = query;
     },
@@ -77,6 +84,7 @@ export default new Vuex.Store({
     fetch({
       commit,
     }, params) {
+      commit('setLoaded', false);
       return new Promise((resolve, reject) => {
         axios.get('/', { params })
           .then(({ data }) => {
@@ -85,6 +93,9 @@ export default new Vuex.Store({
           .catch((error) => {
             commit('setError', error);
             reject(error);
+          })
+          .finally(() => {
+            commit('setLoaded', true);
           });
       });
     },
