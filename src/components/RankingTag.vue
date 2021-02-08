@@ -6,6 +6,9 @@
 
 <script>
 import {
+  types,
+} from '@/assets';
+import {
   parseTag,
 } from '@/helpers';
 
@@ -21,7 +24,8 @@ export default {
     text() {
       const language = parseTag(this.rank.tags, 'language');
       const location = parseTag(this.rank.tags, 'location')?.split(', ').shift();
-      return language || location || 'Global';
+      const text = parseTag(this.rank.tags, 'type') === types.repository.value ? 'All' : 'Global';
+      return language || location || text;
     },
   },
 };
