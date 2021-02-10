@@ -20,4 +20,12 @@ const router = new VueRouter({
   routes,
 });
 
+router.afterEach((to) => {
+  Vue.nextTick(() => {
+    const { name } = to.params;
+    const prefix = name ? `${name} - ` : '';
+    document.title = `${prefix}GH Rankings`;
+  });
+});
+
 export default router;
