@@ -57,7 +57,7 @@
             />
             <v-list-item
               :key="i"
-              :to="search(rank.tags)"
+              :to="search(rank)"
             >
               <v-list-item-content
                 @click="reset()"
@@ -160,14 +160,21 @@ export default {
     },
     sort(ranks) {
       return ranks.sort((a, b) => {
-        const value = (tags) => (tags.length < 3 ? 1 : Number(!tags.join('-').includes(', ')) - 1);
-        return value(b.tags) - value(a.tags);
+        const value = (rank) => (rank.location === '' ? 1 : Number(!rank.location.includes(', ')) - 1);
+        return value(b) - value(a);
       });
     },
-    search(tags) {
+    search(rank) {
+      const query = {
+        type: rank.type,
+        field: rank.field,
+        language: rank.language,
+        location: rank.location,
+      };
+      Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
       return {
         name: 'home',
-        query: Object.fromEntries(tags.map((tag) => String(tag).split(':'))),
+        query,
       };
     },
   },

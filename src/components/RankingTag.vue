@@ -8,9 +8,6 @@
 import {
   types,
 } from '@/assets';
-import {
-  parseTag,
-} from '@/helpers';
 
 export default {
   name: 'RankingTag',
@@ -21,11 +18,11 @@ export default {
     },
   },
   computed: {
+    default() {
+      return this.rank.type === types.repository.value ? 'All' : 'Global';
+    },
     text() {
-      const language = parseTag(this.rank.tags, 'language');
-      const location = parseTag(this.rank.tags, 'location')?.split(', ').shift();
-      const text = parseTag(this.rank.tags, 'type') === types.repository.value ? 'All' : 'Global';
-      return language || location || text;
+      return this.rank.language || this.rank.location.split(', ').shift() || this.default;
     },
   },
 };

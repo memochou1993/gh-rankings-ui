@@ -19,7 +19,10 @@ export default new Vuex.Store({
      * @param ranks[].rank
      * @param ranks[].rankCount
      * @param ranks[].itemCount
-     * @param ranks[].tags
+     * @param ranks[].type
+     * @param ranks[].field
+     * @param ranks[].language
+     * @param ranks[].location
      * @param ranks[].createdAt
      */
     ranks: [],

@@ -29,15 +29,15 @@ export default {
   },
   computed: {
     icon() {
-      const tags = this.rank.tags.join(',');
+      const { field } = this.rank;
       switch (true) {
-        case tags.includes(fields.followers.value):
+        case field.includes(fields.followers.value):
           return 'mdi-account-group-outline';
-        case tags.includes(fields.stars.value):
+        case field.includes(fields.stars.value):
           return 'mdi-star-outline';
-        case tags.includes(fields.forks.value):
+        case field.includes(fields.forks.value):
           return 'mdi-source-fork';
-        case tags.includes(fields.watchers.value):
+        case field.includes(fields.watchers.value):
           return 'mdi-eye-outline';
         default:
           return '';

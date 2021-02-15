@@ -55,9 +55,6 @@ import {
   types,
   fields,
 } from '@/assets';
-import {
-  parseTag,
-} from '@/helpers';
 import RankingAvatar from '@/components/RankingAvatar';
 import RankingItemCount from '@/components/RankingItemCount';
 import RankingTitle from '@/components/RankingTitle';
@@ -70,14 +67,13 @@ export default {
     RankingTitle,
   },
   computed: {
-    tags() {
-      return this.$store.state.ranks[0]?.tags || [];
-    },
     type() {
-      return Object.values(types).find((type) => type.value === parseTag(this.tags, 'type')).title;
+      const finder = (type) => type.value === this.$store.state.query.type;
+      return Object.values(types).find(finder).title;
     },
     field() {
-      return Object.values(fields).find((field) => field.value === parseTag(this.tags, 'field')).title;
+      const finder = (field) => field.value === this.$store.state.query.field;
+      return Object.values(fields).find(finder).title;
     },
     title() {
       return `${this.type} ${this.field} Ranking`;
