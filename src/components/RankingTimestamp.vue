@@ -1,7 +1,7 @@
 <template>
   <div
     class="font-weight-light text--secondary text-right"
-    v-text="`Last updated: ${createdAt}`"
+    v-text="`Last updated: ${updatedAt}`"
   />
 </template>
 
@@ -16,7 +16,10 @@ export default {
   },
   computed: {
     createdAt() {
-      return this.ranks[0]?.createdAt?.split('T')[0] || '';
+      return this.ranks[0]?.createdAt || null;
+    },
+    updatedAt() {
+      return (new Date(this.createdAt)).toLocaleString('tw', { hour12: false }).replaceAll('/', '-');
     },
   },
 };
