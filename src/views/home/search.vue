@@ -116,7 +116,7 @@
         class="my-2"
       >
         <v-text-field
-          v-model="name"
+          :value="name"
           autocapitalize="off"
           autocomplete="off"
           clearable
@@ -127,6 +127,8 @@
           label="Name"
           solo
           class="font-weight-light"
+          @input="updateName"
+          @click:clear="setName('')"
         />
       </v-card>
     </v-card-text>
@@ -138,6 +140,7 @@ import {
   types,
   fields,
 } from '@/assets';
+import { debounce } from '@/helpers';
 
 export default {
   name: 'AppSearch',
@@ -260,6 +263,10 @@ export default {
     setName(name) {
       this.name = name;
     },
+    // eslint-disable-next-line
+    updateName: debounce(function (name) {
+      this.name = name;
+    }, 500),
     switchType() {
       if (this.name.includes('/')) {
         this.setType(types.repository.value);
