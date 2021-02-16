@@ -1,43 +1,45 @@
 # gh-rankings-client
 
-## Info
+## Development
 
+Download the project.
 
-## Before setup
-
-download git_submodule
-```
-git submodule sync
-
-git submodule update --init
+```BASH
+git clone --recursive https://github.com/memochou1993/gh-rankings-client.git
 ```
 
-copy dotenv and update `VUE_APP_API_URL`
-```
-cp .env.example
+Copy `.env.example` to `.env`.
 
+```BASH
+cp .env.example .env
+```
+
+Update environment variables.
+
+```BASH
 VUE_APP_API_URL=https://gh-rankings.epoch.tw/api/
 ```
 
 ## Project setup
-```
+
+```BASH
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
-```
+
+```BASH
 yarn serve
 ```
 
 ### Compiles and minifies for production
-```
+
+```BASH
 yarn build
 ```
 
 ### Lints and fixes files
-```
+
+```BASH
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
