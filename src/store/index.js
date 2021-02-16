@@ -89,7 +89,7 @@ export default new Vuex.Store({
     }, params) {
       commit('setLoaded', false);
       return new Promise((resolve, reject) => {
-        axios.get('/', { params })
+        axios.get(process.env.VUE_APP_API_URL || '/', { params })
           .then(({ data }) => {
             resolve(data);
           })
