@@ -2,7 +2,8 @@
   <v-fade-transition>
     <v-btn
       v-show="showScrollToTop"
-      class="scroll-gradient"
+      class="scroll-btn scroll-gradient"
+      :class="sticky"
       dark
       fab
       right
@@ -35,6 +36,10 @@ export default {
     showScrollToTop() {
       return this.scrollHeight > 400;
     },
+    sticky() {
+      const pageScrollHeight = document.body.scrollHeight - window.innerHeight;
+      return Math.abs(pageScrollHeight - this.scrollHeight) < 60 ? 'mb-10' : '';
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll);
@@ -61,6 +66,9 @@ export default {
 </script>
 
 <style scoped>
+.scroll-btn {
+  transition: margin-bottom .2s ease;
+}
 .scroll-gradient {
   background-image: linear-gradient(to right bottom, #061D30, #2C4C68);
 }
