@@ -1,5 +1,24 @@
 # gh-rankings-client
 
+## Info
+
+
+## Before setup
+
+download git_submodule
+```
+git submodule sync
+
+git submodule update --init
+```
+
+copy dotenv and update `VUE_APP_API_URL`
+```
+cp .env.example
+
+VUE_APP_API_URL=https://gh-rankings.epoch.tw/api/
+```
+
 ## Project setup
 ```
 yarn install
