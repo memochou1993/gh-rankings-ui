@@ -1,3 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+const http = axios.create({
+  baseURL: process.env.VUE_APP_API_URL || '/api/',
+});
+
+export default http;
