@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 import {
   types,
   fields,
   languages,
   locations,
 } from '@/assets';
+import axios from '@/plugins/axios';
 
 Vue.use(Vuex);
 
@@ -89,7 +89,7 @@ export default new Vuex.Store({
     }, params) {
       commit('setLoaded', false);
       return new Promise((resolve, reject) => {
-        axios.get(process.env.VUE_APP_API_URL || '/', { params })
+        axios.get('/', { params })
           .then(({ data }) => {
             resolve(data);
           })
