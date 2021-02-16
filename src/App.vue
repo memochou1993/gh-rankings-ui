@@ -8,6 +8,7 @@
         <router-view />
       </v-container>
     </v-main>
+    <TheElevator />
     <TheFooter />
   </v-app>
 </template>
@@ -15,12 +16,14 @@
 <script>
 import TheFooter from '@/components/TheFooter';
 import TheHeader from '@/components/TheHeader';
+import TheElevator from '@/components/TheElevator';
 
 export default {
   name: 'App',
   components: {
     TheFooter,
     TheHeader,
+    TheElevator,
   },
 };
 </script>
