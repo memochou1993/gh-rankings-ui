@@ -1,4 +1,4 @@
-# gh-rankings-ui
+# GH Rankings UI
 
 ## Development
 
@@ -20,26 +20,26 @@ Update environment variables.
 VUE_APP_API_URL=https://gh-rankings.epoch.tw/api/
 ```
 
-## Project setup
+Download dependencies.
 
 ```BASH
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+Run the project.
 
 ```BASH
 yarn serve
 ```
 
-### Compiles and minifies for production
+## Core
 
-```BASH
-yarn build
-```
+- [gh-rankings](https://github.com/memochou1993/gh-rankings)
 
-### Lints and fixes files
+## Language JSON
 
-```BASH
-yarn lint
-```
+- [gh-rankings-language](https://github.com/memochou1993/gh-rankings-language)
+
+## Location JSON
+
+- [gh-rankings-location](https://github.com/memochou1993/gh-rankings-location)
