@@ -36,17 +36,14 @@ html {
     display: none;
   }
 }
-
 .primary-gradient {
   background-image: linear-gradient(to right, #061D30, #2C4C68);
 }
-
 .pointer {
   &, .v-input__slot, input {
     cursor: pointer !important;
   }
 }
-
 .v-pagination__item {
   outline: none;
 }

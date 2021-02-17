@@ -2,13 +2,13 @@
   <v-fade-transition>
     <v-btn
       v-show="!hidden"
+      :class="['primary-gradient', 'scroll', sticky]"
       bottom
       dark
       fab
       fixed
       right
-      class="scroll-btn primary"
-      :class="sticky"
+      small
       @click="scroll"
     >
       <v-icon>
@@ -26,11 +26,10 @@ export default {
   }),
   computed: {
     hidden() {
-      return this.scrollHeight <= 400;
+      return this.scrollHeight < 400;
     },
     sticky() {
-      const pageScrollHeight = document.body.scrollHeight - window.innerHeight;
-      return Math.abs(pageScrollHeight - this.scrollHeight) < 160 ? 'mb-10' : '';
+      return Math.abs(document.body.scrollHeight - window.innerHeight - this.scrollHeight) < 80 ? 'mb-10' : '';
     },
   },
   mounted() {
@@ -51,8 +50,6 @@ export default {
     },
     onScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop < 0) return;
-      if (Math.abs(scrollTop - this.scrollHeight) < 60) return;
       this.setScrollHeight(scrollTop);
     },
   },
@@ -60,10 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scroll-btn {
-  transition: margin-bottom .2s ease;
-}
-.primary {
-  background-image: linear-gradient(to right, #2C4C68, #2C4C68);
+.scroll {
+  transition: margin .2s ease;
 }
 </style>
