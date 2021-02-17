@@ -1,11 +1,11 @@
-# gh-rankings-client
+# gh-rankings-ui
 
 ## Development
 
 Download the project.
 
 ```BASH
-git clone --recursive https://github.com/memochou1993/gh-rankings-client.git
+git clone --recursive https://github.com/memochou1993/gh-rankings-ui.git
 ```
 
 Copy `.env.example` to `.env`.
