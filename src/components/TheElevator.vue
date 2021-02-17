@@ -7,8 +7,8 @@
       fab
       fixed
       right
-      small
-      class="primary"
+      class="scroll-btn primary"
+      :class="sticky"
       @click="scroll"
     >
       <v-icon>
@@ -27,6 +27,10 @@ export default {
   computed: {
     hidden() {
       return this.scrollHeight <= 400;
+    },
+    sticky() {
+      const pageScrollHeight = document.body.scrollHeight - window.innerHeight;
+      return Math.abs(pageScrollHeight - this.scrollHeight) < 160 ? 'mb-10' : '';
     },
   },
   mounted() {
@@ -56,6 +60,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.scroll-btn {
+  transition: margin-bottom .2s ease;
+}
 .primary {
   background-image: linear-gradient(to right, #2C4C68, #2C4C68);
 }
