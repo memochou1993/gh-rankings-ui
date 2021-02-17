@@ -7,7 +7,6 @@
       fab
       fixed
       right
-      small
       class="scroll-btn primary"
       :class="sticky"
       @click="scroll"

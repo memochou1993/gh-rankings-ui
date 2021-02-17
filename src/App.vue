@@ -46,4 +46,8 @@ html {
     cursor: pointer !important;
   }
 }
+
+.v-pagination__item {
+  outline: none;
+}
 </style>
