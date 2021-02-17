@@ -15,5 +15,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'import/extensions': ['error', 'ignorePackages', { js: 'never', vue: 'never' }],
     'linebreak-style': 'off',
+    'func-names': 'off',
   },
 };

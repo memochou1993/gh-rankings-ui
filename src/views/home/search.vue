@@ -140,7 +140,9 @@ import {
   types,
   fields,
 } from '@/assets';
-import { debounce } from '@/helpers';
+import {
+  debounce,
+} from '@/helpers';
 
 export default {
   name: 'AppSearch',
@@ -263,9 +265,8 @@ export default {
     setName(name) {
       this.name = name;
     },
-    // eslint-disable-next-line
     updateName: debounce(function (name) {
-      this.name = name;
+      this.setName(name);
     }, 500),
     switchType() {
       if (this.name.includes('/')) {
