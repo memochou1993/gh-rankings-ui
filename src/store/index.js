@@ -89,7 +89,7 @@ export default new Vuex.Store({
     }, params) {
       commit('setLoaded', false);
       return new Promise((resolve, reject) => {
-        axios.get('/', { params })
+        axios.get('https://json.epoch.tw/api/records/xYRdG7dDzO', { params })
           .then(({ data }) => {
             resolve(data);
           })
