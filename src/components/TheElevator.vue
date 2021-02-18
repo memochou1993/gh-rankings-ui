@@ -29,7 +29,7 @@ export default {
       return this.scrollHeight < 400;
     },
     sticky() {
-      return Math.abs(document.body.scrollHeight - window.innerHeight - this.scrollHeight) < 80 ? 'mb-10' : '';
+      return Math.abs(document.body.scrollHeight - window.innerHeight - this.scrollHeight) < 40 ? 'mb-10' : '';
     },
   },
   mounted() {
