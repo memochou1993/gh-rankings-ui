@@ -70,7 +70,7 @@ export default {
   },
   data: () => ({
     page: 1,
-    limit: 25,
+    limit: 20,
   }),
   computed: {
     pages() {
@@ -101,7 +101,7 @@ export default {
       return this.page === (Number(this.$route.query.page) || 1);
     },
     isSameLimit() {
-      return this.limit === (Number(this.$route.query.limit) || 10);
+      return this.limit === (Number(this.$route.query.limit) || 20);
     },
     isSameQuery() {
       return this.isSamePage && this.isSameLimit;
@@ -135,7 +135,7 @@ export default {
     },
     retrieve() {
       this.setPage(Number(this.$route.query.page) || 1);
-      this.setLimit(Number(this.$route.query.limit) || 10);
+      this.setLimit(Number(this.$route.query.limit) || 20);
     },
     restore() {
       this.$store.commit('setQuery', {
@@ -153,7 +153,7 @@ export default {
       const query = {
         ...this.$route.query,
         page: after.page !== 1 ? String(after.page) : 0,
-        limit: after.limit !== 10 ? String(after.limit) : 0,
+        limit: after.limit !== 20 ? String(after.limit) : 0,
       };
       Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
       this.$router.push({ query });
