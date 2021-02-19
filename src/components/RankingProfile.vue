@@ -7,18 +7,22 @@
       @click="open()"
     >
       <RankingAvatar
-        :alt="name"
-        :src="imageUrl"
+        :alt="profile.name"
+        :src="profile.imageUrl"
         size="100%"
       />
     </v-card-title>
     <v-card-text
-      class="text-center"
+      class="text-center pointer"
+      @click="open()"
     >
       <div
-        class="title font-weight-regular text--primary pointer"
-        @click="open()"
-        v-text="name"
+        class="headline text--primary"
+        v-text="profile.name"
+      />
+      <div
+        class="title font-weight-light text--secondary"
+        v-text="profile.login"
       />
     </v-card-text>
   </v-card>
@@ -36,18 +40,14 @@ export default {
     RankingAvatar,
   },
   props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    imageUrl: {
-      type: String,
+    profile: {
+      type: Object,
       required: true,
     },
   },
   methods: {
     open() {
-      open(`https://github.com/${this.name}`);
+      open(`https://github.com/${this.profile.login}`);
     },
   },
 };

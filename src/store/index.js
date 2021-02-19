@@ -102,5 +102,23 @@ export default new Vuex.Store({
           });
       });
     },
+    show({
+      commit,
+    }, opts) {
+      commit('setLoaded', false);
+      return new Promise((resolve, reject) => {
+        axios.get(`/${types[opts.type].plural}/${opts.name}`)
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch((error) => {
+            commit('setError', error);
+            reject(error);
+          })
+          .finally(() => {
+            commit('setLoaded', true);
+          });
+      });
+    },
   },
 });

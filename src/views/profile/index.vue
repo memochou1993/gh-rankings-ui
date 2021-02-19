@@ -16,8 +16,7 @@
           >
             <RankingProfile
               v-if="loaded"
-              :name="name"
-              :image-url="imageUrl"
+              :profile="profile"
             />
             <RankingLoader
               v-else
@@ -93,17 +92,12 @@ export default {
   },
   data: () => ({
     loaded: false,
+    profile: {},
     ranks: [],
     page: 1,
     limit: 1000,
   }),
   computed: {
-    name() {
-      return this.ranks[0]?.name || '';
-    },
-    imageUrl() {
-      return this.ranks[0]?.imageUrl || '';
-    },
     groups() {
       return [
         {
@@ -183,18 +177,28 @@ export default {
     setLoaded(loaded) {
       this.loaded = loaded;
     },
+    setProfile(profile) {
+      this.profile = profile;
+    },
     setRanks(ranks) {
       this.ranks = ranks;
     },
     async fetch() {
-      this.$store.dispatch('fetch', this.params)
-        .then(({ data }) => {
-          this.setRanks(data);
-        })
-        .catch(() => {})
-        .finally(() => {
-          this.setLoaded(true);
+      try {
+        const ranks = await this.$store.dispatch('fetch', this.params);
+        if (ranks.data.length === 0) {
+          throw new Error();
+        }
+        this.setRanks(ranks.data);
+        const profile = await this.$store.dispatch('show', {
+          type: ranks.data[0]?.type,
+          name: this.$route.params.name,
         });
+        this.setProfile(profile.data);
+        this.setLoaded(true);
+      } catch (error) {
+        this.$router.push('/');
+      }
     },
     filter(field, language) {
       return this.ranks
