@@ -50,7 +50,7 @@
             </v-list-item-content>
           </v-list-item>
           <template
-            v-for="(rank, i) in sort(ranks)"
+            v-for="(rank, i) in filter(sort(ranks))"
           >
             <v-divider
               :key="`divider-${i}`"
@@ -163,6 +163,9 @@ export default {
         const value = (rank) => (rank.location === '' ? 1 : Number(!rank.location.includes(', ')) - 1);
         return value(b) - value(a);
       });
+    },
+    filter(ranks) {
+      return ranks.filter((rank) => rank.language === '' || rank.itemCount > 0);
     },
     search(rank) {
       const query = {
