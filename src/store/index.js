@@ -12,36 +12,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    /**
-     * @param ranks
-     * @param ranks[].name
-     * @param ranks[].imageUrl
-     * @param ranks[].rank
-     * @param ranks[].rankCount
-     * @param ranks[].itemCount
-     * @param ranks[].type
-     * @param ranks[].field
-     * @param ranks[].language
-     * @param ranks[].location
-     * @param ranks[].createdAt
-     */
     ranks: [],
-    /**
-     * @param error
-     */
     error: {},
-    /**
-     * @param loaded
-     */
     loaded: false,
-    /**
-     * @param query
-     * @param query.type
-     * @param query.field
-     * @param query.language
-     * @param query.location
-     * @param query.name
-     */
     query: {
       type: types.user.value,
       field: fields.repositoryStars.value,
@@ -49,16 +22,7 @@ export default new Vuex.Store({
       location: '',
       name: '',
     },
-    /**
-     * @param languages
-     * @param languages[].name
-     */
     languages,
-    /**
-     * @param locations
-     * @param locations[].name
-     * @param locations[].cities
-     */
     locations: (() => {
       const reducer = (acc, val) => acc.concat(val.cities.map((city) => ({ name: `${city.name}, ${val.name}` })));
       return Array.from(locations).concat(Array.from(locations).reduce(reducer, []));

@@ -35,9 +35,6 @@ export default {
   mounted() {
     window.addEventListener('scroll', this.onScroll);
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
-  },
   methods: {
     setScrollHeight(scrollHeight) {
       this.scrollHeight = scrollHeight;
@@ -52,6 +49,9 @@ export default {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       this.setScrollHeight(scrollTop);
     },
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll);
   },
 };
 </script>
