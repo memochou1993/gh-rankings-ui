@@ -103,6 +103,7 @@ export default {
     repositories() {
       return this.profile.repositories
         .filter((repository) => repository.primaryLanguage.name === this.rank.language)
+        .filter((repository) => repository[this.field].totalCount > 0)
         .sort((a, b) => b[this.field].totalCount - a[this.field].totalCount);
     },
   },
