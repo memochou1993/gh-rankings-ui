@@ -44,6 +44,7 @@
                     :category="group.category"
                     :ranks="group.ranks"
                     :title="group.title"
+                    :profile="profile"
                     class="mb-6"
                   />
                 </template>

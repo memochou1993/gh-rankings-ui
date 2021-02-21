@@ -35,7 +35,8 @@
               </v-list-item-content>
               <v-list-item-action>
                 <RankingItemCount
-                  :rank="rank"
+                  :field="rank.field"
+                  :item-count="rank.itemCount"
                 />
               </v-list-item-action>
             </v-list-item>

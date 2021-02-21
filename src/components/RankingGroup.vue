@@ -57,10 +57,9 @@
             />
             <v-list-item
               :key="i"
-              :to="search(rank)"
             >
               <v-list-item-content
-                @click="reset()"
+                @click="search(rank)"
               >
                 <v-list-item-title
                   class="body-1 font-weight-light"
@@ -86,8 +85,15 @@
                       :cols="4"
                       class="text-right"
                     >
-                      <RankingItemCount
+                      <RankingRepositoryMenu
+                        v-if="rank.language !== '' && rank.field.includes('repositories')"
                         :rank="rank"
+                        :profile="profile"
+                      />
+                      <RankingItemCount
+                        v-else
+                        :field="rank.field"
+                        :item-count="rank.itemCount"
                       />
                     </v-col>
                   </v-row>
@@ -104,17 +110,19 @@
 <script>
 import fields from '@/assets/field';
 import RankingItemCount from '@/components/RankingItemCount';
+import RankingRank from '@/components/RankingRank';
+import RankingRepositoryMenu from '@/components/RankingRepositoryMenu';
 import RankingTag from '@/components/RankingTag';
 import RankingTitle from '@/components/RankingTitle';
-import RankingRank from '@/components/RankingRank';
 
 export default {
   name: 'RankingGroup',
   components: {
     RankingItemCount,
+    RankingRank,
+    RankingRepositoryMenu,
     RankingTag,
     RankingTitle,
-    RankingRank,
   },
   props: {
     category: {
@@ -127,6 +135,10 @@ export default {
     },
     title: {
       type: String,
+      required: true,
+    },
+    profile: {
+      type: Object,
       required: true,
     },
   },
@@ -147,6 +159,15 @@ export default {
     },
   },
   methods: {
+    sort(ranks) {
+      return ranks.sort((a, b) => {
+        const value = (rank) => (rank.location === '' ? 1 : Number(!rank.location.includes(', ')) - 1);
+        return value(b) - value(a);
+      });
+    },
+    filter(ranks) {
+      return ranks.filter((rank) => rank.language === '' || rank.itemCount > 0);
+    },
     reset() {
       this.$store.commit('setRanks', []);
       this.$store.commit('setQuery', {
@@ -158,16 +179,8 @@ export default {
         name: '',
       });
     },
-    sort(ranks) {
-      return ranks.sort((a, b) => {
-        const value = (rank) => (rank.location === '' ? 1 : Number(!rank.location.includes(', ')) - 1);
-        return value(b) - value(a);
-      });
-    },
-    filter(ranks) {
-      return ranks.filter((rank) => rank.language === '' || rank.itemCount > 0);
-    },
     search(rank) {
+      this.reset();
       const query = {
         type: rank.type,
         field: rank.field,
@@ -175,10 +188,10 @@ export default {
         location: rank.location,
       };
       Object.entries(query).forEach(([key, val]) => !val && delete query[key]);
-      return {
+      this.$router.push({
         name: 'home',
         query,
-      };
+      });
     },
   },
 };

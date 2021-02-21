@@ -6,42 +6,30 @@
   >
     <span
       class="body-1 font-weight-light"
-      v-text="rank.itemCount.toLocaleString()"
+      v-text="itemCount.toLocaleString()"
     />
-    <v-icon
-      :size="20"
-      right
-      v-text="icon"
+    <RankingIcon
+      :field="field"
     />
   </v-btn>
 </template>
 
 <script>
-import fields from '@/assets/field';
+import RankingIcon from '@/components/RankingIcon';
 
 export default {
   name: 'RankingItemCount',
+  components: {
+    RankingIcon,
+  },
   props: {
-    rank: {
-      type: Object,
+    itemCount: {
+      type: Number,
       required: true,
     },
-  },
-  computed: {
-    icon() {
-      const { field } = this.rank;
-      switch (true) {
-        case field.includes(fields.followers.value):
-          return 'mdi-account-group-outline';
-        case field.includes(fields.stars.value):
-          return 'mdi-star-outline';
-        case field.includes(fields.forks.value):
-          return 'mdi-source-fork';
-        case field.includes(fields.watchers.value):
-          return 'mdi-eye-outline';
-        default:
-          return '';
-      }
+    field: {
+      type: String,
+      required: true,
     },
   },
 };

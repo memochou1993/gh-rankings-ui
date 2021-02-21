@@ -4,7 +4,7 @@
   >
     <v-card-title
       class="pointer"
-      @click="open()"
+      @click="explore()"
     >
       <RankingAvatar
         :alt="profile.name"
@@ -14,7 +14,7 @@
     </v-card-title>
     <v-card-text
       class="text-center pointer"
-      @click="open()"
+      @click="explore()"
     >
       <div
         class="headline text--primary"
@@ -46,8 +46,8 @@ export default {
     },
   },
   methods: {
-    open() {
-      open(`https://github.com/${this.profile.login}`);
+    explore() {
+      open(`https://github.com/${this.profile.login || this.profile.nameWithOwner}`);
     },
   },
 };
