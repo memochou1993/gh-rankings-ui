@@ -159,7 +159,7 @@ export default {
       this.$router.push({ query });
     },
     async fetch() {
-      const ranks = await this.$store.dispatch('fetch', this.params);
+      const ranks = await this.$store.dispatch('fetchRanks', this.params);
       this.$store.commit('setRanks', ranks.data.filter((rank) => rank.itemCount > 0));
     },
   },

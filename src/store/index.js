@@ -48,12 +48,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    fetch({
+    fetchRanks({
       commit,
     }, params) {
       commit('setLoaded', false);
       return new Promise((resolve, reject) => {
-        axios.get('/', { params })
+        axios.get('/ranks', { params })
           .then(({ data }) => {
             resolve(data);
           })
@@ -66,7 +66,7 @@ export default new Vuex.Store({
           });
       });
     },
-    show({
+    showObjects({
       commit,
     }, opts) {
       commit('setLoaded', false);

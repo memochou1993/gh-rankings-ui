@@ -186,12 +186,12 @@ export default {
     },
     async fetch() {
       try {
-        const ranks = await this.$store.dispatch('fetch', this.params);
+        const ranks = await this.$store.dispatch('fetchRanks', this.params);
         if (ranks.data.length === 0) {
           throw new Error();
         }
         this.setRanks(ranks.data);
-        const profile = await this.$store.dispatch('show', {
+        const profile = await this.$store.dispatch('showObjects', {
           type: ranks.data[0]?.type,
           name: this.$route.params.name,
         });
