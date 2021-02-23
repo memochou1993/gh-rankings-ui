@@ -54,7 +54,7 @@
           >
             <RankingMenu
               :key="i"
-              :disabled="!hasRepositories(rank)"
+              :disabled="!isRepositoryMenuEnabled(rank) && !isGistMenuEnabled(rank)"
             >
               <div
                 slot="activator"
@@ -99,7 +99,13 @@
                 </v-list-item>
               </div>
               <RankingListRepository
-                v-if="hasRepositories(rank)"
+                v-if="isRepositoryMenuEnabled(rank)"
+                slot="list"
+                :rank="rank"
+                :profile="profile"
+              />
+              <RankingListGist
+                v-if="isGistMenuEnabled(rank)"
                 slot="list"
                 :rank="rank"
                 :profile="profile"
@@ -115,6 +121,7 @@
 <script>
 import fields from '@/assets/field';
 import RankingItemCount from '@/components/RankingItemCount';
+import RankingListGist from '@/components/RankingListGist';
 import RankingListRepository from '@/components/RankingListRepository';
 import RankingMenu from '@/components/RankingMenu';
 import RankingRank from '@/components/RankingRank';
@@ -125,6 +132,7 @@ export default {
   name: 'RankingGroup',
   components: {
     RankingItemCount,
+    RankingListGist,
     RankingListRepository,
     RankingMenu,
     RankingRank,
@@ -200,8 +208,14 @@ export default {
         query,
       });
     },
-    hasRepositories(rank) {
+    isMenuEnabled(rank) {
+      return this.isRepositoryMenuEnabled(rank) && this.isGistMenuEnabled(rank);
+    },
+    isRepositoryMenuEnabled(rank) {
       return rank.language !== '' && rank.field.includes('repositories');
+    },
+    isGistMenuEnabled(rank) {
+      return rank.location === '' && rank.field.includes('gists');
     },
   },
 };

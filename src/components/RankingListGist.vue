@@ -7,27 +7,27 @@
       multiple
     >
       <template
-        v-for="(repository, i) in repositories"
+        v-for="(gist, i) in gists"
       >
         <v-list-item
           :key="i"
           class="body-1 font-weight-light"
-          @click="explore(repository)"
+          @click="explore(gist)"
         >
           <v-list-item-content>
             <v-list-item-title
-              v-text="repository.name"
+              v-text="(gist.files[0] || {}).name || gist.name"
             />
           </v-list-item-content>
           <v-list-item-action>
             <RankingItemCount
               :field="field"
-              :item-count="repository[field].totalCount"
+              :item-count="gist[field].totalCount"
             />
           </v-list-item-action>
         </v-list-item>
         <v-divider
-          v-if="i < repositories.length - 1"
+          v-if="i < gists.length - 1"
           :key="`divider-${i}`"
         />
       </template>
@@ -42,7 +42,7 @@ import {
 import RankingItemCount from '@/components/RankingItemCount';
 
 export default {
-  name: 'RankingListRepository',
+  name: 'RankingListGist',
   components: {
     RankingItemCount,
   },
@@ -63,10 +63,9 @@ export default {
     field() {
       return this.rank.field.split('.').pop();
     },
-    repositories() {
-      return this.profile.repositories
-        .filter((repository) => repository.primaryLanguage.name === this.rank.language)
-        .filter((repository) => repository[this.field].totalCount > 0)
+    gists() {
+      return this.profile.gists
+        .filter((gist) => gist[this.field].totalCount > 0)
         .sort((a, b) => b[this.field].totalCount - a[this.field].totalCount);
     },
   },
@@ -81,8 +80,8 @@ export default {
     setSelections(selections) {
       this.selections = selections;
     },
-    explore(repository) {
-      open(`https://github.com/${this.profile.login}/${repository.name}`);
+    explore(gist) {
+      open(`https://gist.github.com/${this.profile.login}/${gist.name}`);
     },
   },
 };

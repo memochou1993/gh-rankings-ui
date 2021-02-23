@@ -4,12 +4,12 @@
     :disabled="disabled"
     :max-height="5 * (48 + 1)"
     :max-width="240"
-    :nudge-right="16"
+    :nudge-right="6"
     :nudge-bottom="1"
     :z-index="1"
+    content-class="elevation-3"
     offset-x
     open-on-hover
-    content-class="elevation-3"
   >
     <template
       v-slot:activator="{ on, attrs }"
