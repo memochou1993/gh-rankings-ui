@@ -3,7 +3,7 @@
     :elevation="5"
   >
     <v-card-text
-      class="pa-0"
+      class="pa-1"
     >
       <RankingTitle
         :title="title"

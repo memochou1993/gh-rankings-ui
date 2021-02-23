@@ -109,9 +109,6 @@
         </v-list-item-group>
       </v-list>
     </v-card-text>
-    <v-card-actions
-      class="pa-0"
-    />
   </v-card>
 </template>
 
