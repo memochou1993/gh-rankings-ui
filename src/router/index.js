@@ -14,6 +14,12 @@ const routes = [
     name: 'profile',
     component: () => import(/* webpackChunkName: "profile" */ '@/views/profile/index.vue'),
   },
+  {
+    path: '*',
+    redirect: {
+      name: 'home',
+    },
+  },
 ];
 
 const router = new VueRouter({
