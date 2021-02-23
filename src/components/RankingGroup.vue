@@ -3,7 +3,7 @@
     :elevation="5"
   >
     <v-card-text
-      class="pa-0"
+      class="pa-1"
     >
       <RankingTitle
         :title="title"
@@ -52,66 +52,75 @@
           <template
             v-for="(rank, i) in filter(sort(ranks))"
           >
-            <v-divider
-              :key="`divider-${i}`"
-            />
-            <v-list-item
+            <RankingMenu
               :key="i"
+              :disabled="!hasRepositories(rank)"
             >
-              <v-list-item-content
-                @click="search(rank)"
+              <div
+                slot="activator"
               >
-                <v-list-item-title
-                  class="body-1 font-weight-light"
-                >
-                  <v-row>
-                    <v-col
-                      :cols="4"
-                      class="text-right"
+                <v-divider />
+                <v-list-item>
+                  <v-list-item-content
+                    @click="search(rank)"
+                  >
+                    <v-list-item-title
+                      class="body-1 font-weight-light"
                     >
-                      <RankingTag
-                        :rank="rank"
-                      />
-                    </v-col>
-                    <v-col
-                      :cols="4"
-                      class="text-left"
-                    >
-                      <RankingRank
-                        :rank="rank"
-                      />
-                    </v-col>
-                    <v-col
-                      :cols="4"
-                      class="text-right"
-                    >
-                      <RankingRepositoryMenu
-                        v-if="rank.language !== '' && rank.field.includes('repositories')"
-                        :rank="rank"
-                        :profile="profile"
-                      />
-                      <RankingItemCount
-                        v-else
-                        :field="rank.field"
-                        :item-count="rank.itemCount"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+                      <v-row>
+                        <v-col
+                          :cols="4"
+                          class="text-right"
+                        >
+                          <RankingTag
+                            :rank="rank"
+                          />
+                        </v-col>
+                        <v-col
+                          :cols="4"
+                          class="text-left"
+                        >
+                          <RankingRank
+                            :rank="rank"
+                          />
+                        </v-col>
+                        <v-col
+                          :cols="4"
+                          class="text-right"
+                        >
+                          <RankingItemCount
+                            :field="rank.field"
+                            :item-count="rank.itemCount"
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </div>
+              <RankingListRepository
+                v-if="hasRepositories(rank)"
+                slot="list"
+                :rank="rank"
+                :profile="profile"
+              />
+            </RankingMenu>
           </template>
         </v-list-item-group>
       </v-list>
     </v-card-text>
+    <v-card-actions
+      class="pa-0"
+    />
   </v-card>
 </template>
 
 <script>
 import fields from '@/assets/field';
 import RankingItemCount from '@/components/RankingItemCount';
+import RankingListRepository from '@/components/RankingListRepository';
+import RankingMenu from '@/components/RankingMenu';
 import RankingRank from '@/components/RankingRank';
-import RankingRepositoryMenu from '@/components/RankingRepositoryMenu';
 import RankingTag from '@/components/RankingTag';
 import RankingTitle from '@/components/RankingTitle';
 
@@ -119,8 +128,9 @@ export default {
   name: 'RankingGroup',
   components: {
     RankingItemCount,
+    RankingListRepository,
+    RankingMenu,
     RankingRank,
-    RankingRepositoryMenu,
     RankingTag,
     RankingTitle,
   },
@@ -192,6 +202,9 @@ export default {
         name: 'home',
         query,
       });
+    },
+    hasRepositories(rank) {
+      return rank.language !== '' && rank.field.includes('repositories');
     },
   },
 };
