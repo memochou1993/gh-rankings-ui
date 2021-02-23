@@ -175,10 +175,12 @@ export default {
   },
   methods: {
     sort(ranks) {
-      return ranks.sort((a, b) => {
-        const value = (rank) => (rank.location === '' ? 1 : Number(!rank.location.includes(', ')) - 1);
-        return value(b) - value(a);
-      });
+      return ranks
+        .sort((a, b) => {
+          const value = (rank) => (rank.location === '' ? 1 : Number(!rank.location.includes(', ')) - 1);
+          return value(b) - value(a);
+        })
+        .sort((a, b) => b.itemCount - a.itemCount);
     },
     filter(ranks) {
       return ranks.filter((rank) => rank.language === '' || rank.itemCount > 0);
