@@ -6,7 +6,6 @@
     :max-width="240"
     :nudge-right="6"
     :nudge-bottom="1"
-    :z-index="1"
     content-class="elevation-3"
     offset-x
     open-on-hover
