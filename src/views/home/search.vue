@@ -118,11 +118,10 @@
         class="my-2"
       >
         <v-autocomplete
-          v-model="q"
+          v-model="name"
           :disabled="!$store.state.loaded"
           :items="names"
           :search-input.sync="search"
-          :value="name"
           clearable
           clear-icon="mdi-close"
           dense
@@ -134,7 +133,6 @@
           solo
           class="font-weight-light pointer"
           @click:clear="setNames([])"
-          @input="setName(q)"
         >
           <span
             slot="item"
@@ -171,7 +169,6 @@ export default {
     location: '',
     name: '',
     names: [],
-    q: '',
     search: '',
   }),
   computed: {
@@ -269,6 +266,9 @@ export default {
   },
   created() {
     this.retrieve();
+    if (this.name) {
+      this.setNames([{ name: this.name }]);
+    }
   },
   methods: {
     setType(type) {
@@ -312,7 +312,6 @@ export default {
       if (!isSame('type')) {
         this.switchField();
         this.switchLocation();
-        this.switchName();
       }
       if (!isSame('field')) {
         this.switchLanguage();
@@ -373,10 +372,6 @@ export default {
       if (this.isLocationDisabled) {
         this.setLocation('');
       }
-    },
-    switchName() {
-      this.setName('');
-      this.setNames([]);
     },
     retrieve() {
       this.setType(this.$store.state.query.type);
