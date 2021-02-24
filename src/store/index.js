@@ -66,21 +66,42 @@ export default new Vuex.Store({
           });
       });
     },
-    showObjects({
+    fetchRankedItems({
       commit,
-    }, opts) {
-      commit('setLoaded', false);
+    }, {
+      type,
+      params,
+    }) {
       return new Promise((resolve, reject) => {
-        axios.get(`/${types[opts.type].plural}/${opts.name}`)
+        axios.get(`/${types[type].plural}`, {
+          params,
+        })
           .then(({ data }) => {
             resolve(data);
           })
           .catch((error) => {
             commit('setError', error);
             reject(error);
+          });
+      });
+    },
+    fetchRankedItem({
+      commit,
+    }, {
+      type,
+      name,
+      params,
+    }) {
+      return new Promise((resolve, reject) => {
+        axios.get(`/${types[type].plural}/${name}`, {
+          params,
+        })
+          .then(({ data }) => {
+            resolve(data);
           })
-          .finally(() => {
-            commit('setLoaded', true);
+          .catch((error) => {
+            commit('setError', error);
+            reject(error);
           });
       });
     },

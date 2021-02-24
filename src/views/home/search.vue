@@ -65,6 +65,7 @@
           v-model="language"
           :disabled="isLanguageDisabled || !$store.state.loaded"
           :items="$store.state.languages"
+          cache-items
           clearable
           clear-icon="mdi-close"
           dense
@@ -92,6 +93,7 @@
           v-model="location"
           :disabled="isLocationDisabled || !$store.state.loaded"
           :items="$store.state.locations"
+          cache-items
           clearable
           clear-icon="mdi-close"
           dense
@@ -115,21 +117,32 @@
         outlined
         class="my-2"
       >
-        <v-text-field
+        <v-autocomplete
+          v-model="q"
+          :disabled="!$store.state.loaded"
+          :items="names"
+          :search-input.sync="search"
           :value="name"
-          autocapitalize="off"
-          autocomplete="off"
           clearable
           clear-icon="mdi-close"
           dense
           flat
           hide-details
+          hide-no-data
+          item-text="name"
           label="Name"
           solo
-          class="font-weight-light"
-          @input="updateName"
-          @click:clear="setName('')"
-        />
+          class="font-weight-light pointer"
+          @click:clear="setNames([])"
+          @input="setName(q)"
+        >
+          <span
+            slot="item"
+            slot-scope="{ item }"
+            class="font-weight-light"
+            v-text="item.name"
+          />
+        </v-autocomplete>
       </v-card>
     </v-card-text>
   </v-card>
@@ -157,6 +170,9 @@ export default {
     language: '',
     location: '',
     name: '',
+    names: [],
+    q: '',
+    search: '',
   }),
   computed: {
     fields() {
@@ -245,6 +261,11 @@ export default {
       this.switchQuery(after, before);
       this.updateRoute();
     },
+    search(after) {
+      if (after && after !== this.name) {
+        this.searchNames(after);
+      }
+    },
   },
   created() {
     this.retrieve();
@@ -265,9 +286,48 @@ export default {
     setName(name) {
       this.name = name;
     },
-    updateName: debounce(function (name) {
-      this.setName(name);
+    setNames(names) {
+      this.names = names;
+    },
+    searchNames: debounce(function (name) {
+      this.fetchNames(name);
     }, 500),
+    async fetchNames(q) {
+      const items = await this.$store.dispatch('fetchRankedItems', {
+        type: this.type,
+        params: {
+          q,
+          limit: 100,
+        },
+      });
+      this.setNames(items.data.map((item) => {
+        const name = item.login || item.nameWithOwner;
+        return {
+          name,
+        };
+      }));
+    },
+    switchQuery(after, before) {
+      const isSame = (key) => after[key] === before[key];
+      if (!isSame('type')) {
+        this.switchField();
+        this.switchLocation();
+        this.switchNames();
+      }
+      if (!isSame('field')) {
+        this.switchLanguage();
+      }
+      if (!isSame('language')) {
+        this.switchLocation();
+      }
+      if (!isSame('location')) {
+        this.switchLanguage();
+      }
+      if (!isSame('name')) {
+        this.switchType();
+      }
+      this.restore();
+    },
     switchType() {
       if (this.name.includes('/')) {
         this.setType(types.repository.value);
@@ -314,6 +374,9 @@ export default {
         this.setLocation('');
       }
     },
+    switchNames() {
+      this.setNames([]);
+    },
     retrieve() {
       this.setType(this.$store.state.query.type);
       this.setField(this.$store.state.query.field);
@@ -329,26 +392,6 @@ export default {
         location: this.location,
         name: this.name,
       });
-    },
-    switchQuery(after, before) {
-      const isSame = (key) => after[key] === before[key];
-      if (!isSame('type')) {
-        this.switchField();
-        this.switchLocation();
-      }
-      if (!isSame('field')) {
-        this.switchLanguage();
-      }
-      if (!isSame('language')) {
-        this.switchLocation();
-      }
-      if (!isSame('location')) {
-        this.switchLanguage();
-      }
-      if (!isSame('name')) {
-        this.switchType();
-      }
-      this.restore();
     },
     updateRoute() {
       if (this.isSameQuery) {

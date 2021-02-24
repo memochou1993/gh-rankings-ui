@@ -191,7 +191,7 @@ export default {
           throw new Error();
         }
         this.setRanks(ranks.data);
-        const profile = await this.$store.dispatch('showObjects', {
+        const profile = await this.$store.dispatch('fetchRankedItem', {
           type: ranks.data[0]?.type,
           name: this.$route.params.name,
         });
