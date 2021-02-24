@@ -16,7 +16,7 @@
         >
           <v-list-item-content>
             <v-list-item-title
-              v-text="(gist.files[0] || {}).name || gist.name"
+              v-text="((gist.files || [])[0] || {}).name || gist.name"
             />
           </v-list-item-content>
           <v-list-item-action>
