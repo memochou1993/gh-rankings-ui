@@ -312,7 +312,7 @@ export default {
       if (!isSame('type')) {
         this.switchField();
         this.switchLocation();
-        this.switchNames();
+        this.switchName();
       }
       if (!isSame('field')) {
         this.switchLanguage();
@@ -374,7 +374,8 @@ export default {
         this.setLocation('');
       }
     },
-    switchNames() {
+    switchName() {
+      this.setName('');
       this.setNames([]);
     },
     retrieve() {
