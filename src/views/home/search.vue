@@ -250,9 +250,6 @@ export default {
   },
   created() {
     this.retrieve();
-    if (this.name) {
-      this.setNames([{ name: this.name }]);
-    }
   },
   methods: {
     setType(type) {
