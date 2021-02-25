@@ -117,30 +117,21 @@
         outlined
         class="my-2"
       >
-        <v-autocomplete
-          v-model="name"
-          :disabled="!$store.state.loaded"
-          :items="names"
-          :search-input.sync="search"
+        <v-text-field
+          :value="name"
+          autocapitalize="off"
+          autocomplete="off"
           clearable
           clear-icon="mdi-close"
           dense
           flat
           hide-details
-          hide-no-data
-          item-text="name"
           label="Name"
           solo
-          class="font-weight-light pointer"
-          @click:clear="setNames([])"
-        >
-          <span
-            slot="item"
-            slot-scope="{ item }"
-            class="font-weight-light"
-            v-text="item.name"
-          />
-        </v-autocomplete>
+          class="font-weight-light"
+          @input="updateName"
+          @click:clear="setName('')"
+        />
       </v-card>
     </v-card-text>
   </v-card>
@@ -168,8 +159,6 @@ export default {
     language: '',
     location: '',
     name: '',
-    names: [],
-    search: '',
   }),
   computed: {
     fields() {
@@ -258,11 +247,6 @@ export default {
       this.switchQuery(after, before);
       this.updateRoute();
     },
-    search(after) {
-      if (after && after !== this.name) {
-        this.searchNames(after);
-      }
-    },
   },
   created() {
     this.retrieve();
@@ -286,27 +270,9 @@ export default {
     setName(name) {
       this.name = name;
     },
-    setNames(names) {
-      this.names = names;
-    },
-    searchNames: debounce(function (name) {
-      this.fetchNames(name);
+    updateName: debounce(function (name) {
+      this.setName(name);
     }, 500),
-    async fetchNames(q) {
-      const items = await this.$store.dispatch('fetchRankedItems', {
-        type: this.type,
-        params: {
-          q,
-          limit: 100,
-        },
-      });
-      this.setNames(items.data.map((item) => {
-        const name = item.login || item.nameWithOwner;
-        return {
-          name,
-        };
-      }));
-    },
     switchQuery(after, before) {
       const isSame = (key) => after[key] === before[key];
       if (!isSame('type')) {
