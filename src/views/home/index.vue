@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import types from '@/assets/type';
+import fields from '@/assets/field';
 import RankingError from '@/components/RankingError';
 import RankingLoader from '@/components/RankingLoader';
 import Ranking from './ranking';
@@ -108,9 +110,9 @@ export default {
     },
   },
   watch: {
-    $route() {
+    $route(after, before) {
       this.retrieve();
-      this.restore();
+      this.restore(after, before);
       this.fetch();
     },
     query(after) {
@@ -137,13 +139,20 @@ export default {
       this.setPage(Number(this.$route.query.page) || 1);
       this.setLimit(Number(this.$route.query.limit) || 20);
     },
-    restore() {
+    restore(after = null, before = null) {
+      const handle = (key, def) => {
+        let value = this.$route.query[key] || this.$store.state.query[key];
+        if (!!before?.query[key] && !after?.query[key]) {
+          value = def;
+        }
+        return value;
+      };
       this.$store.commit('setQuery', {
-        type: this.$route.query.type || this.$store.state.query.type,
-        field: this.$route.query.field || this.$store.state.query.field,
-        language: this.$route.query.language || this.$store.state.query.language,
-        location: this.$route.query.location || this.$store.state.query.location,
-        name: this.$route.query.name || this.$store.state.query.name,
+        type: handle('type', types.user.value),
+        field: handle('field', fields.repositoryStars.value),
+        language: handle('language', ''),
+        location: handle('location', ''),
+        name: handle('name', ''),
       });
     },
     updateRoute(after) {
