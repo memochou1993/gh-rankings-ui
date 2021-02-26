@@ -43,3 +43,8 @@ yarn serve
 ## Location JSON
 
 - [gh-rankings-location](https://github.com/memochou1993/gh-rankings-location)
+
+## Contributors
+<a href="https://github.com/memochou1993/gh-rankings-ui/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=memochou1993/gh-rankings-ui" />
+</a>
