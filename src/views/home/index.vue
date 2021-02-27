@@ -38,7 +38,7 @@
               :type="`list-item-two-line@${limit}`"
             />
             <v-pagination
-              v-if="$store.state.ranks.length > 0"
+              v-if="pages > 1"
               v-model="page"
               :disabled="!$store.state.loaded"
               :length="pages"

@@ -64,7 +64,7 @@ export default {
       return this.rank.field.split('.').pop();
     },
     gists() {
-      return this.profile.gists
+      return (this.profile?.gists || [])
         .filter((gist) => gist[this.field].totalCount > 0)
         .sort((a, b) => b[this.field].totalCount - a[this.field].totalCount);
     },
