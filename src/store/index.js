@@ -7,6 +7,10 @@ import {
   locations,
 } from '@/assets';
 import axios from '@/plugins/axios';
+import Axios from 'axios';
+
+const { CancelToken } = Axios;
+let cancels = [];
 
 Vue.use(Vuex);
 
@@ -51,15 +55,31 @@ export default new Vuex.Store({
     fetchRanks({
       commit,
     }, params) {
+      cancels.forEach(({ action, condition }) => action(condition));
+      cancels = [];
       commit('setLoaded', false);
       return new Promise((resolve, reject) => {
-        axios.get('/ranks', { params })
+        axios.get('/ranks', {
+          params,
+          cancelToken: new CancelToken((action) => {
+            cancels.push({
+              condition: params,
+              action,
+            });
+          }),
+        })
           .then(({ data }) => {
+            cancels.pop();
             resolve(data);
           })
           .catch((error) => {
-            commit('setError', error);
-            reject(error);
+            if (Axios.isCancel(error)) {
+              // console.log('Request canceled /ranks: ', error.message);
+              resolve({});
+            } else {
+              commit('setError', error);
+              reject(error);
+            }
           })
           .finally(() => {
             commit('setLoaded', true);
