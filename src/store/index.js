@@ -56,7 +56,6 @@ export default new Vuex.Store({
       commit,
     }, params) {
       cancels.forEach(({ action, condition }) => action(condition));
-      cancels = [];
       commit('setLoaded', false);
       return new Promise((resolve, reject) => {
         axios.get('/ranks', {
@@ -69,17 +68,16 @@ export default new Vuex.Store({
           }),
         })
           .then(({ data }) => {
-            cancels.pop();
+            cancels = [];
             resolve(data);
           })
           .catch((error) => {
             if (Axios.isCancel(error)) {
-              // console.log('Request canceled /ranks: ', error.message);
               resolve({});
-            } else {
-              commit('setError', error);
-              reject(error);
+              return;
             }
+            commit('setError', error);
+            reject(error);
           })
           .finally(() => {
             commit('setLoaded', true);
