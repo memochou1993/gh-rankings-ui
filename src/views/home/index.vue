@@ -169,7 +169,9 @@ export default {
     },
     async fetch() {
       const ranks = await this.$store.dispatch('fetchRanks', this.params);
-      if (ranks.data) this.$store.commit('setRanks', ranks.data.filter((rank) => rank.itemCount > 0));
+      if (ranks.data) {
+        this.$store.commit('setRanks', ranks.data.filter((rank) => rank.itemCount > 0));
+      }
     },
   },
 };
