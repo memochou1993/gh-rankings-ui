@@ -69,6 +69,7 @@ export default new Vuex.Store({
         })
           .then(({ data }) => {
             cancels = [];
+            commit('setLoaded', true);
             resolve(data);
           })
           .catch((error) => {
@@ -77,10 +78,8 @@ export default new Vuex.Store({
               return;
             }
             commit('setError', error);
-            reject(error);
-          })
-          .finally(() => {
             commit('setLoaded', true);
+            reject(error);
           });
       });
     },
