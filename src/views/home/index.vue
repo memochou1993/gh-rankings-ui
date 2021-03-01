@@ -1,57 +1,47 @@
 <template>
-  <v-row
-    justify="center"
-  >
-    <v-col
-      :cols="12"
-      :sm="8"
-      class="py-10"
-    >
-      <v-fade-transition>
-        <v-row>
-          <v-col
-            :cols="12"
-            :md="2"
-            :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
-          >
-            <Search />
-          </v-col>
-          <v-col
-            :cols="12"
-            :md="9"
-            :offset-md="3"
-          >
-            <template
-              v-if="$store.state.loaded"
-            >
-              <Ranking
-                v-if="$store.state.ranks.length > 0"
-              />
-              <RankingError
-                v-else
-                :message="$store.state.error.message || ''"
-              />
-            </template>
-            <RankingLoader
-              v-else
-              :height="64 * limit + (limit - 1)"
-              :type="`list-item-two-line@${limit}`"
-            />
-            <v-pagination
-              v-if="pages > 1"
-              v-model="page"
-              :disabled="!$store.state.loaded"
-              :length="pages"
-              :total-visible="9"
-              next-icon="mdi-menu-right"
-              prev-icon="mdi-menu-left"
-              class="font-weight-light py-6"
-            />
-          </v-col>
-        </v-row>
-      </v-fade-transition>
-    </v-col>
-  </v-row>
+  <v-fade-transition>
+    <v-row>
+      <v-col
+        :cols="12"
+        :md="2"
+        :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
+      >
+        <Search />
+      </v-col>
+      <v-col
+        :cols="12"
+        :md="9"
+        :offset-md="3"
+      >
+        <template
+          v-if="$store.state.loaded"
+        >
+          <Ranking
+            v-if="$store.state.ranks.length > 0"
+          />
+          <RankingError
+            v-else
+            :message="$store.state.error.message || ''"
+          />
+        </template>
+        <RankingLoader
+          v-else
+          :height="64 * limit + (limit - 1)"
+          :type="`list-item-two-line@${limit}`"
+        />
+        <v-pagination
+          v-if="pages > 1"
+          v-model="page"
+          :disabled="!$store.state.loaded"
+          :length="pages"
+          :total-visible="9"
+          next-icon="mdi-menu-right"
+          prev-icon="mdi-menu-left"
+          class="font-weight-light py-6"
+        />
+      </v-col>
+    </v-row>
+  </v-fade-transition>
 </template>
 
 <script>

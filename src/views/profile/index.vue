@@ -1,72 +1,62 @@
 <template>
-  <v-row
-    justify="center"
-  >
-    <v-col
-      :cols="12"
-      :sm="8"
-      class="py-10"
-    >
-      <v-fade-transition>
-        <v-row>
-          <v-col
-            :cols="12"
-            :md="2"
-            :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
-          >
-            <RankingProfile
-              v-if="loaded"
-              :profile="profile"
-            />
-            <RankingLoader
-              v-else
-              :height="160"
-              type="card"
-            />
-          </v-col>
-          <v-col
-            :cols="12"
-            :md="9"
-            :offset-md="3"
+  <v-fade-transition>
+    <v-row>
+      <v-col
+        :cols="12"
+        :md="2"
+        :style="`${$vuetify.breakpoint.mdAndUp ? 'position:fixed' : '' }`"
+      >
+        <RankingProfile
+          v-if="loaded"
+          :profile="profile"
+        />
+        <RankingLoader
+          v-else
+          :height="160"
+          type="card"
+        />
+      </v-col>
+      <v-col
+        :cols="12"
+        :md="9"
+        :offset-md="3"
+      >
+        <template
+          v-if="loaded"
+        >
+          <template
+            v-if="ranks.length > 0"
           >
             <template
-              v-if="loaded"
+              v-for="(group, i) in groups"
             >
-              <template
-                v-if="ranks.length > 0"
-              >
-                <template
-                  v-for="(group, i) in groups"
-                >
-                  <RankingGroup
-                    v-if="group.ranks.length > 0"
-                    :key="i"
-                    :category="group.category"
-                    :ranks="group.ranks"
-                    :title="group.title"
-                    :profile="profile"
-                    class="mb-6"
-                  />
-                </template>
-                <RankingTimestamp
-                  :ranks="ranks"
-                />
-              </template>
-              <RankingError
-                v-else
-                :message="$store.state.error.message || ''"
+              <RankingGroup
+                v-if="group.ranks.length > 0"
+                :key="i"
+                :category="group.category"
+                :ranks="group.ranks"
+                :title="group.title"
+                :profile="profile"
+                class="mb-6"
               />
             </template>
-            <RankingLoader
-              v-else
-              :height="600"
-              type="list-item-two-line@3"
+            <RankingTimestamp
+              :ranks="ranks"
             />
-          </v-col>
-        </v-row>
-      </v-fade-transition>
-    </v-col>
-  </v-row>
+          </template>
+          <RankingError
+            v-else
+            :message="$store.state.error.message || ''"
+          />
+        </template>
+        <RankingLoader
+          v-else
+          :height="600"
+          type="list-item-two-line@3"
+        />
+      </v-col>
+    </v-row>
+  </v-fade-transition>
 </template>
 
 <script>

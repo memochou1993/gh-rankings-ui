@@ -5,7 +5,17 @@
       <v-container
         fluid
       >
-        <router-view />
+        <v-row
+          justify="center"
+        >
+          <v-col
+            :cols="12"
+            :sm="8"
+            class="py-10"
+          >
+            <router-view />
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
     <TheElevator />
